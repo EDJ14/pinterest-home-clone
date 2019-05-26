@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Post = styled.div`
   width: 8rem;
@@ -13,6 +14,7 @@ class BodyPosts extends Component {
   state = { posts: 0 };
 
   renderContent() {
+    axios.get('/api/newpost');
     if (this.state.posts) {
       const res = [];
       for (let i = 0; i <= this.state.posts; i++) {

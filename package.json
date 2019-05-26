@@ -1,0 +1,32 @@
+{
+  "name": "server6",
+  "version": "1.0.0",
+  "description": "recreating pinterest's home page",
+  "main": "index.js",
+  "scripts": {
+    "client": "npm run start --prefix client",
+    "server": "nodemon index.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EDJ14/pinterest-home-clone.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EDJ14/pinterest-home-clone/issues"
+  },
+  "homepage": "https://github.com/EDJ14/pinterest-home-clone#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "faker": "^4.1.0",
+    "mysql": "^2.17.1"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "nodemon": "^1.19.1"
+  }
+}
