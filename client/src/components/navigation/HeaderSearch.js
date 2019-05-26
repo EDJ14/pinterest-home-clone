@@ -6,31 +6,37 @@ const Search = styled.input`
   type: text;
   margin: 0 2rem;
   width: 66rem;
-  height: 4.5rem;
+  height: 3.75rem;
   border: none;
+  border-radius: 1rem;
+  background-color: rgb(227, 229, 232);
 
   ::placeholder,
   ::-webkit-input-placeholder {
-    padding-left: 4.5rem;
+    padding-left: 3.85rem;
   }
   :-ms-input-placeholder {
-    padding-left: 4, 5rem;
+    padding-left: 3.85rem;
   }
 
   &:focus {
     outline: none;
     border: 3px solid rgb(109, 163, 249);
-    border-radius: 1rem;
+    text-indent: 3.5rem;
+
+    &::placeholder {
+      padding: 0;
+    }
   }
 `;
 
 const SearchButton = styled.button`
   position: absolute;
-  top: 1.5rem;
+  top: 1.15rem;
   left: 4rem;
   border: none;
-  background-color: white;
-  transform: scale(1.5);
+  background-color: rgb(227, 229, 232);
+  transform: scale(1.25);
 `;
 
 class HeaderSearch extends Component {

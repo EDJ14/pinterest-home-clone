@@ -8,7 +8,6 @@ const HeaderUser = styled.button`
   border: none;
   background-color: white
   z-index: 10;
-  text-transform: uppercase;
   font-weight: ${props => (props.bold ? 'bold' : '')}
   font-family: inherit;
 `;
