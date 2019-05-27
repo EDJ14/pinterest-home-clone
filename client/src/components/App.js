@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import '../scss/_main.scss';
+
 import Header from './navigation/Header';
 import BodyContainer from './body/BodyContainer';
 

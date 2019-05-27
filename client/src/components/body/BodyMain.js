@@ -7,7 +7,10 @@ const Body2 = styled.div`
   grid-column: 2 / -2;
   grid-row: 2 / -1;
   height: 30rem;
-  background-color: green;
+
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(5, 1fr);
 `;
 
 class BodyMain extends Component {

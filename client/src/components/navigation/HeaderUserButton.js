@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const HeaderUser = styled.button`
   width: min-content;
   height: min-content;
-  padding: 1rem;
+  padding: 0 2rem;
   border: none;
   background-color: white
   z-index: 10;

@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 
-const Post = styled.div`
-  width: 8rem;
-  height: 15rem;
-  background-color: red;
-  display: inline-block;
-  margin-right: 1rem;
+import PostCard from './PostCard';
+
+const PostsButtons = styled.button`
+  position: absolute;
+  top: 15rem;
+  left: 3rem;
 `;
 
 class BodyPosts extends Component {
@@ -17,23 +17,22 @@ class BodyPosts extends Component {
     //axios.get('/api/newpost/Eddie');
     if (this.state.posts) {
       const res = [];
-      for (let i = 0; i <= this.state.posts; i++) {
-        console.log(this.state);
-        res.push(<Post key={Math.random()} />);
+      for (let i = 0; i < this.state.posts; i++) {
+        res.push(<PostCard height={Math.random() * 40} />);
       }
       return res;
     }
   }
 
   render() {
-    return (
-      <div>
-        <button onClick={() => this.setState({ posts: this.state.posts + 1 })}>
-          CliCK
-        </button>
-        {this.renderContent()}
-      </div>
-    );
+    return [
+      <PostsButtons
+        onClick={() => this.setState({ posts: this.state.posts + 1 })}
+      >
+        CliCK
+      </PostsButtons>,
+      this.renderContent()
+    ];
   }
 }
 

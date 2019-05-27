@@ -5,7 +5,7 @@ import { MdSearch } from 'react-icons/md';
 const Search = styled.input`
   type: text;
   margin: 0 2rem;
-  width: 66rem;
+  width: 74rem;
   height: 3.75rem;
   border: none;
   border-radius: 1rem;

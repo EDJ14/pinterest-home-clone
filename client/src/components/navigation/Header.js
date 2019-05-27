@@ -10,11 +10,12 @@ const HeaderPosition = styled.header`
   grid-column: 1 / -1;
   width: 100%;
   background-color: white;
-  padding: 1.5rem;
+  padding: 0.9rem 1.75rem;
   box-shadow: 0 0 2px 2px;
   display: flex;
   align-items: center;
   position: fixed;
+  z-index: 1000;
 `;
 
 class Header extends Component {
@@ -23,8 +24,8 @@ class Header extends Component {
       <HeaderPosition>
         <HeaderLogo />
         <HeaderSearch />
-        <HeaderUserButton bold text="home" />
-        <HeaderUserButton text="following" />
+        <HeaderUserButton bold text="Home" />
+        <HeaderUserButton text="Following" />
         <HeaderUserButton text="user" />
       </HeaderPosition>
     );

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import pinimage from '../../img/pinterest.svg';
 
 const Logo = styled.div`
   width: 2.5rem;
@@ -10,3 +11,4 @@ const Logo = styled.div`
 export default () => {
   return <Logo />;
 };
+// background-image: url('../../img/pinterest.png);

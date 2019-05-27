@@ -9,9 +9,11 @@ const BodyCont = styled.div`
   grid-row: 2 / 3;
   background-color: white;
 
+  position: relative;
+
   display: grid;
   grid-gap: 1rem;
-  grid-template-columns: 10vw 1fr 1fr 1fr 1fr 10vw;
+  grid-template-columns: 5vw 1fr 1fr 1fr 1fr 5vw;
   grid-template-rows: min-content min-content;
 `;
 
