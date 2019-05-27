@@ -13,6 +13,7 @@ const BodyBan = styled.div`
 
 const UserWelcome = styled.h1`
   background-color: white;
+  color: black;
   text-align: center;
   margin-bottom: 1rem;
 `;
@@ -25,8 +26,9 @@ const CategoryBox = styled.div`
 `;
 
 const FeaturedPosts = styled.div`
-  color: red;
+  color: white;
   text-transform: uppercase;
+  font-weight: bold;
   margin: 0.75rem;
   background-image: url(https://source.unsplash.com/random/75x75);
   border-radius: 5px;

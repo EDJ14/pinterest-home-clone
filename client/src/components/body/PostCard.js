@@ -11,7 +11,7 @@ const Post = styled.div`
   position: relative;
 
   display: grid;
-  grid-template-rows: 70% 30%;
+  grid-template-rows: 80% 20%;
   grid-template-columns: 1fr 1fr;
 
   &:hover > .overlay {
@@ -43,7 +43,6 @@ const PostDetails = styled.div`
 
 class PostCard extends Component {
   render() {
-    console.log('props', this.props, 'state', this.state);
     return (
       <Post height={this.props.height}>
         <div className="overlay" />
