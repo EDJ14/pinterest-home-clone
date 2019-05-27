@@ -14,7 +14,7 @@ class BodyPosts extends Component {
   state = { posts: 0 };
 
   renderContent() {
-    axios.get('/api/newpost');
+    //axios.get('/api/newpost/Eddie');
     if (this.state.posts) {
       const res = [];
       for (let i = 0; i <= this.state.posts; i++) {

@@ -15,7 +15,7 @@ const connection = mysql.createConnection({
   database: 'server6'
 });
 
-require('./routes/postRoutes')(app);
+require('./routes/postRoutes')(app, connection);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log('Awaiting orders'));
