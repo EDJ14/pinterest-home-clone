@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import { IconContext } from 'react-icons';
@@ -79,6 +80,13 @@ const ShadowHover = styled.div`
 `;
 
 class Header extends Component {
+  renderAuth = () => {
+    if (this.props.auth == null) {
+      return <HeaderUserButton text="Login" />;
+    }
+    return <HeaderUserButton text={this.props.auth.id} />;
+  };
+
   render() {
     return (
       <HeaderPosition>
@@ -92,7 +100,7 @@ class Header extends Component {
         <HeaderSearch />
         <HeaderUserButton bold text="Home" />
         <HeaderUserButton text="Following" />
-        <HeaderUserButton text="user" />
+        <a href="/auth/google">{this.renderAuth()}</a>
         <IconContext.Provider value={{ color: 'gray', size: '3rem' }}>
           <ShadowHover>
             <TiMessageTyping />
@@ -110,4 +118,8 @@ class Header extends Component {
   }
 }
 
-export default Header;
+function mapStateToProps({ auth }) {
+  return { auth };
+}
+
+export default connect(mapStateToProps)(Header);

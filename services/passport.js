@@ -10,10 +10,6 @@ const connection = mysql.createConnection({
   database: 'server6'
 });
 
-//const mongoose = require('mongoose');
-
-//const User = mongoose.model('users');
-
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
@@ -22,9 +18,10 @@ passport.deserializeUser((id, done) => {
   const q = 'SELECT * FROM users WHERE id=' + id;
   connection.query(q, (err, results) => {
     const user = {
-      id: results.id,
-      google_id: results.google_id //115660807052933830156
+      id: results[0].id,
+      google_id: results[0].google_id //115660807052933830156
     };
+
     done(null, user);
   });
 });

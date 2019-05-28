@@ -14,17 +14,13 @@ const HeaderUser = styled.button`
 `;
 
 class HeaderUserButton extends Component {
-  testSQL = async () => {
-    const res = await axios.get('/auth/google');
-    console.log(res);
-  };
+  /*testSQL = async () => {
+    //const res = await axios.get('/api/tags');
+    console.log('hi');
+  };*/
 
   render() {
-    return (
-      <HeaderUser onClick={this.testSQL} bold={this.props.bold}>
-        {this.props.text}
-      </HeaderUser>
-    );
+    return <HeaderUser bold={this.props.bold}>{this.props.text}</HeaderUser>;
   }
 }
 

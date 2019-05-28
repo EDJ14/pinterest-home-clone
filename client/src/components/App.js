@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-
-import '../scss/_main.scss';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 
 import Header from './navigation/Header';
 import BodyContainer from './body/BodyContainer';
 
 class App extends Component {
+  componentDidMount() {
+    this.props.fetchUser();
+  }
+
   render() {
     return (
       <div className="container">
@@ -16,4 +20,7 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(
+  null,
+  actions
+)(App);

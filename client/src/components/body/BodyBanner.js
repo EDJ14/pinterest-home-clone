@@ -59,7 +59,7 @@ class BodyBanner extends Component {
     }
 
     const posts = this.state.tags.map(cat => (
-      <FeaturedPosts>
+      <FeaturedPosts key={cat}>
         <div style={{ position: 'absolute', bottom: '.5rem', left: '.5rem' }}>
           {cat}
         </div>
