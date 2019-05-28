@@ -1,0 +1,70 @@
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const mysql = require('mysql');
+const keys = require('../config/keys');
+
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: keys.sqlkey,
+  database: 'server6'
+});
+
+//const mongoose = require('mongoose');
+
+//const User = mongoose.model('users');
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  const q = 'SELECT * FROM users WHERE id=' + id;
+  connection.query(q, (err, results) => {
+    const user = {
+      id: results.id,
+      google_id: results.google_id //115660807052933830156
+    };
+    done(null, user);
+  });
+});
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: keys.googleClientID,
+      clientSecret: keys.googleClientSecret,
+      callbackURL: '/auth/google/callback',
+      proxy: true
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      const q = 'SELECT * FROM users WHERE google_id=' + profile.id;
+      connection.query(q, (err, results) => {
+        if (results.length) {
+          // check if any results, ie any users in database
+          const existingUser = {
+            id: results[0].id,
+            google_id: results[0].google_id
+          };
+          done(null, existingUser);
+        }
+
+        newUserQ = `INSERT INTO users (google_id, username) VALUES (${
+          profile.id
+        }, "test9")`; // if no users, insert with new id
+
+        connection.query(newUserQ, (err, results) => {
+          const getNewUserQ =
+            'SELECT * FROM users WHERE id=' + results.insertId; // after inserting, get that user
+          connection.query(getNewUserQ, (err, results) => {
+            const newUser = {
+              id: results[0].id,
+              google_id: results[0].google_id
+            };
+            done(null, newUser);
+          });
+        });
+      });
+    }
+  )
+);

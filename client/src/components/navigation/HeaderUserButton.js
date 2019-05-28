@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const HeaderUser = styled.button`
   width: min-content;
@@ -13,8 +14,17 @@ const HeaderUser = styled.button`
 `;
 
 class HeaderUserButton extends Component {
+  testSQL = async () => {
+    const res = await axios.get('/api/test');
+    console.log(res);
+  };
+
   render() {
-    return <HeaderUser bold={this.props.bold}>{this.props.text}</HeaderUser>;
+    return (
+      <HeaderUser onClick={this.testSQL} bold={this.props.bold}>
+        {this.props.text}
+      </HeaderUser>
+    );
   }
 }
 

@@ -19,7 +19,7 @@ const Post = styled.div`
     width: 100%;
     height: 100%;
     position: absolute;
-    background-color: rgb(198, 201, 206);
+    background-color: rgba(0, 0, 0, .5);
     opacity: 0.5;
     border-radius: 10px;
     transform: scale(1.035);

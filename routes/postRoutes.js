@@ -27,4 +27,20 @@ module.exports = (app, connection) => {
       res.send(results);
     });
   });
+
+  app.get('/api/test', (req, res) => {
+    const selectQ = 'SELECT * FROM users WHERE google_id=1234';
+    const insertQ =
+      'INSERT INTO users (google_id, username) VALUES (1234, "test8")';
+    connection.query(insertQ, (err, results) => {
+      if (err) throw err;
+      /*const user = {
+        id: results[0].id,
+        google_id: results[0].google_id,
+        username: results[0].username
+      };*/
+      console.log(results.insertId);
+      res.send(results);
+    });
+  });
 };
