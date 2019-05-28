@@ -8,8 +8,10 @@ const Body2 = styled.div`
   grid-row: 2 / -1;
   height: 30rem;
 
+  position: relative;
+
   display: grid;
-  grid-gap: 1rem;
+  grid-gap: 1.3rem;
   grid-template-columns: repeat(5, 1fr);
 `;
 
@@ -43,24 +45,37 @@ const Col5 = styled.div`
   justify-content: flex-start;
 `;
 
+const PostsButtons = styled.button`
+  position: absolute;
+  top: -2rem;
+  left: 3rem;
+`;
+
 class BodyMain extends Component {
+  state = { posts: 0 };
+
   render() {
     return (
       <Body2>
+        <PostsButtons
+          onClick={() => this.setState({ posts: this.state.posts + 1 })}
+        >
+          CliCK
+        </PostsButtons>
         <Col1>
-          <BodyPosts />
+          <BodyPosts num={this.state.posts % 5} />
         </Col1>
         <Col2>
-          <BodyPosts />
+          <BodyPosts num={Math.floor(this.state.posts / 2)} />
         </Col2>
         <Col3>
-          <BodyPosts />
+          <BodyPosts num={Math.floor(this.state.posts / 3)} />
         </Col3>
         <Col4>
-          <BodyPosts />
+          <BodyPosts num={Math.floor(this.state.posts / 4)} />
         </Col4>
         <Col5>
-          <BodyPosts />
+          <BodyPosts num={Math.floor(this.state.posts / 5)} />
         </Col5>
       </Body2>
     );
