@@ -46,20 +46,16 @@ passport.use(
             id: results[0].id,
             google_id: results[0].google_id
           };
-          done(null, existingUser);
+          return done(null, existingUser);
         }
-
-        newUserQ = `INSERT INTO users (google_id, username) VALUES (${
-          profile.id
-        }, "test9")`; // if no users, insert with new id
-
-        connection.query(newUserQ, (err, results) => {
+        newUserQ = `INSERT INTO users (google_id) VALUES (${profile.id})`; // if no users, insert with new id
+        connection.query(newUserQ, (err, results2) => {
           const getNewUserQ =
-            'SELECT * FROM users WHERE id=' + results.insertId; // after inserting, get that user
-          connection.query(getNewUserQ, (err, results) => {
+            'SELECT * FROM users WHERE id=' + results2.insertId; // after inserting, get that user
+          connection.query(getNewUserQ, (err, results3) => {
             const newUser = {
-              id: results[0].id,
-              google_id: results[0].google_id
+              id: results3[0].id,
+              google_id: results3[0].google_id
             };
             done(null, newUser);
           });

@@ -15,7 +15,7 @@ const HeaderUser = styled.button`
 
 class HeaderUserButton extends Component {
   testSQL = async () => {
-    const res = await axios.get('/api/test');
+    const res = await axios.get('/auth/google');
     console.log(res);
   };
 
