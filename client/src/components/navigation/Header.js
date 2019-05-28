@@ -42,12 +42,12 @@ const DotDot = styled.span`
   }
 
   &::before {
-    left: 1rem;
+    left: 0.5rem;
     top: 0;
   }
 
   &::after {
-    right: 0.9rem;
+    right: 0.6rem;
     top: 0;
   }
 `;
@@ -63,6 +63,21 @@ const RedDot = styled.span`
   color: white;
 `;
 
+const ShadowHover = styled.div`
+  cursor: pointer;
+  opacity: 1;
+  border-radius: 50%;
+
+  &:hover {
+    width: 3rem;
+    height: 3rem;
+    transform: scale(1.1)
+    opacity: .5;
+    border-radius: 50%;
+    background-color: rgba(0,0,0,.2);
+  }
+`;
+
 class Header extends Component {
   render() {
     return (
@@ -70,16 +85,18 @@ class Header extends Component {
         <IconContext.Provider
           value={{ color: 'rgb(206, 24, 38)', size: '2.7rem' }}
         >
-          <FaPinterest />
-        </IconContext.Provider>{' '}
+          <ShadowHover>
+            <FaPinterest />
+          </ShadowHover>
+        </IconContext.Provider>
         <HeaderSearch />
         <HeaderUserButton bold text="Home" />
         <HeaderUserButton text="Following" />
         <HeaderUserButton text="user" />
         <IconContext.Provider value={{ color: 'gray', size: '3rem' }}>
-          <div style={{ marginRight: '2.2rem' }}>
+          <ShadowHover>
             <TiMessageTyping />
-          </div>
+          </ShadowHover>
         </IconContext.Provider>
         <IconContext.Provider value={{ color: 'gray', size: '3rem' }}>
           <div style={{ position: 'relative' }}>

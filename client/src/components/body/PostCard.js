@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Post = styled.div`
   width: 100%;
@@ -81,9 +82,11 @@ const Post = styled.div`
 const PostPic = styled.div`
   grid-row: 1 / 2;
   grid-column: 1 / -1;
-  background-image: url(https://source.unsplash.com/random/250x250);
+  background-image: url(${props => props.img});
   border-radius: 10px;
 `;
+
+// url(https://source.unsplash.com/random/250x250)
 
 const PostDetails = styled.div`
   grid-row: 2 / -1;
@@ -94,13 +97,26 @@ const PostDetails = styled.div`
 `;
 
 class PostCard extends Component {
+  state = { imgURL: '' };
+
+  async componentDidMount() {
+    if (!this.state.imgURL.length) {
+      const res = await axios.get(
+        `/api/images/${Math.floor(Math.random() * 99 + 1)}`
+      );
+      const url = res.data[0];
+      this.setState({ imgURL: url });
+    }
+    console.log(this.state.imgURL.image_url);
+  }
+
   render() {
     return (
       <Post height={this.props.height}>
         <div className="overlay" />
         <div className="savebut">Save</div>
         <div className="sourcesite">website.com</div>
-        <PostPic />
+        <PostPic img={this.state.imgURL.image_url} />
         <PostDetails>
           <p>Author</p>
           <p>Date</p>

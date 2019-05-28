@@ -10,11 +10,20 @@ module.exports = (app, connection) => {
     res.sendStatus(200);
   });
 
-  app.get('/api/categories', (req, res) => {
-    const q = 'SELECT category_name FROM categories';
+  app.get('/api/tags', (req, res) => {
+    const q = 'SELECT tag_name FROM tags LIMIT 5';
 
     connection.query(q, (err, results) => {
       if (err) throw err;
+      res.send(results);
+    });
+  });
+
+  app.get('/api/images/:num', (req, res) => {
+    const q = 'SELECT image_url FROM photos WHERE id=' + req.params.num;
+    connection.query(q, (err, results) => {
+      if (err) throw err;
+
       res.send(results);
     });
   });

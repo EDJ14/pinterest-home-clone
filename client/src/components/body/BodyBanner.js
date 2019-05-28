@@ -38,12 +38,12 @@ const FeaturedPosts = styled.div`
 `;
 
 class BodyBanner extends Component {
-  state = { categories: [] };
+  state = { tags: [] };
 
   async componentDidMount() {
-    const res = await axios.get('/api/categories');
-    const cats = res.data.slice(0, 5).map(cat => cat.category_name);
-    this.setState({ categories: cats });
+    const res = await axios.get('/api/tags');
+    const tags = res.data.slice(0, 5).map(cat => cat.tag_name);
+    this.setState({ tags: tags });
   }
 
   renderContent() {
@@ -58,7 +58,7 @@ class BodyBanner extends Component {
       );
     }
 
-    const posts = this.state.categories.map(cat => (
+    const posts = this.state.tags.map(cat => (
       <FeaturedPosts>
         <div style={{ position: 'absolute', bottom: '.5rem', left: '.5rem' }}>
           {cat}

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import BodyBanner from './BodyBanner';
-import Body2 from './BodyMain';
+import BodyMain from './BodyMain';
 
 const BodyCont = styled.div`
   grid-column: 1 / -1;
@@ -21,7 +21,7 @@ export default () => {
   return (
     <BodyCont>
       <BodyBanner />
-      <Body2 />
+      <BodyMain />
     </BodyCont>
   );
 };

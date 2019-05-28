@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 
 import PostCard from './PostCard';
 
@@ -11,7 +10,9 @@ class BodyPosts extends Component {
     if (this.props.num) {
       const res = [];
       for (let i = 0; i < this.props.num; i++) {
-        res.push(<PostCard height={Math.random() * 40 + 20} />);
+        res.push(
+          <PostCard num={this.props.num} height={Math.random() * 40 + 20} />
+        );
       }
       return res;
     }

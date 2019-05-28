@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 import BodyPosts from './BodyPosts';
 
@@ -63,19 +64,19 @@ class BodyMain extends Component {
           CliCK
         </PostsButtons>
         <Col1>
-          <BodyPosts num={this.state.posts % 5} />
+          <BodyPosts num={this.state.posts} />
         </Col1>
         <Col2>
-          <BodyPosts num={Math.floor(this.state.posts / 2)} />
+          <BodyPosts num={this.state.posts - 1} />
         </Col2>
         <Col3>
-          <BodyPosts num={Math.floor(this.state.posts / 3)} />
+          <BodyPosts num={this.state.posts - 2} />
         </Col3>
         <Col4>
-          <BodyPosts num={Math.floor(this.state.posts / 4)} />
+          <BodyPosts num={this.state.posts - 3} />
         </Col4>
         <Col5>
-          <BodyPosts num={Math.floor(this.state.posts / 5)} />
+          <BodyPosts num={this.state.posts - 4} />
         </Col5>
       </Body2>
     );
