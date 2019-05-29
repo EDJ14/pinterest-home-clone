@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { Transition, CSSTransition } from 'react-transition-group';
 
 const Post = styled.div`
   width: 100%;
@@ -79,10 +80,18 @@ const Post = styled.div`
   }
 `;
 
+const randomColor = () => {
+  const color = ['blue', 'green', 'red', 'orange', 'yellow', 'brown'][
+    Math.floor(Math.random() * 6)
+  ];
+  return color;
+};
+
 const PostPic = styled.div`
   grid-row: 1 / 2;
   grid-column: 1 / -1;
   background-image: url(${props => props.img});
+  background-color: ${props => (props.img ? 'white' : randomColor())};
   border-radius: 10px;
 `;
 
@@ -96,32 +105,57 @@ const PostDetails = styled.div`
   align-items: center;
 `;
 
-class PostCard extends Component {
-  state = { imgURL: '' };
+const duration = 3000;
 
-  async componentDidMount() {
+const defaultStyle = {
+  transition: `opacity ${duration}ms ease-in-out`,
+  opacity: 0
+};
+
+const transitionStyles = {
+  entering: { opacity: 1 },
+  entered: { opacity: 1 },
+  exiting: { opacity: 0 },
+  exited: { opacity: 0 }
+};
+
+class PostCard extends Component {
+  state = { imgURL: '', inProp: false };
+
+  componentDidMount() {
     if (!this.state.imgURL.length) {
-      const res = await axios.get(
-        `/api/images/${Math.floor(Math.random() * 49 + 1)}`
-      );
-      const url = res.data[0];
-      this.setState({ imgURL: url });
+      try {
+        this.setState({ imgURL: url, inProp: true });
+      } catch (err) {
+        this.setState({ inProp: true });
+      }
     }
-    console.log(this.state.imgURL.image_url);
   }
 
   render() {
+    console.log(this.props);
     return (
-      <Post height={this.props.height}>
-        <div className="overlay" />
-        <div className="savebut">Save</div>
-        <div className="sourcesite">website.com</div>
-        <PostPic img={this.state.imgURL.image_url} />
-        <PostDetails>
-          <p>Author</p>
-          <p>Date</p>
-        </PostDetails>
-      </Post>
+      <Transition in={this.state.inProp} timeout={10}>
+        {state => (
+          <div
+            style={{
+              ...defaultStyle,
+              ...transitionStyles[state]
+            }}
+          >
+            <Post height={Math.random() * 40 + 20}>
+              <div className="overlay" />
+              <div className="savebut">Save</div>
+              <div className="sourcesite">website.com</div>
+              <PostPic img={this.props.post[0].image_url} />
+              <PostDetails>
+                <p>Author</p>
+                <p>Date</p>
+              </PostDetails>
+            </Post>
+          </div>
+        )}
+      </Transition>
     );
   }
 }

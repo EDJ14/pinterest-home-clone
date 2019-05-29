@@ -5,17 +5,11 @@ import PostCard from './PostCard';
 
 class BodyPosts extends Component {
   renderContent() {
-    //axios.get('/api/newpost/Eddie');
-
     if (this.props.num) {
       const res = [];
       for (let i = 0; i < this.props.num; i++) {
         res.push(
-          <PostCard
-            key={Math.random()}
-            num={this.props.num}
-            height={Math.random() * 40 + 20}
-          />
+          <PostCard key={Math.random()} height={Math.random() * 40 + 20} />
         );
       }
       return res;

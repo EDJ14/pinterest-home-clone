@@ -46,7 +46,6 @@ class BodyBanner extends Component {
     const res = await axios.get('/api/tags');
     const tags = res.data.slice(0, 5).map(cat => cat.tag_name);
     this.setState({ tags: tags });
-    axios.get('/api/posts/4');
   }
 
   renderContent() {

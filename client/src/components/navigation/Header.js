@@ -22,12 +22,24 @@ const HeaderPosition = styled.header`
   z-index: 1000;
 `;
 
+const ButtonsCont = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 30%;
+
+  @media (max-width: 1090px) {
+    width: 30%;
+  }
+`;
+
 const DotDotCont = styled.div`
   border-radius: 100%;
   width: 3rem;
   height: 3rem;
-  position: absolute;
   right: 1.5rem;
+  position: relative;
+  margin-left: 1.5rem
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
@@ -40,8 +52,10 @@ const DotDot = styled.span`
   height: 4px;
   border-radius: 100%;
   background-color: gray;
-  position: relative;
+  position: absolute;
   display: inline-block;
+  margin: 0 1.3rem;
+  top: 1rem;
 
   &::before,
   &::after {
@@ -55,12 +69,12 @@ const DotDot = styled.span`
   }
 
   &::before {
-    left: 0.75rem;
+    left: 0.9rem;
     top: 0;
   }
 
   &::after {
-    right: 0.6rem;
+    right: 0.9rem;
     top: 0;
   }
 `;
@@ -111,39 +125,32 @@ class Header extends Component {
     return (
       <HeaderPosition>
         <IconContext.Provider
-          value={{ color: 'rgb(206, 24, 38)', size: '2.7rem' }}
+          value={{ color: 'rgb(206, 24, 38)', size: '2.7rem', width: '3rem' }}
         >
           <FaPinterest />
         </IconContext.Provider>
         <HeaderSearch />
-        <HeaderUserButton bold text="Home" />
-        <HeaderUserButton text="Following" />
-        <a href="/auth/google">{this.renderAuth()}</a>
-        <IconContext.Provider value={{ color: 'gray', size: '3rem' }}>
-          <div style={{ padding: '0 1.5rem' }}>
-            <TiMessageTyping />
-          </div>
-        </IconContext.Provider>
-        <IconContext.Provider value={{ color: 'gray', size: '3rem' }}>
-          <div style={{ position: 'relative', padding: '0 .5rem' }}>
-            <TiBell />
-            <RedDot>1</RedDot>
-          </div>
-        </IconContext.Provider>
-        <DotDotCont>
-          <div
-            style={{
-              position: 'absolute',
-              right: '.35rem',
-              top: '1.2rem',
-              padding: '0 1rem'
-            }}
-          >
+        <ButtonsCont>
+          <HeaderUserButton bold text="Home" />
+          <HeaderUserButton text="Following" />
+          <a href="/auth/google">{this.renderAuth()}</a>
+          <IconContext.Provider value={{ color: 'gray', size: '3rem' }}>
+            <div style={{ padding: '0 1.5rem' }}>
+              <TiMessageTyping />
+            </div>
+          </IconContext.Provider>
+          <IconContext.Provider value={{ color: 'gray', size: '3rem' }}>
+            <div style={{ position: 'relative', padding: '0 .5rem' }}>
+              <TiBell />
+              <RedDot>1</RedDot>
+            </div>
+          </IconContext.Provider>
+          <DotDotCont>
             <a href="/api/logout">
-              <DotDot>&nbsp;</DotDot>{' '}
+              <DotDot>&nbsp;</DotDot>
             </a>
-          </div>
-        </DotDotCont>
+          </DotDotCont>
+        </ButtonsCont>
       </HeaderPosition>
     );
   }

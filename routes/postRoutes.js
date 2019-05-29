@@ -44,14 +44,16 @@ module.exports = (app, connection) => {
     });
   });
 
-  app.get('/api/posts/:num', (req, res) => {
+  app.get('/api/posts/:num/:offset', (req, res) => {
+    console.log(req.params.num);
     const q = `select username, image_url from photos right join 
               (select username, photo_id, tag_id from posts left join users on posts.user_id = users.id) 
               as userphotoid on photos.id = userphotoid.photo_id LIMIT ${
                 req.params.num
-              }`;
+              } OFFSET ${req.params.offset}`;
     connection.query(q, (err, results) => {
       console.log(results);
+      res.send(results);
     });
   });
 };
