@@ -6,6 +6,15 @@ const Search = styled.input`
   type: text;
   margin: 0 2rem;
   width: 74rem;
+
+  @media (max-width: 930px) {
+    width: 60rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 20rem;
+  }
+
   height: 3.75rem;
   border: none;
   border-radius: 1rem;

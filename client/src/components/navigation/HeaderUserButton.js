@@ -5,12 +5,13 @@ import axios from 'axios';
 const HeaderUser = styled.button`
   width: min-content;
   height: min-content;
-  padding: 0 2rem;
+  padding: 0 1.5rem;
   border: none;
   background-color: white
   z-index: 10;
   font-weight: ${props => (props.bold ? 'bold' : '')}
   font-family: inherit;
+  cursor: pointer;
 `;
 
 class HeaderUserButton extends Component {

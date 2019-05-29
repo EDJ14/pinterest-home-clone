@@ -22,11 +22,23 @@ const HeaderPosition = styled.header`
   z-index: 1000;
 `;
 
+const DotDotCont = styled.div`
+  border-radius: 100%;
+  width: 3rem;
+  height: 3rem;
+  position: absolute;
+  right: 1.5rem;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+`;
+
 const DotDot = styled.span`
   margin-left: 2rem;
   width: 4px;
   height: 4px;
-  border-radius: 50%;
+  border-radius: 100%;
   background-color: gray;
   position: relative;
   display: inline-block;
@@ -43,7 +55,7 @@ const DotDot = styled.span`
   }
 
   &::before {
-    left: 0.5rem;
+    left: 0.75rem;
     top: 0;
   }
 
@@ -59,7 +71,7 @@ const RedDot = styled.span`
   height: 1.5rem;
   border-radius: 100%;
   position: absolute;
-  right: -0.15rem;
+  right: 0.35rem;
   text-align: center;
   color: white;
 `;
@@ -84,7 +96,7 @@ class Header extends Component {
     if (this.props.auth == null) {
       return <HeaderUserButton text="Login" />;
     }
-    return <HeaderUserButton text={this.props.auth.id} />;
+    return <HeaderUserButton text={this.props.auth.username} />;
   };
 
   render() {
@@ -93,26 +105,35 @@ class Header extends Component {
         <IconContext.Provider
           value={{ color: 'rgb(206, 24, 38)', size: '2.7rem' }}
         >
-          <ShadowHover>
-            <FaPinterest />
-          </ShadowHover>
+          <FaPinterest />
         </IconContext.Provider>
         <HeaderSearch />
         <HeaderUserButton bold text="Home" />
         <HeaderUserButton text="Following" />
         <a href="/auth/google">{this.renderAuth()}</a>
         <IconContext.Provider value={{ color: 'gray', size: '3rem' }}>
-          <ShadowHover>
+          <div style={{ padding: '0 1.5rem' }}>
             <TiMessageTyping />
-          </ShadowHover>
+          </div>
         </IconContext.Provider>
         <IconContext.Provider value={{ color: 'gray', size: '3rem' }}>
-          <div style={{ position: 'relative' }}>
+          <div style={{ position: 'relative', padding: '0 .5rem' }}>
             <TiBell />
             <RedDot>1</RedDot>
           </div>
         </IconContext.Provider>
-        <DotDot>&nbsp;</DotDot>
+        <DotDotCont>
+          <div
+            style={{
+              position: 'absolute',
+              right: '.35rem',
+              top: '1.2rem',
+              padding: '0 1rem'
+            }}
+          >
+            <DotDot>&nbsp;</DotDot>
+          </div>
+        </DotDotCont>
       </HeaderPosition>
     );
   }

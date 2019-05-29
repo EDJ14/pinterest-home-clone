@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
 import styled from 'styled-components';
 
@@ -51,7 +52,8 @@ class BodyBanner extends Component {
       return (
         <BodyBan>
           <UserWelcome>
-            Hi Eddie! Your feed is made up of these topics
+            Hi {this.props.auth ? this.props.auth.username : 'Loading'} Your
+            feed is made up of these topics
           </UserWelcome>
           <FeaturedPosts />
         </BodyBan>
@@ -69,7 +71,8 @@ class BodyBanner extends Component {
     return (
       <BodyBan>
         <UserWelcome>
-          Hi Eddie! Your feed is made up of these topics
+          Hi {this.props.auth ? this.props.auth.username : 'Loading'}!! Your
+          feed is made up of these topics
         </UserWelcome>
         <CategoryBox>{posts}</CategoryBox>
       </BodyBan>
@@ -81,4 +84,8 @@ class BodyBanner extends Component {
   }
 }
 
-export default BodyBanner;
+function mapStateToProps({ auth }) {
+  return { auth };
+}
+
+export default connect(mapStateToProps)(BodyBanner);
