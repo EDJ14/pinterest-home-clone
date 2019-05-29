@@ -12,7 +12,7 @@ const Post = styled.div`
   position: relative;
 
   display: grid;
-  grid-template-rows: 80% 20%;
+  grid-template-rows: 85% 15%;
   grid-template-columns: 1fr 1fr;
 
   &:hover > .overlay {
@@ -102,7 +102,7 @@ class PostCard extends Component {
   async componentDidMount() {
     if (!this.state.imgURL.length) {
       const res = await axios.get(
-        `/api/images/${Math.floor(Math.random() * 99 + 1)}`
+        `/api/images/${Math.floor(Math.random() * 49 + 1)}`
       );
       const url = res.data[0];
       this.setState({ imgURL: url });

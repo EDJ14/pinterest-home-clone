@@ -2,11 +2,11 @@ module.exports = (app, connection) => {
   app.get('/api/newpost/:username', (req, res) => {
     const person = { username: req.params.username };
 
-    connection.query('INSERT INTO users SET ?', person, (err, results) => {
+    /*connection.query('INSERT INTO users SET ?', person, (err, results) => {
       if (err) {
         console.log(err.sqlMessage);
       }
-    });
+    });*/
     res.sendStatus(200);
   });
 
@@ -32,7 +32,7 @@ module.exports = (app, connection) => {
     const selectQ = 'SELECT * FROM users WHERE google_id=1234';
     const insertQ =
       'INSERT INTO users (google_id, username) VALUES (1234, "test8")';
-    connection.query(insertQ, (err, results) => {
+    connection.query(selectQ, (err, results) => {
       if (err) throw err;
       /*const user = {
         id: results[0].id,
@@ -41,6 +41,17 @@ module.exports = (app, connection) => {
       };*/
       console.log(results.insertId);
       res.send(results);
+    });
+  });
+
+  app.get('/api/posts/:num', (req, res) => {
+    const q = `select username, image_url from photos right join 
+              (select username, photo_id, tag_id from posts left join users on posts.user_id = users.id) 
+              as userphotoid on photos.id = userphotoid.photo_id LIMIT ${
+                req.params.num
+              }`;
+    connection.query(q, (err, results) => {
+      console.log(results);
     });
   });
 };

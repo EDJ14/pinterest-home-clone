@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 
 import BodyPosts from './BodyPosts';
 
@@ -14,6 +13,10 @@ const Body2 = styled.div`
   display: grid;
   grid-gap: 1.3rem;
   grid-template-columns: repeat(5, 1fr);
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 `;
 
 const Col1 = styled.div`

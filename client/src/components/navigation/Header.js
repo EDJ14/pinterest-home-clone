@@ -94,12 +94,20 @@ const ShadowHover = styled.div`
 class Header extends Component {
   renderAuth = () => {
     if (this.props.auth == null) {
+      return <HeaderUserButton text="Loading" />;
+    } else if (this.props.auth == false) {
       return <HeaderUserButton text="Login" />;
     }
-    return <HeaderUserButton text={this.props.auth.username} />;
+    const { username } = this.props.auth;
+    return (
+      <HeaderUserButton
+        text={username.length > 6 ? username.slice(0, 6) + '...' : username}
+      />
+    );
   };
 
   render() {
+    console.log(this.props);
     return (
       <HeaderPosition>
         <IconContext.Provider
@@ -131,7 +139,9 @@ class Header extends Component {
               padding: '0 1rem'
             }}
           >
-            <DotDot>&nbsp;</DotDot>
+            <a href="/api/logout">
+              <DotDot>&nbsp;</DotDot>{' '}
+            </a>
           </div>
         </DotDotCont>
       </HeaderPosition>

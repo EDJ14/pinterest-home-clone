@@ -31,7 +31,8 @@ const FeaturedPosts = styled.div`
   text-transform: uppercase;
   font-weight: bold;
   margin: 0.75rem;
-  background-image: url(https://source.unsplash.com/random/75x75);
+  background-image: url(https://source.unsplash.com/random/${props =>
+      props.img}5x${props => props.img}5);
   border-radius: 5px;
   text-align: center;
   position: relative;
@@ -45,6 +46,7 @@ class BodyBanner extends Component {
     const res = await axios.get('/api/tags');
     const tags = res.data.slice(0, 5).map(cat => cat.tag_name);
     this.setState({ tags: tags });
+    axios.get('/api/posts/4');
   }
 
   renderContent() {
@@ -60,8 +62,8 @@ class BodyBanner extends Component {
       );
     }
 
-    const posts = this.state.tags.map(cat => (
-      <FeaturedPosts key={cat}>
+    const posts = this.state.tags.map((cat, i) => (
+      <FeaturedPosts key={cat} img={i}>
         <div style={{ position: 'absolute', bottom: '.5rem', left: '.5rem' }}>
           {cat}
         </div>
