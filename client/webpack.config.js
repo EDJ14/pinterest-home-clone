@@ -13,7 +13,7 @@ module.exports = {
         options: { presets: ['@babel/env'] }
       },
       {
-        test: /\.scss$/,
+        test: /\.(scss|css)$/,
         exclude: /node_modules/,
         use: ['style-loader', 'css-loader', 'sass-loader']
       },

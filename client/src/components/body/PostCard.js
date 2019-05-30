@@ -95,8 +95,6 @@ const PostPic = styled.div`
   border-radius: 10px;
 `;
 
-// url(https://source.unsplash.com/random/250x250)
-
 const PostDetails = styled.div`
   grid-row: 2 / -1;
   grid-column: 1 / -1;
@@ -105,7 +103,7 @@ const PostDetails = styled.div`
   align-items: center;
 `;
 
-const duration = 3000;
+const duration = 5000;
 
 const defaultStyle = {
   transition: `opacity ${duration}ms ease-in-out`,
@@ -122,38 +120,45 @@ const transitionStyles = {
 class PostCard extends Component {
   state = { imgURL: '', inProp: false };
 
-  componentDidMount() {
-    if (!this.state.imgURL.length) {
-      try {
-        this.setState({ imgURL: url, inProp: true });
-      } catch (err) {
-        this.setState({ inProp: true });
-      }
-    }
+  sleep = time => {
+    return new Promise(resolve => setTimeout(resolve, time));
+  };
+
+  async componentDidMount() {
+    await this.sleep(50);
+    this.setState({ inProp: true });
   }
 
+  savePost = e => {
+    console.log(e);
+  };
+
   render() {
-    console.log(this.props);
     return (
-      <Transition in={this.state.inProp} timeout={10}>
+      <Transition in={this.state.inProp} timeout={500}>
         {state => (
-          <div
+          <Post
             style={{
               ...defaultStyle,
               ...transitionStyles[state]
             }}
+            height={Math.random() * 40 + 20}
           >
-            <Post height={Math.random() * 40 + 20}>
-              <div className="overlay" />
-              <div className="savebut">Save</div>
-              <div className="sourcesite">website.com</div>
-              <PostPic img={this.props.post[0].image_url} />
-              <PostDetails>
-                <p>Author</p>
-                <p>Date</p>
-              </PostDetails>
-            </Post>
-          </div>
+            <div className="overlay" />
+            <div onClick={this.savePost} className="savebut">
+              Save
+            </div>
+            <div className="sourcesite">website.com</div>
+            <PostPic
+              img={this.props.post ? this.props.post[0].image_url : null}
+            />
+            <PostDetails>
+              <p style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
+                {this.props.post[0].username}
+              </p>
+              <p>Date</p>
+            </PostDetails>
+          </Post>
         )}
       </Transition>
     );

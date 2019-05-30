@@ -25,11 +25,12 @@ const HeaderPosition = styled.header`
 const ButtonsCont = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  width: 30%;
+  margin-left: auto;
+  justify-content: space-between;
+  width: 40%;
 
   @media (max-width: 1090px) {
-    width: 30%;
+    width: 80%;
   }
 `;
 
@@ -43,6 +44,7 @@ const DotDotCont = styled.div`
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
+    transform: scale(1.25);
   }
 `;
 
@@ -55,7 +57,7 @@ const DotDot = styled.span`
   position: absolute;
   display: inline-block;
   margin: 0 1.3rem;
-  top: 1rem;
+  top: 1.25rem;
 
   &::before,
   &::after {
@@ -121,7 +123,6 @@ class Header extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <HeaderPosition>
         <IconContext.Provider

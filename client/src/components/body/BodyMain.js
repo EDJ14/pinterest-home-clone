@@ -84,18 +84,18 @@ class BodyMain extends Component {
 
     let i = 0;
     while (i < numPosts) {
-      col0.push(<PostCard post={posts[i]} num={1} />);
+      col0.push(<PostCard post={posts[i]} />);
       i++;
-      i < numPosts ? col1.push(<PostCard post={posts[i]} num={1} />) : false;
+      i < numPosts ? col1.push(<PostCard post={posts[i]}/>) : false;
       i++;
-      i < numPosts ? col2.push(<PostCard post={posts[i]} num={1} />) : false;
+      i < numPosts ? col2.push(<PostCard post={posts[i]}  />) : false;
       i++;
       i < numPosts
-        ? col3.push(<PostCard post={this.props.posts[i]} num={1} />)
+        ? col3.push(<PostCard post={this.props.posts[i]} />)
         : false;
       i++;
       i < numPosts
-        ? col4.push(<PostCard post={this.props.posts[i]} num={1} />)
+        ? col4.push(<PostCard post={this.props.posts[i]}  />)
         : null;
       i++;
     }
@@ -112,7 +112,6 @@ class BodyMain extends Component {
   };
 
   render() {
-    console.log(this.props.posts);
     return (
       <Body2>
         <PostsButtons onClick={this.handleClick}>CliCK</PostsButtons>
