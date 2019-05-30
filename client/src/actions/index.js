@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { FETCH_USER, FETCH_POSTS } from './types';
+import { FETCH_USER, FETCH_POSTS, INCREMENT_POSTS } from './types';
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get('/api/current_user');
@@ -12,4 +12,8 @@ export const fetchPosts = numPosts => async dispatch => {
   const res = await axios.get(`/api/posts/1/${numPosts}`);
 
   dispatch({ type: FETCH_POSTS, payload: res.data });
+};
+
+export const incrementPosts = () => dispatch => {
+  dispatch({ type: INCREMENT_POSTS });
 };

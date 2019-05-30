@@ -111,7 +111,7 @@ class Header extends Component {
   renderAuth = () => {
     if (this.props.auth == null) {
       return <HeaderUserButton text="Loading" />;
-    } else if (this.props.auth == false) {
+    } else if (this.props.auth.id == false) {
       return <HeaderUserButton text="Login" />;
     }
     const { username } = this.props.auth;
@@ -123,6 +123,7 @@ class Header extends Component {
   };
 
   render() {
+    console.log(this.props.auth);
     return (
       <HeaderPosition>
         <IconContext.Provider
@@ -143,7 +144,7 @@ class Header extends Component {
           <IconContext.Provider value={{ color: 'gray', size: '3rem' }}>
             <div style={{ position: 'relative', padding: '0 .5rem' }}>
               <TiBell />
-              <RedDot>1</RedDot>
+              <RedDot>{Math.ceil(Math.random() * 20)}</RedDot>
             </div>
           </IconContext.Provider>
           <DotDotCont>

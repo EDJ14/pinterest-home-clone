@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import * as actions from '../../actions';
 
 import PostCard from './PostCard';
-import axios from 'axios';
 
 const Body2 = styled.div`
   grid-column: 2 / -2;
@@ -23,31 +22,7 @@ const Body2 = styled.div`
   }
 `;
 
-const Col0 = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-`;
-
-const Col1 = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-`;
-
-const Col2 = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-`;
-
-const Col3 = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-`;
-
-const Col4 = styled.div`
+const Col = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -63,6 +38,8 @@ class BodyMain extends Component {
   state = { numClicks: 0 };
 
   handleClick = async () => {
+    this.props.incrementPosts();
+
     try {
       await this.props.fetchPosts(this.state.numClicks);
       this.setState({ numClicks: this.state.numClicks + 1 });
@@ -73,60 +50,47 @@ class BodyMain extends Component {
     }
   };
 
-  render1 = () => {
-    const col0 = [];
-    const col1 = [];
-    const col2 = [];
-    const col3 = [];
-    const col4 = [];
-    const numPosts = this.props.posts.length || this.state.numClicks;
-    const posts = this.props.posts;
+  shouldComponentUpdate() {
+    return false;
+  }
 
-    let i = 0;
-    while (i < numPosts) {
-      col0.push(<PostCard post={posts[i]} />);
-      i++;
-      i < numPosts ? col1.push(<PostCard post={posts[i]}/>) : false;
-      i++;
-      i < numPosts ? col2.push(<PostCard post={posts[i]}  />) : false;
-      i++;
-      i < numPosts
-        ? col3.push(<PostCard post={this.props.posts[i]} />)
-        : false;
-      i++;
-      i < numPosts
-        ? col4.push(<PostCard post={this.props.posts[i]}  />)
-        : null;
-      i++;
+  postsForColumns(n, col) {
+    const res = [];
+    for (let i = 1; i <= n; i++) {
+      res.push(
+        <PostCard
+          key={Math.ceil(Math.random() * 1000 * n)}
+          num={i + 4 * (i - 1) + (col - 1)}
+        />
+      );
     }
+    return res;
+  }
 
-    const ret = [
-      <Col0>{col0}</Col0>,
-      <Col1>{col1}</Col1>,
-      <Col2>{col2}</Col2>,
-      <Col3>{col3}</Col3>,
-      <Col4>{col4}</Col4>
-    ];
-
-    return ret;
-  };
+  renderColumns(numberOfPosts) {
+    const res = [];
+    for (let i = 1; i <= 5; i++) {
+      res.push(
+        <Col key={i}>
+          {this.postsForColumns(Math.ceil(numberOfPosts / 5), i)}
+        </Col>
+      );
+    }
+    return res;
+  }
 
   render() {
     return (
       <Body2>
         <PostsButtons onClick={this.handleClick}>CliCK</PostsButtons>
-        {this.render1()}
+        {this.renderColumns(100)}
       </Body2>
     );
   }
 }
 
-function mapStateToProps({ posts }) {
-  return { posts };
-}
-
 export default connect(
-  mapStateToProps,
+  null,
   actions
 )(BodyMain);
 
@@ -152,4 +116,82 @@ export default connect(
         </Col4>
       </Body2>
     );
-  }*/
+  }
+
+  //-----------------OLD---------------------------------
+  state = { numClicks: 0 };
+
+  handleClick = async () => {
+    try {
+      await this.props.fetchPosts(this.state.numClicks);
+      this.setState({ numClicks: this.state.numClicks + 1 });
+    } catch (err) {
+      this.setState({
+        numClicks: this.state.numClicks + 1
+      });
+    }
+  };
+
+  render1 = () => {
+    const col0 = [];
+    const col1 = [];
+    const col2 = [];
+    const col3 = [];
+    const col4 = [];
+    const numPosts = this.props.posts.length || this.state.numClicks;
+    const { posts } = this.props;
+
+    let i = 0;
+    while (i < numPosts) {
+      col0.push(<PostCard post={posts[i]} />);
+      i++;
+      i < numPosts ? col1.push(<PostCard post={posts[i]} />) : false;
+      i++;
+      i < numPosts ? col2.push(<PostCard post={posts[i]} />) : false;
+      i++;
+      i < numPosts ? col3.push(<PostCard post={posts[i]} />) : false;
+      i++;
+      i < numPosts ? col4.push(<PostCard post={posts[i]} />) : null;
+      i++;
+    }
+
+    const ret = [
+      <Col0>{col0}</Col0>,
+      <Col1>{col1}</Col1>,
+      <Col2>{col2}</Col2>,
+      <Col3>{col3}</Col3>,
+      <Col4>{col4}</Col4>
+    ];
+
+    return ret;
+  };
+  
+
+  render() {
+    return (
+      <Body2>
+        <PostsButtons onClick={this.handleClick}>CliCK</PostsButtons>
+        {this.render1()}
+      </Body2>
+    );
+  }
+  ------------OLD--------------------------------------------
+
+  <Col0>
+          <PostCard num={1} />
+          <PostCard num={6} />
+        </Col0>
+        <Col1>
+          <PostCard num={2} />
+        </Col1>
+        <Col2>
+          <PostCard num={3} />
+        </Col2>
+        <Col3>
+          <PostCard num={4} />
+        </Col3>
+        <Col4>
+          <PostCard num={5} />
+        </Col4>
+
+        */

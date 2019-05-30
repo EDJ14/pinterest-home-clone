@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import axios from 'axios';
 import { Transition, CSSTransition } from 'react-transition-group';
@@ -124,6 +125,67 @@ class PostCard extends Component {
     return new Promise(resolve => setTimeout(resolve, time));
   };
 
+  async componentDidUpdate() {
+    console.log('updated');
+    await new Promise(resolve => setTimeout(resolve, 50));
+    this.state.inProp ? null : this.setState({ inProp: true });
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.postNumber == this.props.num;
+  }
+
+  renderContent() {
+    const post = this.props.posts[this.props.num - 1];
+    if (this.props.num <= this.props.postNumber) {
+      return (
+        <Transition in={this.state.inProp} timeout={500}>
+          {state => (
+            <Post
+              style={{
+                ...defaultStyle,
+                ...transitionStyles[state]
+              }}
+              height={Math.random() * 40 + 20}
+            >
+              <div className="overlay" />
+              <div onClick={this.savePost} className="savebut">
+                Save
+              </div>
+              <div className="sourcesite">website.com</div>
+              <PostPic img={post ? post[0].image_url : null} />
+              <PostDetails>
+                <p style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
+                  {post ? post[0].username : 'Author'}
+                </p>
+                <p>Date</p>
+              </PostDetails>
+            </Post>
+          )}
+        </Transition>
+      );
+    } else {
+      return <div style={{ width: '0', height: '0' }} />;
+    }
+  }
+
+  render() {
+    return this.renderContent();
+  }
+}
+
+function mapStateToProps(state) {
+  return state;
+}
+
+export default connect(mapStateToProps)(PostCard);
+
+/*state = { imgURL: '', inProp: false };
+
+  sleep = time => {
+    return new Promise(resolve => setTimeout(resolve, time));
+  };
+
   async componentDidMount() {
     await this.sleep(50);
     this.setState({ inProp: true });
@@ -154,7 +216,7 @@ class PostCard extends Component {
             />
             <PostDetails>
               <p style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
-                {this.props.post[0].username}
+                {this.props.post ? this.props.post[0].username : null}
               </p>
               <p>Date</p>
             </PostDetails>
@@ -163,6 +225,4 @@ class PostCard extends Component {
       </Transition>
     );
   }
-}
-
-export default PostCard;
+}*/
