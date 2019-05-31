@@ -39,4 +39,21 @@ module.exports = (app, connection) => {
       res.send(results);
     });
   });
+
+  app.post('/api/posts', (req, res) => {
+    const post = { user_id: 50, title: 'this is a test post' };
+    connection.query('INSERT INTO posts SET ?', post, (err, results) => {
+      if (err) {
+        console.log(err.sqlMessage);
+      }
+      console.log(results);
+      retrievePostq =
+        'SELECT title, user_id, photo_id, tag_id FROM posts WHERE id=' +
+        results.insertId;
+      connection.query(retrievePostq, (err, results2) => {
+        console.log(results2);
+        res.send(results2);
+      });
+    });
+  });
 };

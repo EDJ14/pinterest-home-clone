@@ -5,7 +5,8 @@ import { MdSearch } from 'react-icons/md';
 const Search = styled.input`
   type: text;
   margin: 0 2rem;
-  width: 74rem;
+  width: 84rem;
+  padding-left: 3.85rem;
 
   @media (max-width: 930px) {
     width: 60rem;
@@ -20,22 +21,11 @@ const Search = styled.input`
   border-radius: 1rem;
   background-color: rgb(227, 229, 232);
 
-  ::placeholder,
-  ::-webkit-input-placeholder {
-    padding-left: 3.85rem;
-  }
-  :-ms-input-placeholder {
-    padding-left: 3.85rem;
-  }
-
   &:focus {
     outline: none;
     border: 3px solid rgb(109, 163, 249);
     text-indent: 3.5rem;
-
-    &::placeholder {
-      padding: 0;
-    }
+    padding-left: 0;
   }
 `;
 

@@ -18,9 +18,9 @@ passport.deserializeUser((id, done) => {
   const q = 'SELECT * FROM users WHERE id=' + id;
   connection.query(q, (err, results) => {
     const user = {
-      id: results.length ? results[0].id : false,
-      google_id: results.length ? results[0].google_id : false,
-      username: results.length ? results[0].username : false //115660807052933830156
+      id: results.length ? results[0].id : null,
+      google_id: results.length ? results[0].google_id : null,
+      username: results.length ? results[0].username : null //115660807052933830156
     };
 
     done(null, user);

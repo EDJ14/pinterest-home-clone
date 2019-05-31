@@ -20,6 +20,11 @@ module.exports = {
       {
         test: /\.(png|svg|jpg|gif)$/,
         use: ['file-loader']
+      },
+      {
+        test: /\.(png|gif|cur|jpg)$/,
+        loader: 'url-loader',
+        query: { limit: 8192 }
       }
     ]
   },

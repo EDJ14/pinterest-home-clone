@@ -22,6 +22,7 @@
     "node-sass": "^4.12.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
     "webpack": "^4.32.2",
     "webpack-cli": "^3.3.2",
     "webpack-dev-server": "^3.4.1"
@@ -36,6 +37,7 @@
     "react-router-dom": "^5.0.0",
     "react-transition-group": "^4.0.1",
     "redux": "^4.0.1",
+    "redux-form": "^8.2.3",
     "redux-thunk": "^2.3.0",
     "styled-components": "^4.2.0"
   }

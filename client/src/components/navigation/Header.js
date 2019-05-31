@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { IconContext } from 'react-icons';
@@ -13,6 +14,7 @@ const HeaderPosition = styled.header`
   grid-row: 1 / 2;
   grid-column: 1 / -1;
   width: 100%;
+  height: 6.5rem;
   background-color: white;
   padding: 0.9rem 1.75rem;
   box-shadow: 0 0 2px 2px;
@@ -20,6 +22,7 @@ const HeaderPosition = styled.header`
   align-items: center;
   position: fixed;
   z-index: 1000;
+  cursor: url(../../img/magnify.cur), auto;
 `;
 
 const ButtonsCont = styled.div`
@@ -92,26 +95,11 @@ const RedDot = styled.span`
   color: white;
 `;
 
-const ShadowHover = styled.div`
-  cursor: pointer;
-  opacity: 1;
-  border-radius: 50%;
-
-  &:hover {
-    width: 3rem;
-    height: 3rem;
-    transform: scale(1.1)
-    opacity: .5;
-    border-radius: 50%;
-    background-color: rgba(0,0,0,.2);
-  }
-`;
-
 class Header extends Component {
   renderAuth = () => {
     if (this.props.auth == null) {
       return <HeaderUserButton text="Loading" />;
-    } else if (this.props.auth.id == false) {
+    } else if (this.props.auth == false || this.props.auth.username == null) {
       return <HeaderUserButton text="Login" />;
     }
     const { username } = this.props.auth;
@@ -123,14 +111,21 @@ class Header extends Component {
   };
 
   render() {
-    console.log(this.props.auth);
     return (
       <HeaderPosition>
-        <IconContext.Provider
-          value={{ color: 'rgb(206, 24, 38)', size: '2.7rem', width: '3rem' }}
-        >
-          <FaPinterest />
-        </IconContext.Provider>
+        <Link to="/">
+          <div style={{ marginTop: '.5rem', width: '5rem' }}>
+            <IconContext.Provider
+              value={{
+                color: 'rgb(206, 24, 38)',
+                size: '2.7rem',
+                width: '3rem'
+              }}
+            >
+              <FaPinterest />
+            </IconContext.Provider>
+          </div>
+        </Link>
         <HeaderSearch />
         <ButtonsCont>
           <HeaderUserButton bold text="Home" />

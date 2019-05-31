@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import * as actions from '../../actions';
@@ -34,6 +35,11 @@ const PostsButtons = styled.button`
   left: 3rem;
 `;
 
+const UserPostsButtons = styled.button`
+  top: 2rem;
+  left: 17rem;
+`;
+
 class BodyMain extends Component {
   state = { numClicks: 0 };
 
@@ -41,7 +47,7 @@ class BodyMain extends Component {
     this.props.incrementPosts();
 
     try {
-      await this.props.fetchPosts(this.state.numClicks);
+      this.props.fetchPosts(this.state.numClicks);
       this.setState({ numClicks: this.state.numClicks + 1 });
     } catch (err) {
       this.setState({
@@ -50,17 +56,18 @@ class BodyMain extends Component {
     }
   };
 
-  shouldComponentUpdate() {
+  /*shouldComponentUpdate() {
     return false;
-  }
+  }*/
 
   postsForColumns(n, col) {
     const res = [];
     for (let i = 1; i <= n; i++) {
       res.push(
         <PostCard
-          key={Math.ceil(Math.random() * 1000 * n)}
+          key={i + 4 * (i - 1) + (col - 1)}
           num={i + 4 * (i - 1) + (col - 1)}
+          height={Math.random() * 40 + 20}
         />
       );
     }
@@ -83,6 +90,9 @@ class BodyMain extends Component {
     return (
       <Body2>
         <PostsButtons onClick={this.handleClick}>CliCK</PostsButtons>
+        <Link to="/new" style={{ position: 'absolute', top: '-5rem' }}>
+          <UserPostsButtons>NewPost</UserPostsButtons>
+        </Link>
         {this.renderColumns(100)}
       </Body2>
     );

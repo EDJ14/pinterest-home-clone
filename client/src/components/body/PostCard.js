@@ -14,7 +14,7 @@ const Post = styled.div`
   position: relative;
 
   display: grid;
-  grid-template-rows: 85% 15%;
+  grid-template-rows: 92.5% 7.5%;
   grid-template-columns: 1fr 1fr;
 
   &:hover > .overlay {
@@ -59,7 +59,7 @@ const Post = styled.div`
     &:hover > .sourcesite {
       width: 7rem;
       height: 4rem;
-      bottom: 23%;
+      bottom: 10%;
       left: 1rem;
       position: absolute;
       background-color: rgb(58, 54, 54);
@@ -114,39 +114,55 @@ const defaultStyle = {
 const transitionStyles = {
   entering: { opacity: 1 },
   entered: { opacity: 1 },
-  exiting: { opacity: 0 },
-  exited: { opacity: 0 }
+  exiting: { opacity: 1 },
+  exited: { opacity: 1 }
 };
 
 class PostCard extends Component {
-  state = { imgURL: '', inProp: false };
+  state = { postFromUser: { title: this.props.userPost || '' }, inProp: false };
 
   sleep = time => {
     return new Promise(resolve => setTimeout(resolve, time));
   };
 
   async componentDidUpdate() {
-    console.log('updated');
+    if (this.props.num == 1) {
+      console.log('props', this.props);
+    }
     await new Promise(resolve => setTimeout(resolve, 50));
     this.state.inProp ? null : this.setState({ inProp: true });
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return nextProps.postNumber == this.props.num;
+    if (this.props.num == 1) {
+      console.log('nextState of 1', nextState);
+    }
+    return (
+      nextProps.postNumber == this.props.num ||
+      (nextState.postFromUser.title.length != 0 && this.props.num == 1)
+    );
+  }
+
+  renderName() {
+    const post = this.props.posts[this.props.num - 1];
+    if ((this.props.num == 1) & (this.state.postFromUser.title.length != 0)) {
+      return this.state.postFromUser.title;
+    }
+    return post ? post[0].username : 'Author';
   }
 
   renderContent() {
-    const post = this.props.posts[this.props.num - 1];
+    const post = this.props.posts[this.props.num - 1]; // get post details from complete array of posts stored in redux
     if (this.props.num <= this.props.postNumber) {
       return (
-        <Transition in={this.state.inProp} timeout={500}>
+        <Transition in={this.state.inProp} timeout={0}>
           {state => (
             <Post
               style={{
                 ...defaultStyle,
                 ...transitionStyles[state]
               }}
-              height={Math.random() * 40 + 20}
+              height={this.props.height}
             >
               <div className="overlay" />
               <div onClick={this.savePost} className="savebut">
@@ -156,7 +172,7 @@ class PostCard extends Component {
               <PostPic img={post ? post[0].image_url : null} />
               <PostDetails>
                 <p style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
-                  {post ? post[0].username : 'Author'}
+                  {this.renderName()}
                 </p>
                 <p>Date</p>
               </PostDetails>
