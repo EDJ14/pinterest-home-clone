@@ -25,7 +25,7 @@ const Search = styled.input`
   &:focus {
     outline: none;
     border: 3px solid rgb(109, 163, 249);
-    text-indent: 4.5rem;
+    text-indent: 4.2rem;
     padding-left: 0;
   }
 `;
@@ -44,7 +44,6 @@ class HeaderSearch extends Component {
 
   handleChange = e => {
     this.setState({ input: e.target.value });
-    console.log('changed');
   };
 
   render() {

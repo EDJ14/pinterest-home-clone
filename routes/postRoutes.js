@@ -2,11 +2,6 @@ module.exports = (app, connection) => {
   app.get('/api/newpost/:username', (req, res) => {
     const person = { username: req.params.username };
 
-    /*connection.query('INSERT INTO users SET ?', person, (err, results) => {
-      if (err) {
-        console.log(err.sqlMessage);
-      }
-    });*/
     res.sendStatus(200);
   });
 

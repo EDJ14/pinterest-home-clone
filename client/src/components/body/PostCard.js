@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { Transition, CSSTransition } from 'react-transition-group';
 import * as actions from '../../actions';
 
 const Post = styled.div`
@@ -36,6 +36,7 @@ const Post = styled.div`
   &:hover > .savebut {
     width: 7rem;
     height: 4rem;
+    border: none;
     top: 1rem;
     right: 1rem;
     position: absolute;
@@ -50,6 +51,12 @@ const Post = styled.div`
     line-height: 4rem;
     color: white;
     font-weight: 300;
+
+    &:focus .saveclick {
+      width: 4rem;
+      height: 4rem;
+      background-color: black;
+    }
 
     &:hover {
       background-color: rgb(150, 9, 20);
@@ -119,17 +126,11 @@ const transitionStyles = {
 };
 
 class PostCard extends Component {
-  state = { inProp: false };
-
-  async componentDidMount() {
-    await new Promise(resolve => setTimeout(resolve, 500));
-    this.state.inProp ? null : this.setState({ inProp: true });
-  }
+  state = { inProp: this.props.num <= this.props.postNumber };
 
   async componentDidUpdate() {
-    if (this.props.num == 1) {
-      console.log(this.props);
-    }
+    await new Promise(resolve => setTimeout(resolve, 50));
+    this.state.inProp ? null : this.setState({ inProp: true, count: 1 });
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -176,20 +177,31 @@ class PostCard extends Component {
 
     if (num <= this.props.postNumber) {
       return (
-        <Post height={this.props.height}>
-          <div className="overlay" />
-          <div onClick={this.savePost} className="savebut">
-            Save
-          </div>
-          <div className="sourcesite">website.com</div>
-          <PostPic img={this.renderImg()} />
-          <PostDetails>
-            <p style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
-              {this.renderName()}
-            </p>
-            <p>Date</p>
-          </PostDetails>
-        </Post>
+        <Transition in={this.state.inProp} timeout={duration}>
+          {state => (
+            <Post
+              height={this.props.height}
+              style={{
+                ...defaultStyle,
+                ...transitionStyles[state]
+              }}
+            >
+              <div className="overlay" />
+              <button className="savebut">
+                Save
+                <div className="saveclick" />
+              </button>
+              <div className="sourcesite">website.com</div>
+              <PostPic img={this.renderImg()} />
+              <PostDetails>
+                <p style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
+                  {this.renderName()}
+                </p>
+                <p>Date</p>
+              </PostDetails>
+            </Post>
+          )}
+        </Transition>
       );
     } else {
       return <div style={{ width: '0', height: '0' }} />;
@@ -209,50 +221,3 @@ export default connect(
   mapStateToProps,
   actions
 )(PostCard);
-
-/*state = { imgURL: '', inProp: false };
-
-  sleep = time => {
-    return new Promise(resolve => setTimeout(resolve, time));
-  };
-
-  async componentDidMount() {
-    await this.sleep(50);
-    this.setState({ inProp: true });
-  }
-
-  savePost = e => {
-    console.log(e);
-  };
-
-  render() {
-    return (
-      <Transition in={this.state.inProp} timeout={500}>
-        {state => (
-          <Post
-            style={{
-              ...defaultStyle,
-              ...transitionStyles[state]
-            }}
-            height={Math.random() * 40 + 20}
-          >
-            <div className="overlay" />
-            <div onClick={this.savePost} className="savebut">
-              Save
-            </div>
-            <div className="sourcesite">website.com</div>
-            <PostPic
-              img={this.props.post ? this.props.post[0].image_url : null}
-            />
-            <PostDetails>
-              <p style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
-                {this.props.post ? this.props.post[0].username : null}
-              </p>
-              <p>Date</p>
-            </PostDetails>
-          </Post>
-        )}
-      </Transition>
-    );
-  }
-}*/

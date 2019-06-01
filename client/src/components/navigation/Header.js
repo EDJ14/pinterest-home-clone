@@ -94,6 +94,28 @@ const RedDot = styled.span`
   color: white;
 `;
 
+const LogoCont = styled.div`
+  margin: 0.5rem 0 0 0.5rem;
+  width: 5rem;
+  position: relative;
+
+  .shadow {
+    &:hover {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 100%;
+      transform: scale(1.25);
+      background-color: grey;
+      position: absolute;
+      top: -1.8rem;
+
+      & > * {
+        transform: scale(0.8);
+      }
+    }
+  }
+`;
+
 class Header extends Component {
   renderAuth = () => {
     if (this.props.auth == null) {
@@ -113,19 +135,19 @@ class Header extends Component {
     return (
       <HeaderPosition>
         <Link to="/">
-          <div
-            style={{ marginTop: '.5rem', marginLeft: '.5rem', width: '5rem' }}
-          >
-            <IconContext.Provider
-              value={{
-                color: 'rgb(206, 24, 38)',
-                size: '3rem',
-                width: '3rem'
-              }}
-            >
-              <FaPinterest />
-            </IconContext.Provider>
-          </div>
+          <LogoCont>
+            <div className="shadow">
+              <IconContext.Provider
+                value={{
+                  color: 'rgb(206, 24, 38)',
+                  size: '3rem',
+                  width: '3rem'
+                }}
+              >
+                <FaPinterest />
+              </IconContext.Provider>
+            </div>
+          </LogoCont>
         </Link>
         <HeaderSearch />
         <ButtonsCont>

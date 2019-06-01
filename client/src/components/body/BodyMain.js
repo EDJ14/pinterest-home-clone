@@ -44,6 +44,34 @@ const UserPostsButtons = styled.button`
 `;
 
 class BodyMain extends Component {
+  componentDidMount() {
+    window.addEventListener('scroll', this.scrollProgress);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.scrollProgress);
+  }
+
+  scrollProgress = () => {
+    const scrollPx = document.documentElement.scrollTop;
+    const winHeightPx =
+      document.documentElement.scrollHeight -
+      document.documentElement.clientHeight;
+    const scrolled = `${(scrollPx / winHeightPx) * 100}%`;
+
+    console.log(scrolled);
+
+    if (scrolled == '100%') {
+      this.props.incrementPosts();
+
+      this.props.fetchPosts(this.props.postNumber);
+    }
+
+    /*this.setState({
+      scrolled: scrolled
+    });*/
+  };
+
   handleClick = () => {
     this.props.incrementPosts();
 
@@ -58,15 +86,16 @@ class BodyMain extends Component {
           key={i + 4 * (i - 1) + (col - 1)}
           num={i + 4 * (i - 1) + (col - 1)}
           height={Math.random() * 40 + 20}
+          count={0}
         />
       );
     }
     return res;
   }
 
-  renderColumns(numberOfPosts) {
+  renderColumnsAndPosts(numberOfColumns, numberOfPosts) {
     const res = [];
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= numberOfColumns; i++) {
       res.push(
         <Col key={i}>
           {this.postsForColumns(Math.ceil(numberOfPosts / 5), i)}
@@ -83,7 +112,7 @@ class BodyMain extends Component {
         <Link to="/new" style={{ position: 'absolute', top: '-5rem' }}>
           <UserPostsButtons>NewPost</UserPostsButtons>
         </Link>
-        {this.renderColumns(100)}
+        {this.renderColumnsAndPosts(5, 100)}
       </Body2>
     );
   }
