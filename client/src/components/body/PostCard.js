@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import axios from 'axios';
-import { Transition, CSSTransition } from 'react-transition-group';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import * as actions from '../../actions';
 
 const Post = styled.div`
@@ -105,7 +104,7 @@ const PostDetails = styled.div`
   align-items: center;
 `;
 
-const duration = 5000;
+const duration = 3000;
 
 const defaultStyle = {
   transition: `opacity ${duration}ms ease-in-out`,
@@ -115,23 +114,22 @@ const defaultStyle = {
 const transitionStyles = {
   entering: { opacity: 1 },
   entered: { opacity: 1 },
-  exiting: { opacity: 1 },
-  exited: { opacity: 1 }
+  exiting: { opacity: 0 },
+  exited: { opacity: 0 }
 };
 
 class PostCard extends Component {
-  state = { postFromUser: { title: '' }, inProp: false };
+  state = { inProp: false };
 
-  sleep = time => {
-    return new Promise(resolve => setTimeout(resolve, time));
-  };
+  async componentDidMount() {
+    await new Promise(resolve => setTimeout(resolve, 500));
+    this.state.inProp ? null : this.setState({ inProp: true });
+  }
 
   async componentDidUpdate() {
     if (this.props.num == 1) {
       console.log(this.props);
     }
-    await new Promise(resolve => setTimeout(resolve, 50));
-    this.state.inProp ? null : this.setState({ inProp: true });
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -178,30 +176,20 @@ class PostCard extends Component {
 
     if (num <= this.props.postNumber) {
       return (
-        <Transition in={this.state.inProp} timeout={0}>
-          {state => (
-            <Post
-              style={{
-                ...defaultStyle,
-                ...transitionStyles[state]
-              }}
-              height={this.props.height}
-            >
-              <div className="overlay" />
-              <div onClick={this.savePost} className="savebut">
-                Save
-              </div>
-              <div className="sourcesite">website.com</div>
-              <PostPic img={this.renderImg()} />
-              <PostDetails>
-                <p style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
-                  {this.renderName()}
-                </p>
-                <p>Date</p>
-              </PostDetails>
-            </Post>
-          )}
-        </Transition>
+        <Post height={this.props.height}>
+          <div className="overlay" />
+          <div onClick={this.savePost} className="savebut">
+            Save
+          </div>
+          <div className="sourcesite">website.com</div>
+          <PostPic img={this.renderImg()} />
+          <PostDetails>
+            <p style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
+              {this.renderName()}
+            </p>
+            <p>Date</p>
+          </PostDetails>
+        </Post>
       );
     } else {
       return <div style={{ width: '0', height: '0' }} />;

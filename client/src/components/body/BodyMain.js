@@ -44,19 +44,10 @@ const UserPostsButtons = styled.button`
 `;
 
 class BodyMain extends Component {
-  state = { numClicks: 0 };
-
-  handleClick = async () => {
+  handleClick = () => {
     this.props.incrementPosts();
 
-    try {
-      this.props.fetchPosts(this.state.numClicks);
-      this.setState({ numClicks: this.state.numClicks + 1 });
-    } catch (err) {
-      this.setState({
-        numClicks: this.state.numClicks + 1
-      });
-    }
+    this.props.fetchPosts(this.props.postNumber);
   };
 
   postsForColumns(n, col) {
@@ -98,8 +89,12 @@ class BodyMain extends Component {
   }
 }
 
+function mapStateToProps({ postNumber }) {
+  return { postNumber };
+}
+
 export default connect(
-  null,
+  mapStateToProps,
   actions
 )(BodyMain);
 

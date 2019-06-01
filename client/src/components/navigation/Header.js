@@ -113,11 +113,13 @@ class Header extends Component {
     return (
       <HeaderPosition>
         <Link to="/">
-          <div style={{ marginTop: '.5rem', width: '5rem' }}>
+          <div
+            style={{ marginTop: '.5rem', marginLeft: '.5rem', width: '5rem' }}
+          >
             <IconContext.Provider
               value={{
                 color: 'rgb(206, 24, 38)',
-                size: '2.7rem',
+                size: '3rem',
                 width: '3rem'
               }}
             >

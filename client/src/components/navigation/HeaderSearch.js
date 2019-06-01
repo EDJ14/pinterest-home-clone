@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { MdSearch } from 'react-icons/md';
+import { IconContext } from 'react-icons';
 
 const Search = styled.input`
   type: text;
-  margin: 0 2rem;
   width: 84rem;
-  padding-left: 3.85rem;
+  padding-left: 4.5rem;
+  font-size: 1.75rem;
 
   @media (max-width: 930px) {
     width: 60rem;
@@ -24,15 +25,15 @@ const Search = styled.input`
   &:focus {
     outline: none;
     border: 3px solid rgb(109, 163, 249);
-    text-indent: 3.5rem;
+    text-indent: 4.5rem;
     padding-left: 0;
   }
 `;
 
 const SearchButton = styled.button`
   position: absolute;
-  top: 1.15rem;
-  left: 4rem;
+  top: 0.75rem;
+  left: 2rem;
   border: none;
   background-color: rgb(227, 229, 232);
   transform: scale(1.25);
@@ -48,14 +49,23 @@ class HeaderSearch extends Component {
 
   render() {
     return (
-      <div style={{ position: 'relative' }}>
+      <div style={{ position: 'relative', marginRight: '2.5rem' }}>
         <Search
           onChange={e => this.handleChange(e)}
           value={this.state.input}
           placeholder="Search"
         />
         <SearchButton>
-          <MdSearch />
+          <IconContext.Provider
+            value={{
+              color: 'grey',
+              size: '2rem',
+              width: '3rem'
+            }}
+          >
+            {' '}
+            <MdSearch />
+          </IconContext.Provider>
         </SearchButton>
       </div>
     );

@@ -14,7 +14,7 @@ window.axios = axios;
 
 const store = createStore(
   reducers,
-  { userPost: [] },
+  { userPost: [], postNumber: 0 },
   applyMiddleware(reduxThunk)
 );
 
