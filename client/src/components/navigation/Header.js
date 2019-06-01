@@ -22,7 +22,6 @@ const HeaderPosition = styled.header`
   align-items: center;
   position: fixed;
   z-index: 1000;
-  cursor: url(../../img/magnify.cur), auto;
 `;
 
 const ButtonsCont = styled.div`

@@ -21,11 +21,12 @@ export const incrementPosts = () => dispatch => {
 export const submitPost = (values, history) => async dispatch => {
   const res = await axios.post('/api/posts', values);
 
+  dispatch(incrementPosts());
   dispatch(showUserPost(values));
   history.push('/');
   dispatch({ type: FETCH_USER, payload: res.data });
 };
 
-export const showUserPost = ({ title }) => dispatch => {
-  dispatch({ type: USER_POST, payload: title });
+export const showUserPost = ({ title, body }) => dispatch => {
+  dispatch({ type: USER_POST, payload: { title, body } });
 };

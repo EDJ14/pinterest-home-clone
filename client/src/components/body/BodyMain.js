@@ -7,6 +7,8 @@ import * as actions from '../../actions';
 
 import PostCard from './PostCard';
 
+import magnifyCursor from '../../img/magnify.cur';
+
 const Body2 = styled.div`
   grid-column: 2 / -2;
   grid-row: 2 / -1;
@@ -27,6 +29,7 @@ const Col = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  cursor: url(${magnifyCursor}), auto;
 `;
 
 const PostsButtons = styled.button`
@@ -55,10 +58,6 @@ class BodyMain extends Component {
       });
     }
   };
-
-  /*shouldComponentUpdate() {
-    return false;
-  }*/
 
   postsForColumns(n, col) {
     const res = [];

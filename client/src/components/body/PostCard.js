@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import axios from 'axios';
 import { Transition, CSSTransition } from 'react-transition-group';
+import * as actions from '../../actions';
 
 const Post = styled.div`
   width: 100%;
@@ -119,7 +120,7 @@ const transitionStyles = {
 };
 
 class PostCard extends Component {
-  state = { postFromUser: { title: this.props.userPost || '' }, inProp: false };
+  state = { postFromUser: { title: '' }, inProp: false };
 
   sleep = time => {
     return new Promise(resolve => setTimeout(resolve, time));
@@ -127,33 +128,55 @@ class PostCard extends Component {
 
   async componentDidUpdate() {
     if (this.props.num == 1) {
-      console.log('props', this.props);
+      console.log(this.props);
     }
     await new Promise(resolve => setTimeout(resolve, 50));
     this.state.inProp ? null : this.setState({ inProp: true });
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (this.props.num == 1) {
-      console.log('nextState of 1', nextState);
+    const { num } = this.props;
+
+    if (num == nextProps.userPost.length) {
+      return (
+        nextProps.userPost[num - 1].title.length != 0 ||
+        nextProps.postNumber == num
+      );
     }
-    return (
-      nextProps.postNumber == this.props.num ||
-      (nextState.postFromUser.title.length != 0 && this.props.num == 1)
-    );
+    return nextProps.postNumber == num;
   }
 
   renderName() {
-    const post = this.props.posts[this.props.num - 1];
-    if ((this.props.num == 1) & (this.state.postFromUser.title.length != 0)) {
-      return this.state.postFromUser.title;
+    const { num } = this.props;
+    const { userPost } = this.props;
+    const post = this.props.posts[num - 1];
+    if (userPost.length >= num) {
+      if (this.props.userPost[num - 1].title.length != 0) {
+        return this.props.userPost[num - 1].title;
+      }
     }
     return post ? post[0].username : 'Author';
   }
 
+  renderImg() {
+    const { num } = this.props;
+    const { userPost } = this.props;
+    const post = this.props.posts[num - 1];
+    if (userPost.length >= num) {
+      if (userPost[num - 1].body.length != 0) {
+        return userPost[num - 1].body;
+      }
+    }
+    if (post) {
+      return post[0].image_url;
+    }
+    return null;
+  }
+
   renderContent() {
-    const post = this.props.posts[this.props.num - 1]; // get post details from complete array of posts stored in redux
-    if (this.props.num <= this.props.postNumber) {
+    const { num } = this.props;
+
+    if (num <= this.props.postNumber) {
       return (
         <Transition in={this.state.inProp} timeout={0}>
           {state => (
@@ -169,7 +192,7 @@ class PostCard extends Component {
                 Save
               </div>
               <div className="sourcesite">website.com</div>
-              <PostPic img={post ? post[0].image_url : null} />
+              <PostPic img={this.renderImg()} />
               <PostDetails>
                 <p style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
                   {this.renderName()}
@@ -194,7 +217,10 @@ function mapStateToProps(state) {
   return state;
 }
 
-export default connect(mapStateToProps)(PostCard);
+export default connect(
+  mapStateToProps,
+  actions
+)(PostCard);
 
 /*state = { imgURL: '', inProp: false };
 
