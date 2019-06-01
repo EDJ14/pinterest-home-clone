@@ -104,13 +104,17 @@ const LogoCont = styled.div`
       width: 3rem;
       height: 3rem;
       border-radius: 100%;
-      transform: scale(1.25);
-      background-color: grey;
+      transform: scale(1.6);
+      background-color: rgb(205, 208, 214);
       position: absolute;
       top: -1.8rem;
 
       & > * {
-        transform: scale(0.8);
+        transform: scale(0.625);
+      }
+
+      &:active {
+        box-shadow: 0 0 0 2.5px rgb(0, 132, 255, 0.5);
       }
     }
   }

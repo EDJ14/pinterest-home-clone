@@ -52,7 +52,7 @@ class BodyMain extends Component {
     window.removeEventListener('scroll', this.scrollProgress);
   }
 
-  scrollProgress = () => {
+  scrollProgress = async () => {
     const scrollPx = document.documentElement.scrollTop;
     const winHeightPx =
       document.documentElement.scrollHeight -
@@ -65,6 +65,8 @@ class BodyMain extends Component {
       this.props.incrementPosts();
 
       this.props.fetchPosts(this.props.postNumber);
+      await new Promise(resolve => setTimeout(resolve, 500));
+      window.scrollTo(0, 0);
     }
 
     /*this.setState({
@@ -85,7 +87,7 @@ class BodyMain extends Component {
         <PostCard
           key={i + 4 * (i - 1) + (col - 1)}
           num={i + 4 * (i - 1) + (col - 1)}
-          height={Math.random() * 40 + 20}
+          height={60 /*Math.random() * 40 + 20*/}
           count={0}
         />
       );
