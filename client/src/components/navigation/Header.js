@@ -21,7 +21,7 @@ const HeaderPosition = styled.header`
   display: flex;
   align-items: center;
   position: fixed;
-  z-index: 1000;
+  z-index: 10;
 `;
 
 const ButtonsCont = styled.div`
@@ -166,7 +166,7 @@ class Header extends Component {
           <IconContext.Provider value={{ color: 'gray', size: '3rem' }}>
             <div style={{ position: 'relative', padding: '0 .5rem' }}>
               <TiBell />
-              <RedDot>{Math.ceil(Math.random() * 20)}</RedDot>
+              <RedDot>{this.props.postNumber}</RedDot>
             </div>
           </IconContext.Provider>
           <DotDotCont>
@@ -180,8 +180,8 @@ class Header extends Component {
   }
 }
 
-function mapStateToProps({ auth }) {
-  return { auth };
+function mapStateToProps({ auth, postNumber }) {
+  return { auth, postNumber };
 }
 
 export default connect(mapStateToProps)(Header);

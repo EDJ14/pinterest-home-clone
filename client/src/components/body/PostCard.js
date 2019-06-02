@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Transition, CSSTransition } from 'react-transition-group';
 import * as actions from '../../actions';
+
+//import Modal from '../modal/Modal'
 
 const Post = styled.div`
   width: 100%;
@@ -45,17 +48,22 @@ const Post = styled.div`
     visibility: visible;
     opacity: 1;
     border-radius: 10px;
-    transition: all 0.2s ease-out;
     cursor: pointer;
     text-align: center;
     line-height: 4rem;
     color: white;
     font-weight: 300;
+    z-index: 5;
 
     &:focus .saveclick {
-      width: 4rem;
-      height: 4rem;
-      background-color: black;
+      margin-left: 7.5rem;
+      width: 10rem;
+      height: 20rem;
+      background-color: white;
+      box-shadow: 0 0 0 4.5px rgb(0, 132, 255, 0.5);
+      outline: 0;      
+      position: absolute;
+      top: 0;
     }
 
     &:hover {
@@ -172,6 +180,10 @@ class PostCard extends Component {
     return null;
   }
 
+  save = e => {
+    e.preventDefault();
+  };
+
   renderContent() {
     const { num } = this.props;
 
@@ -179,27 +191,31 @@ class PostCard extends Component {
       return (
         <Transition in={this.state.inProp} timeout={duration}>
           {state => (
-            <Post
-              height={this.props.height}
-              style={{
-                ...defaultStyle,
-                ...transitionStyles[state]
-              }}
+            <Link
+              to={{ pathname: 'detail', state: { title: this.renderName() } }}
             >
-              <div className="overlay" />
-              <button className="savebut">
-                Save
-                <div className="saveclick" />
-              </button>
-              <div className="sourcesite">website.com</div>
-              <PostPic img={this.renderImg()} />
-              <PostDetails>
-                <p style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
-                  {this.renderName()}
-                </p>
-                <p>Date</p>
-              </PostDetails>
-            </Post>
+              <Post
+                height={this.props.height}
+                style={{
+                  ...defaultStyle,
+                  ...transitionStyles[state]
+                }}
+              >
+                <div className="overlay" />
+                <button onClick={e => this.save(e)} className="savebut">
+                  Save
+                  <div className="saveclick" />
+                </button>
+                <div className="sourcesite">website.com</div>
+                <PostPic img={this.renderImg()} />
+                <PostDetails>
+                  <p style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
+                    {this.renderName()}
+                  </p>
+                  <p>Date</p>
+                </PostDetails>
+              </Post>
+            </Link>
           )}
         </Transition>
       );

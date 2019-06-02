@@ -32,15 +32,34 @@ const Col = styled.div`
   cursor: url(${magnifyCursor}), auto;
 `;
 
-const PostsButtons = styled.button`
+const ButtonContainer = styled.div`
   position: absolute;
-  top: -2rem;
+  top: -8rem;
   left: 3rem;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 `;
 
-const UserPostsButtons = styled.button`
-  top: 2rem;
-  left: 17rem;
+const PostsButtons = styled.button`
+  border: none;
+  background-color: rgb(215, 219, 226);
+  border-radius: 20%;
+  height: 7rem;
+  width: 10rem;
+  cursor: pointer;
+  font-size: 2rem;
+  transition: all 0.2s;
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+
+  &:active,
+  &:focus {
+    box-shadow: 0 0 0 4.5px rgb(0, 132, 255, 0.5);
+    outline: 0;
+  }
 `;
 
 class BodyMain extends Component {
@@ -59,19 +78,12 @@ class BodyMain extends Component {
       document.documentElement.clientHeight;
     const scrolled = `${(scrollPx / winHeightPx) * 100}%`;
 
-    console.log(scrolled);
-
     if (scrolled == '100%') {
       this.props.incrementPosts();
-
       this.props.fetchPosts(this.props.postNumber);
       await new Promise(resolve => setTimeout(resolve, 500));
       window.scrollTo(0, 0);
     }
-
-    /*this.setState({
-      scrolled: scrolled
-    });*/
   };
 
   handleClick = () => {
@@ -80,14 +92,14 @@ class BodyMain extends Component {
     this.props.fetchPosts(this.props.postNumber);
   };
 
-  postsForColumns(n, col) {
+  postsForColumns(n, col, numColumns) {
     const res = [];
     for (let i = 1; i <= n; i++) {
       res.push(
         <PostCard
-          key={i + 4 * (i - 1) + (col - 1)}
-          num={i + 4 * (i - 1) + (col - 1)}
-          height={60 /*Math.random() * 40 + 20*/}
+          key={i + (numColumns - 1) * (i - 1) + (col - 1)}
+          num={i + (numColumns - 1) * (i - 1) + (col - 1)}
+          height={Math.random() * 40 + 20}
           count={0}
         />
       );
@@ -100,7 +112,11 @@ class BodyMain extends Component {
     for (let i = 1; i <= numberOfColumns; i++) {
       res.push(
         <Col key={i}>
-          {this.postsForColumns(Math.ceil(numberOfPosts / 5), i)}
+          {this.postsForColumns(
+            Math.ceil(numberOfPosts / numberOfColumns),
+            i,
+            numberOfColumns
+          )}
         </Col>
       );
     }
@@ -110,10 +126,12 @@ class BodyMain extends Component {
   render() {
     return (
       <Body2>
-        <PostsButtons onClick={this.handleClick}>CliCK</PostsButtons>
-        <Link to="/new" style={{ position: 'absolute', top: '-5rem' }}>
-          <UserPostsButtons>NewPost</UserPostsButtons>
-        </Link>
+        <ButtonContainer>
+          <PostsButtons onClick={this.handleClick}>New Post</PostsButtons>
+          <Link to="/new">
+            <PostsButtons>Create Post</PostsButtons>
+          </Link>
+        </ButtonContainer>
         {this.renderColumnsAndPosts(5, 100)}
       </Body2>
     );
@@ -128,105 +146,3 @@ export default connect(
   mapStateToProps,
   actions
 )(BodyMain);
-
-/*  render() {
-    this.render1();
-    return (
-      <Body2>
-        <PostsButtons onClick={this.handleClick}>CliCK</PostsButtons>
-        <Col0>
-          <BodyPosts posts={this.state.posts} />
-        </Col0>
-        <Col1>
-          <BodyPosts num={this.state.posts} />
-        </Col1>
-        <Col2>
-          <BodyPosts num={this.state.posts} />
-        </Col2>
-        <Col3>
-          <BodyPosts num={this.state.posts} />
-        </Col3>
-        <Col4>
-          <BodyPosts num={this.state.posts} />
-        </Col4>
-      </Body2>
-    );
-  }
-
-  //-----------------OLD---------------------------------
-  state = { numClicks: 0 };
-
-  handleClick = async () => {
-    try {
-      await this.props.fetchPosts(this.state.numClicks);
-      this.setState({ numClicks: this.state.numClicks + 1 });
-    } catch (err) {
-      this.setState({
-        numClicks: this.state.numClicks + 1
-      });
-    }
-  };
-
-  render1 = () => {
-    const col0 = [];
-    const col1 = [];
-    const col2 = [];
-    const col3 = [];
-    const col4 = [];
-    const numPosts = this.props.posts.length || this.state.numClicks;
-    const { posts } = this.props;
-
-    let i = 0;
-    while (i < numPosts) {
-      col0.push(<PostCard post={posts[i]} />);
-      i++;
-      i < numPosts ? col1.push(<PostCard post={posts[i]} />) : false;
-      i++;
-      i < numPosts ? col2.push(<PostCard post={posts[i]} />) : false;
-      i++;
-      i < numPosts ? col3.push(<PostCard post={posts[i]} />) : false;
-      i++;
-      i < numPosts ? col4.push(<PostCard post={posts[i]} />) : null;
-      i++;
-    }
-
-    const ret = [
-      <Col0>{col0}</Col0>,
-      <Col1>{col1}</Col1>,
-      <Col2>{col2}</Col2>,
-      <Col3>{col3}</Col3>,
-      <Col4>{col4}</Col4>
-    ];
-
-    return ret;
-  };
-  
-
-  render() {
-    return (
-      <Body2>
-        <PostsButtons onClick={this.handleClick}>CliCK</PostsButtons>
-        {this.render1()}
-      </Body2>
-    );
-  }
-  ------------OLD--------------------------------------------
-
-  <Col0>
-          <PostCard num={1} />
-          <PostCard num={6} />
-        </Col0>
-        <Col1>
-          <PostCard num={2} />
-        </Col1>
-        <Col2>
-          <PostCard num={3} />
-        </Col2>
-        <Col3>
-          <PostCard num={4} />
-        </Col3>
-        <Col4>
-          <PostCard num={5} />
-        </Col4>
-
-        */

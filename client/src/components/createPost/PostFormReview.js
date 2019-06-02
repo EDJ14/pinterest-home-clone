@@ -23,16 +23,8 @@ const PostFormReview = ({ onCancel, formValues, submitPost, history }) => {
       <FormContainer>
         <h5>Please confirm your entries</h5>
         {reviewFields}
-        <button
-          className="yellow darken-3 white-text btn-flat"
-          onClick={onCancel}
-        >
-          Back
-        </button>
-        <button
-          onClick={() => submitPost(formValues, history)}
-          className="green btn-flat right white-text"
-        >
+        <button onClick={onCancel}>Back</button>
+        <button onClick={() => submitPost(formValues, history)}>
           Send Survey
         </button>
       </FormContainer>

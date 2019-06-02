@@ -73,8 +73,33 @@ function validate(values) {
   return errors;
 }
 
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+];
+
+const date =
+  months[new Date().getMonth()] +
+  ' ' +
+  new Date().getDate().toString() +
+  ' ' +
+  new Date().getFullYear().toString();
+
 export default reduxForm({
   validate,
   form: 'postForm',
+  initialValues: {
+    date: date
+  },
   destroyOnUnmount: false
 })(withRouter(requireAuth(PostForm)));
