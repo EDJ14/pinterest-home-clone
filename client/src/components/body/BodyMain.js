@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
+import Loadable from 'react-loadable';
 import * as actions from '../../actions';
 
-import PostCard from './PostCard';
+//import PostCard from './PostCard';
 
 import magnifyCursor from '../../img/magnify.cur';
 
@@ -35,7 +35,6 @@ const Col = styled.div`
 const ButtonContainer = styled.div`
   position: absolute;
   top: -8rem;
-  left: 3rem;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -61,6 +60,13 @@ const PostsButtons = styled.button`
     outline: 0;
   }
 `;
+
+const LoadableCard = Loadable({
+  loader: () => import('./PostCard'),
+  loading() {
+    return <div>......</div>;
+  }
+});
 
 class BodyMain extends Component {
   componentDidMount() {
@@ -96,7 +102,7 @@ class BodyMain extends Component {
     const res = [];
     for (let i = 1; i <= n; i++) {
       res.push(
-        <PostCard
+        <LoadableCard
           key={i + (numColumns - 1) * (i - 1) + (col - 1)}
           num={i + (numColumns - 1) * (i - 1) + (col - 1)}
           height={Math.random() * 40 + 20}
@@ -110,7 +116,7 @@ class BodyMain extends Component {
     const res = [];
     for (let i = 1; i <= numberOfColumns; i++) {
       res.push(
-        <Col key={i}>
+        <Col id="column" key={i}>
           {this.postsForColumns(
             Math.ceil(numberOfPosts / numberOfColumns),
             i,
@@ -124,14 +130,14 @@ class BodyMain extends Component {
 
   render() {
     return (
-      <Body2>
+      <Body2 id="body">
         <ButtonContainer>
           <PostsButtons onClick={this.handleClick}>New Post</PostsButtons>
           <Link to="/new">
             <PostsButtons>Create Post</PostsButtons>
           </Link>
         </ButtonContainer>
-        {this.renderColumnsAndPosts(5, 100)}
+        {this.renderColumnsAndPosts(5, 60)}
       </Body2>
     );
   }

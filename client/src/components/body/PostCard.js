@@ -5,8 +5,6 @@ import styled from 'styled-components';
 import { Transition, CSSTransition } from 'react-transition-group';
 import * as actions from '../../actions';
 
-import Modal from '../modal/Modal';
-
 const Post = styled.div`
   width: 100%;
   height: ${props => props.height}rem;
@@ -106,8 +104,6 @@ const randomColor = () => {
 const PostPic = styled.div`
   grid-row: 1 / 2;
   grid-column: 1 / -1;
-  background-image: url(${props => props.img});
-  background-color: ${props => (props.img ? 'white' : randomColor())};
   border-radius: 10px;
 `;
 
@@ -119,7 +115,7 @@ const PostDetails = styled.div`
   align-items: center;
 `;
 
-const duration = 3000;
+const duration = 1000;
 const defaultStyle = {
   transition: `all ${duration}ms`,
   transform: 'translateY(-5rem)',
@@ -133,48 +129,56 @@ const transitionStyles = {
   exited: { opacity: 0, transform: 'translateY(-5rem)' }
 };
 
-/*
-const defaultStyle = {
-  transition: `opacity ${duration}ms ease-in-out`,
-  opacity: 0
-};
-
-const transitionStyles = {
-  entering: { opacity: 1 },
-  entered: { opacity: 1 },
-  exiting: { opacity: 0 },
-  exited: { opacity: 0 }
-};
-*/
-
 class PostCard extends Component {
   constructor(props) {
     super(props);
     this.state = { inProp: this.props.num <= this.props.postNumber };
     this.styleCheck = React.createRef();
+    this.imgCheck = React.createRef();
   }
 
-  async componentDidUpdate() {
-    setTimeout(() => {
-      if (this.styleCheck.current.style.opacity == 0) {
-        this.styleCheck.current.style.opacity = 1;
-      }
-    }, 15000);
-
-    await new Promise(resolve => setTimeout(resolve, 1));
-    this.state.inProp ? null : this.setState({ inProp: true });
-  }
+  checkStyles = () => {
+    const { num } = this.props;
+    const { userPost } = this.props;
+    const post = this.props.posts[num - 1];
+    let { style } = this.styleCheck.current;
+    if (style.opacity == 0) {
+      style.opacity = 1;
+    }
+    if (style.transform != 'translateY(0)') {
+      style.transform = 'translateY(0)';
+    }
+    const computed = window
+      .getComputedStyle(this.imgCheck.current)
+      .getPropertyValue('background-image');
+    if (!computed.startsWith('url("http://lorem') && post) {
+      this.imgCheck.current.style.backgroundImage = `url(${post[0].image_url})`;
+    }
+  };
 
   shouldComponentUpdate(nextProps, nextState) {
     const { num } = this.props;
 
-    if (num == nextProps.userPost.length) {
+    if (num === nextProps.userPost.length) {
       return (
         nextProps.userPost[num - 1].title.length != 0 ||
         nextProps.postNumber == num
       );
     }
-    return nextProps.postNumber == num; // need num because all divs rendered first as invisible
+    return nextProps.postNumber === num; // need num because all divs rendered first as invisible
+  }
+
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    console.log('prevProps height', prevProps.height);
+    return prevProps.height;
+  }
+
+  async componentDidUpdate(one, two, snapshot) {
+    console.log('one', one, 'two', two);
+    setTimeout(this.checkStyles, duration * 1.5);
+
+    await new Promise(resolve => setTimeout(resolve, 1));
+    this.state.inProp ? null : this.setState({ inProp: true });
   }
 
   renderName() {
@@ -215,32 +219,35 @@ class PostCard extends Component {
       return (
         <Transition in={this.state.inProp} timeout={duration}>
           {state => (
-            <Link
-              to={{ pathname: 'delete', state: { title: this.renderName() } }}
+            <Post
+              id="post"
+              ref={this.styleCheck}
+              height={this.props.height}
+              style={{
+                ...defaultStyle,
+                ...transitionStyles[state]
+              }}
             >
-              <Post
-                ref={this.styleCheck}
-                height={this.props.height}
+              <div className="overlay" />
+              <button onClick={e => this.save(e)} className="savebut">
+                Save
+                <div className="saveclick" />
+              </button>
+              <div className="sourcesite">website.com</div>
+              <PostPic
+                ref={this.imgCheck}
                 style={{
-                  ...defaultStyle,
-                  ...transitionStyles[state]
+                  backgroundImage: `url(${this.renderImg()})`,
+                  backgroundColor: randomColor()
                 }}
-              >
-                <div className="overlay" />
-                <button onClick={e => this.save(e)} className="savebut">
-                  Save
-                  <div className="saveclick" />
-                </button>
-                <div className="sourcesite">website.com</div>
-                <PostPic img={this.renderImg()} />
-                <PostDetails>
-                  <p style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
-                    {this.renderName()}
-                  </p>
-                  <p>Date</p>
-                </PostDetails>
-              </Post>
-            </Link>
+              />
+              <PostDetails>
+                <p style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
+                  {this.renderName()}
+                </p>
+                <p>Date</p>
+              </PostDetails>
+            </Post>
           )}
         </Transition>
       );
