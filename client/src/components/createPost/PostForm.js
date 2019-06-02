@@ -28,6 +28,10 @@ export const FormContainer = styled.div`
 `;
 
 class PostForm extends Component {
+  onClick = () => {
+    // history.push(), can display loading screen here
+  };
+
   renderFields() {
     return formFields.map(({ label, name }) => {
       return (

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Transition, CSSTransition } from 'react-transition-group';
 import * as actions from '../../actions';
 
-//import Modal from '../modal/Modal'
+import Modal from '../modal/Modal';
 
 const Post = styled.div`
   width: 100%;
@@ -120,7 +120,20 @@ const PostDetails = styled.div`
 `;
 
 const duration = 3000;
+const defaultStyle = {
+  transition: `all ${duration}ms`,
+  transform: 'translateY(-5rem)',
+  opacity: 0
+};
 
+const transitionStyles = {
+  entering: { opacity: 1, transform: 'translateY(0)' },
+  entered: { opacity: 1, transform: 'translateY(0)' },
+  exiting: { opacity: 0, transform: 'translateY(-5rem)' },
+  exited: { opacity: 0, transform: 'translateY(-5rem)' }
+};
+
+/*
 const defaultStyle = {
   transition: `opacity ${duration}ms ease-in-out`,
   opacity: 0
@@ -132,13 +145,24 @@ const transitionStyles = {
   exiting: { opacity: 0 },
   exited: { opacity: 0 }
 };
+*/
 
 class PostCard extends Component {
-  state = { inProp: this.props.num <= this.props.postNumber };
+  constructor(props) {
+    super(props);
+    this.state = { inProp: this.props.num <= this.props.postNumber };
+    this.styleCheck = React.createRef();
+  }
 
   async componentDidUpdate() {
-    await new Promise(resolve => setTimeout(resolve, 50));
-    this.state.inProp ? null : this.setState({ inProp: true, count: 1 });
+    setTimeout(() => {
+      if (this.styleCheck.current.style.opacity == 0) {
+        this.styleCheck.current.style.opacity = 1;
+      }
+    }, 15000);
+
+    await new Promise(resolve => setTimeout(resolve, 1));
+    this.state.inProp ? null : this.setState({ inProp: true });
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -150,7 +174,7 @@ class PostCard extends Component {
         nextProps.postNumber == num
       );
     }
-    return nextProps.postNumber == num;
+    return nextProps.postNumber == num; // need num because all divs rendered first as invisible
   }
 
   renderName() {
@@ -192,9 +216,10 @@ class PostCard extends Component {
         <Transition in={this.state.inProp} timeout={duration}>
           {state => (
             <Link
-              to={{ pathname: 'detail', state: { title: this.renderName() } }}
+              to={{ pathname: 'delete', state: { title: this.renderName() } }}
             >
               <Post
+                ref={this.styleCheck}
                 height={this.props.height}
                 style={{
                   ...defaultStyle,

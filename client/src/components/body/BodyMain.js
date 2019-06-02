@@ -81,8 +81,8 @@ class BodyMain extends Component {
     if (scrolled == '100%') {
       this.props.incrementPosts();
       this.props.fetchPosts(this.props.postNumber);
-      await new Promise(resolve => setTimeout(resolve, 500));
-      window.scrollTo(0, 0);
+      //await new Promise(resolve => setTimeout(resolve, 500));
+      //window.scrollTo(0, 0);
     }
   };
 
@@ -100,7 +100,6 @@ class BodyMain extends Component {
           key={i + (numColumns - 1) * (i - 1) + (col - 1)}
           num={i + (numColumns - 1) * (i - 1) + (col - 1)}
           height={Math.random() * 40 + 20}
-          count={0}
         />
       );
     }

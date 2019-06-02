@@ -11,20 +11,7 @@ const Back = styled.button`
 `;
 
 const Modal = props => {
-  return ReactDOM.createPortal(
-    <div
-      style={{
-        width: '100vw',
-        height: '100vh',
-        backgroundColor: 'rgba(3,3,3,.4)',
-        position: 'absolute',
-        top: '0'
-      }}
-    >
-      <Back onClick={() => props.history.push('/')} />
-    </div>,
-    document.querySelector('#modal')
-  );
+  return ReactDOM.createPortal(props.children, document.querySelector('#post'));
 };
 
 export default withRouter(Modal);
