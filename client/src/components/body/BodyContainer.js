@@ -13,7 +13,7 @@ const BodyCont = styled.div`
 
   display: grid;
   grid-gap: 1rem;
-  grid-template-columns: 5vw 1fr 1fr 1fr 1fr 1fr 5vw;
+  grid-template-columns: 10vw 1fr 1fr 1fr 1fr 1fr 10vw;
   grid-template-rows: min-content min-content;
 `;
 

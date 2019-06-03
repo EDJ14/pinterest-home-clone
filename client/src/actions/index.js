@@ -19,15 +19,18 @@ export const incrementPosts = () => dispatch => {
 };
 
 export const submitPost = (values, history, postNumber) => async dispatch => {
-  const res = await axios.post('/api/posts', values);
+  await axios.post('/api/posts', values);
 
   dispatch(incrementPosts());
-  dispatch(fetchPosts(postNumber + 1));
-  dispatch(showUserPost(values));
+  //dispatch(fetchPosts(postNumber + 1));
+  dispatch(showUserPost(/*values*/));
   history.push('/');
   dispatch({ type: FETCH_USER, payload: null });
 };
 
-export const showUserPost = ({ title, body }) => dispatch => {
-  dispatch({ type: USER_POST, payload: { title, body } });
+export const showUserPost = () => dispatch => {
+  dispatch({
+    type: USER_POST,
+    payload: [{ username: 'test', image_url: 'placeholder' }]
+  });
 };

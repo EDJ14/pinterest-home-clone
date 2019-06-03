@@ -7,8 +7,6 @@ import * as actions from '../../actions';
 
 //import PostCard from './PostCard';
 
-import magnifyCursor from '../../img/magnify.cur';
-
 const Body2 = styled.div`
   grid-column: 2 / -2;
   grid-row: 2 / -1;
@@ -18,7 +16,7 @@ const Body2 = styled.div`
 
   display: grid;
   grid-gap: 1.3rem;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 
   @media (max-width: 768px) {
     grid-template-columns: repeat(3, 1fr);
@@ -29,7 +27,6 @@ const Col = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  cursor: url(${magnifyCursor}), auto;
 `;
 
 const ButtonContainer = styled.div`
@@ -106,7 +103,7 @@ class BodyMain extends Component {
         <LoadableCard
           key={i + (numColumns - 1) * (i - 1) + (col - 1)}
           num={i + (numColumns - 1) * (i - 1) + (col - 1)}
-          height={Math.random() * 40 + 20}
+          height={Math.round(Math.random() * 40 + 20)}
         />
       );
     }
@@ -117,7 +114,7 @@ class BodyMain extends Component {
     const res = [];
     for (let i = 1; i <= numberOfColumns; i++) {
       res.push(
-        <Col id="column" key={i}>
+        <Col key={i}>
           {this.postsForColumns(
             Math.ceil(numberOfPosts / numberOfColumns),
             i,
@@ -138,7 +135,7 @@ class BodyMain extends Component {
             <PostsButtons>Create Post</PostsButtons>
           </Link>
         </ButtonContainer>
-        {this.renderColumnsAndPosts(5, 60)}
+        {this.renderColumnsAndPosts(4, 64)}
       </Body2>
     );
   }

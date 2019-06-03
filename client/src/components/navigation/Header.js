@@ -124,8 +124,11 @@ class Header extends Component {
   renderAuth = () => {
     if (this.props.auth == null) {
       return <HeaderUserButton text="Loading" />;
-    } else if (this.props.auth == false || this.props.auth.username == null) {
+    } else if (this.props.auth == false) {
       return <HeaderUserButton text="Login" />;
+    } else if (this.props.auth.username == null) {
+      let user = `user ${Math.ceil(Math.random()) * 100}`;
+      return <HeaderUserButton text={user} />;
     }
     const { username } = this.props.auth;
     return (
@@ -170,7 +173,7 @@ class Header extends Component {
             </div>
           </IconContext.Provider>
           <DotDotCont>
-            <a href="/api/logout">
+            <a href="/api/logout" style={{ marginTop: '.3rem' }}>
               <DotDot>&nbsp;</DotDot>
             </a>
           </DotDotCont>

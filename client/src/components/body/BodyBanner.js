@@ -24,7 +24,6 @@ const CategoryBox = styled.div`
   grid-template-columns: repeat(5, 1fr);
   width: 100%;
   height: calc(100% - 5rem);
-  background-color: ${randomColor()};
 `;
 
 import { randomColor } from '../body/PostCard';
@@ -36,6 +35,7 @@ const FeaturedPosts = styled.div`
   margin: 0.75rem;
   background-image: url(https://source.unsplash.com/random/${props =>
       props.img}5x${props => props.img}5);
+  background-color: ${randomColor()};
   border-radius: 5px;
   text-align: center;
   position: relative;

@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Transition, CSSTransition } from 'react-transition-group';
-import * as actions from '../../actions';
+
+import magnifyCursor from '../../img/magnify.cur';
 
 const Post = styled.div`
   width: 100%;
@@ -17,6 +18,8 @@ const Post = styled.div`
   display: grid;
   grid-template-rows: 92.5% 7.5%;
   grid-template-columns: 1fr 1fr;
+
+  cursor: url(${magnifyCursor}), auto;
 
   &:hover > .overlay {
     width: 100%;
@@ -139,7 +142,7 @@ class PostCard extends Component {
 
   checkStyles = () => {
     const { num } = this.props;
-    const { userPost } = this.props;
+    //const { userPost } = this.props;
     const post = this.props.posts[num - 1];
     let { style } = this.styleCheck.current;
     if (style.opacity == 0) {
@@ -152,6 +155,7 @@ class PostCard extends Component {
       .getComputedStyle(this.imgCheck.current)
       .getPropertyValue('background-image');
     if (!computed.startsWith('url("http://lorem') && post) {
+      console.log(computed);
       this.imgCheck.current.style.backgroundImage = `url(${post[0].image_url})`;
     }
   };
@@ -159,12 +163,14 @@ class PostCard extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     const { num } = this.props;
 
-    if (num === nextProps.userPost.length) {
+    /*if (num === nextProps.userPost.length) {
       return (
         nextProps.userPost[num - 1].title.length != 0 ||
         nextProps.postNumber == num
       );
-    } else if (nextProps.postNumber === num) {
+    } else*/ if (
+      nextProps.postNumber === num
+    ) {
       return true; // need num because all divs rendered first as invisible
     }
     return false;
@@ -175,7 +181,7 @@ class PostCard extends Component {
   }
 
   async componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log(this.props.num, ' updated');
+    console.log(this.props.num, ' updated. Props are ', this.props);
     setTimeout(this.checkStyles, duration * 5);
 
     await new Promise(resolve => setTimeout(resolve, 1));
@@ -184,25 +190,26 @@ class PostCard extends Component {
 
   renderName() {
     const { num } = this.props;
-    const { userPost } = this.props;
     const post = this.props.posts[num - 1];
+    /*const { userPost } = this.props;
     if (userPost.length >= num) {
       if (this.props.userPost[num - 1].title.length != 0) {
         return this.props.userPost[num - 1].title;
       }
-    }
+    }*/
     return post ? post[0].username : 'Author';
   }
 
   renderImg() {
     const { num } = this.props;
-    const { userPost } = this.props;
     const post = this.props.posts[num - 1];
+
+    /*const { userPost } = this.props;
     if (userPost.length >= num) {
       if (userPost[num - 1].body.length != 0) {
         return userPost[num - 1].body;
       }
-    }
+    }*/
     if (post) {
       return post[0].image_url;
     }
@@ -246,7 +253,7 @@ class PostCard extends Component {
                 <p style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
                   {this.renderName()}
                 </p>
-                <p>Date</p>
+                <p>...</p>
               </PostDetails>
             </Post>
           )}
@@ -262,11 +269,8 @@ class PostCard extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return state;
+function mapStateToProps({ postNumber, posts }) {
+  return { postNumber, posts };
 }
 
-export default connect(
-  mapStateToProps,
-  actions
-)(PostCard);
+export default connect(mapStateToProps)(PostCard);
