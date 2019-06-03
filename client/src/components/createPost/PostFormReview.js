@@ -8,7 +8,13 @@ import * as actions from '../../actions';
 
 import { Container, FormContainer } from './PostForm';
 
-const PostFormReview = ({ onCancel, formValues, submitPost, history }) => {
+const PostFormReview = ({
+  onCancel,
+  formValues,
+  submitPost,
+  history,
+  postNumber
+}) => {
   const reviewFields = formFields.map(({ name, label }) => {
     return (
       <div key={name}>
@@ -24,7 +30,7 @@ const PostFormReview = ({ onCancel, formValues, submitPost, history }) => {
         <h5>Please confirm your entries</h5>
         {reviewFields}
         <button onClick={onCancel}>Back</button>
-        <button onClick={() => submitPost(formValues, history)}>
+        <button onClick={() => submitPost(formValues, history, postNumber)}>
           Send Survey
         </button>
       </FormContainer>
@@ -33,7 +39,10 @@ const PostFormReview = ({ onCancel, formValues, submitPost, history }) => {
 };
 
 function mapStateToProps(state) {
-  return { formValues: state.form.postForm.values };
+  return {
+    formValues: state.form.postForm.values,
+    postNumber: state.postNumber
+  };
 }
 
 export default connect(

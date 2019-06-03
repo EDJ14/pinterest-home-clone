@@ -70,6 +70,7 @@ const LoadableCard = Loadable({
 
 class BodyMain extends Component {
   componentDidMount() {
+    console.log('body mounted');
     window.addEventListener('scroll', this.scrollProgress);
   }
 
@@ -84,11 +85,11 @@ class BodyMain extends Component {
       document.documentElement.clientHeight;
     const scrolled = `${(scrollPx / winHeightPx) * 100}%`;
 
-    if (scrolled == '100%') {
+    if (scrolled >= '85%') {
       this.props.incrementPosts();
       this.props.fetchPosts(this.props.postNumber);
       //await new Promise(resolve => setTimeout(resolve, 500));
-      //window.scrollTo(0, 0);
+      //window.scrollTo(0, 70);
     }
   };
 

@@ -24,7 +24,10 @@ const CategoryBox = styled.div`
   grid-template-columns: repeat(5, 1fr);
   width: 100%;
   height: calc(100% - 5rem);
+  background-color: ${randomColor()};
 `;
+
+import { randomColor } from '../body/PostCard';
 
 const FeaturedPosts = styled.div`
   color: white;

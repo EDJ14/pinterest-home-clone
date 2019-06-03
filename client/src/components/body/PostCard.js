@@ -94,7 +94,7 @@ const Post = styled.div`
   }
 `;
 
-const randomColor = () => {
+export const randomColor = () => {
   const color = ['blue', 'green', 'red', 'orange', 'yellow', 'brown'][
     Math.floor(Math.random() * 6)
   ];
@@ -132,7 +132,7 @@ const transitionStyles = {
 class PostCard extends Component {
   constructor(props) {
     super(props);
-    this.state = { inProp: this.props.num <= this.props.postNumber };
+    this.state = { inProp: this.props.num <= this.props.postNumber, count: 0 };
     this.styleCheck = React.createRef();
     this.imgCheck = React.createRef();
   }
@@ -164,18 +164,19 @@ class PostCard extends Component {
         nextProps.userPost[num - 1].title.length != 0 ||
         nextProps.postNumber == num
       );
+    } else if (nextProps.postNumber === num) {
+      return true; // need num because all divs rendered first as invisible
     }
-    return nextProps.postNumber === num; // need num because all divs rendered first as invisible
+    return false;
   }
 
   getSnapshotBeforeUpdate(prevProps, prevState) {
-    console.log('prevProps height', prevProps.height);
     return prevProps.height;
   }
 
-  async componentDidUpdate(one, two, snapshot) {
-    console.log('one', one, 'two', two);
-    setTimeout(this.checkStyles, duration * 1.5);
+  async componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log(this.props.num, ' updated');
+    setTimeout(this.checkStyles, duration * 5);
 
     await new Promise(resolve => setTimeout(resolve, 1));
     this.state.inProp ? null : this.setState({ inProp: true });

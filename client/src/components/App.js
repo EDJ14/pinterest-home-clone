@@ -7,6 +7,7 @@ import Header from './navigation/Header';
 import BodyContainer from './body/BodyContainer';
 import NewPost from './createPost/NewPost';
 import PostDetail from './body/PostDetail';
+import LoadingScreen from './LoadingScreen';
 
 class App extends Component {
   componentDidMount() {
@@ -21,6 +22,7 @@ class App extends Component {
           <Route exact path="/" component={BodyContainer} />
           <Route exact path="/new" component={NewPost} />
           <Route path="/detail" component={PostDetail} />
+          <Route path="/loading" component={LoadingScreen} />
         </BrowserRouter>
       </div>
     );

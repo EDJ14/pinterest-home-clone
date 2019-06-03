@@ -18,14 +18,14 @@ export const incrementPosts = () => dispatch => {
   dispatch({ type: INCREMENT_POSTS });
 };
 
-export const submitPost = (values, history) => async dispatch => {
+export const submitPost = (values, history, postNumber) => async dispatch => {
   const res = await axios.post('/api/posts', values);
 
   dispatch(incrementPosts());
-  dispatch(fetchPosts());
+  dispatch(fetchPosts(postNumber + 1));
   dispatch(showUserPost(values));
   history.push('/');
-  dispatch({ type: FETCH_USER, payload: res.data });
+  dispatch({ type: FETCH_USER, payload: null });
 };
 
 export const showUserPost = ({ title, body }) => dispatch => {
