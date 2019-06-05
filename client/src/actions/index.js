@@ -1,6 +1,12 @@
 import axios from 'axios';
 
-import { FETCH_USER, FETCH_POSTS, INCREMENT_POSTS, USER_POST } from './types';
+import {
+  FETCH_USER,
+  FETCH_POSTS,
+  INCREMENT_POSTS,
+  USER_POST,
+  DELETE_POSTS
+} from './types';
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get('/api/current_user');
@@ -22,10 +28,14 @@ export const submitPost = (values, history, postNumber) => async dispatch => {
   await axios.post('/api/posts', values);
 
   dispatch(incrementPosts());
-  //dispatch(fetchPosts(postNumber + 1));
-  dispatch(showUserPost(/*values*/));
+  dispatch(fetchPosts(postNumber + 1));
+  dispatch(showUserPost(values));
   history.push('/');
   dispatch({ type: FETCH_USER, payload: null });
+};
+
+export const deletePosts = () => dispatch => {
+  dispatch({ type: DELETE_POSTS });
 };
 
 export const showUserPost = () => dispatch => {

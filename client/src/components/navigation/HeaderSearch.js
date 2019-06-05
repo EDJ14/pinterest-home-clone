@@ -5,7 +5,7 @@ import { IconContext } from 'react-icons';
 
 const Search = styled.input`
   type: text;
-  width: 84rem;
+  width: 74rem;
   padding-left: 4.5rem;
   font-size: 1.75rem;
 

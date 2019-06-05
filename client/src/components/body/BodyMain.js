@@ -19,7 +19,7 @@ const Body2 = styled.div`
   grid-template-columns: repeat(4, 1fr);
 
   @media (max-width: 768px) {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 `;
 
@@ -75,6 +75,10 @@ class BodyMain extends Component {
     window.removeEventListener('scroll', this.scrollProgress);
   }
 
+  componentDidUpdate() {
+    console.log(this.props);
+  }
+
   scrollProgress = async () => {
     const scrollPx = document.documentElement.scrollTop;
     const winHeightPx =
@@ -126,11 +130,23 @@ class BodyMain extends Component {
     return res;
   }
 
+  deletePosts = () => {
+    alert('???YOU SURE BOUT DAT??');
+
+    this.props.deletePosts();
+  };
+
   render() {
     return (
       <Body2 id="body">
         <ButtonContainer>
           <PostsButtons onClick={this.handleClick}>New Post</PostsButtons>
+          <PostsButtons
+            style={{ marginRight: '10rem' }}
+            onClick={this.deletePosts}
+          >
+            Clear Posts
+          </PostsButtons>
           <Link to="/new">
             <PostsButtons>Create Post</PostsButtons>
           </Link>

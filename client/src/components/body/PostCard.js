@@ -135,7 +135,10 @@ const transitionStyles = {
 class PostCard extends Component {
   constructor(props) {
     super(props);
-    this.state = { inProp: this.props.num <= this.props.postNumber, count: 0 };
+    this.state = {
+      inProp: this.props.num <= this.props.postNumber,
+      count: 0
+    };
     this.styleCheck = React.createRef();
     this.imgCheck = React.createRef();
   }
@@ -222,6 +225,7 @@ class PostCard extends Component {
 
   renderContent() {
     const { num } = this.props;
+    const { postNumber } = this.props;
 
     if (num <= this.props.postNumber) {
       return (
@@ -241,7 +245,18 @@ class PostCard extends Component {
                 Save
                 <div className="saveclick" />
               </button>
-              <div className="sourcesite">website.com</div>
+              <div className="sourcesite">
+                <Link
+                  to={{
+                    pathname: '/detail',
+                    query: { postNumber, post: this.props.posts }
+                  }}
+                  style={{ textDecoration: 'none' }}
+                >
+                  website.com
+                </Link>
+              </div>
+
               <PostPic
                 ref={this.imgCheck}
                 style={{
@@ -249,6 +264,7 @@ class PostCard extends Component {
                   backgroundColor: randomColor()
                 }}
               />
+
               <PostDetails>
                 <p style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
                   {this.renderName()}

@@ -44,7 +44,7 @@ body {
   width: 100vw;
   display: grid;
   grid-gap: 1rem;
-  grid-template-rows: 12vh min-content 30vw;
+  grid-template-rows: 6.5rem min-content 30vw;
   grid-template-columns:
     [sidebar-start] 8rem [sidebar-end full-start] minmax(6rem, 1fr)
     [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end])

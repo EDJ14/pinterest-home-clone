@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 
 const HeaderUser = styled.button`
   width: min-content;
