@@ -61,22 +61,17 @@ const PostsButtons = styled.button`
 const LoadableCard = Loadable({
   loader: () => import('./PostCard'),
   loading() {
-    return <div>......</div>;
+    return <div>Loading...</div>;
   }
 });
 
 class BodyMain extends Component {
   componentDidMount() {
-    console.log('body mounted');
     window.addEventListener('scroll', this.scrollProgress);
   }
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.scrollProgress);
-  }
-
-  componentDidUpdate() {
-    console.log(this.props);
   }
 
   scrollProgress = async () => {
@@ -107,7 +102,6 @@ class BodyMain extends Component {
         <LoadableCard
           key={i + (numColumns - 1) * (i - 1) + (col - 1)}
           num={i + (numColumns - 1) * (i - 1) + (col - 1)}
-          height={Math.round(Math.random() * 40 + 20)}
         />
       );
     }

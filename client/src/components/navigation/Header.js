@@ -9,6 +9,7 @@ import { FaPinterest } from 'react-icons/fa';
 
 import HeaderUserButton from './HeaderUserButton';
 import HeaderSearch from './HeaderSearch';
+import RedDot from './reddot';
 
 const HeaderPosition = styled.header`
   grid-row: 1 / 2;
@@ -81,17 +82,6 @@ const DotDot = styled.span`
     right: 0.9rem;
     top: 0;
   }
-`;
-
-const RedDot = styled.span`
-  background-color: rgb(206, 24, 38);
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: 100%;
-  position: absolute;
-  right: 0.35rem;
-  text-align: center;
-  color: white;
 `;
 
 const LogoCont = styled.div`
@@ -169,7 +159,7 @@ class Header extends Component {
           <IconContext.Provider value={{ color: 'gray', size: '3rem' }}>
             <div style={{ position: 'relative', padding: '0 .5rem' }}>
               <TiBell />
-              <RedDot>{this.props.postNumber}</RedDot>
+              <RedDot />
             </div>
           </IconContext.Provider>
           <DotDotCont>
@@ -183,8 +173,8 @@ class Header extends Component {
   }
 }
 
-function mapStateToProps({ auth, postNumber }) {
-  return { auth, postNumber };
+function mapStateToProps({ auth }) {
+  return { auth };
 }
 
 export default connect(mapStateToProps)(Header);

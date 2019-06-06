@@ -10,5 +10,4 @@ export default combineReducers({
   posts: postsReducer,
   postNumber: incPostReducer,
   form: reduxForm
-  //userPost: userPostReducer
 });

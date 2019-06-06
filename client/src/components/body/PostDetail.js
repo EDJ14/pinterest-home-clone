@@ -6,7 +6,7 @@ import { IconContext } from 'react-icons';
 
 import { randomColor } from './PostCard';
 
-const PostDetailCont = styled.div`
+const PostDetailContainer = styled.div`
   height: calc(100vh - 6.5rem);
   margin-top: 6.5rem;
   width: 100vw;
@@ -17,14 +17,39 @@ const PostDetailCont = styled.div`
   grid-template-rows: repeat(15, 1fr);
 `;
 
-const PostDetailMaterial = styled.div`
-  grid-row: 2 / 13;
+const PostContainer = styled.div`
+  grid-row: 3 / 14;
   grid-column: 6 / 11;
-  background-color: ${randomColor()};
-  display: relative;
+  border: 2rem solid white;
+  border-radius: 3%;
+
+  display: flex;
+  flex-direction: column;
 `;
 
-const BackButtonCont = styled.div`
+const PostToolbar = styled.div`
+  width: 100%;
+  height: 10%;
+  background-color: white;
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const PostContents = styled.div`
+  width: 100%;
+  height: 90%;
+  border-radius: inherit;
+  background-image: url(${props => props.image_url});
+  background-color: ${randomColor()};
+  display: relative;
+  transition: filter 0.2s;
+
+  &:hover {
+    filter: brightness(50%);
+  }
+`;
+
+const BackButtonContainer = styled.div`
   display: flex;
   left: -38rem;
   top: 3rem;
@@ -55,9 +80,6 @@ const BackButton = styled.button`
 
   &:focus {
     outline: none;
-    padding: 0;
-    border: none;
-    background: none;
   }
 `;
 
@@ -68,10 +90,17 @@ const InfoBox = styled.div`
   background-color: white;
 `;
 
+function renderImg(props) {
+  const post = props.location.query.post;
+  if (post) {
+    return post[0].image_url;
+  }
+  return null;
+}
+
 export const PostDetail = props => {
-  console.log(props);
   return (
-    <PostDetailCont>
+    <PostDetailContainer>
       <Link
         to="/"
         style={{
@@ -80,16 +109,19 @@ export const PostDetail = props => {
           textDecoration: 'none'
         }}
       >
-        <BackButtonCont>
+        <BackButtonContainer>
           <IconContext.Provider value={{ color: 'black', size: '4.5rem' }}>
             <MdKeyboardArrowLeft />
           </IconContext.Provider>
           <BackButton>Home</BackButton>
-        </BackButtonCont>
+        </BackButtonContainer>
       </Link>
-      <PostDetailMaterial />
+      <PostContainer>
+        <PostToolbar />
+        <PostContents image_url={renderImg(props)} />
+      </PostContainer>
       <InfoBox />
-    </PostDetailCont>
+    </PostDetailContainer>
   );
 };
 

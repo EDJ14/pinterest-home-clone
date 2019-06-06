@@ -136,8 +136,7 @@ class PostCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      inProp: this.props.num <= this.props.postNumber,
-      count: 0
+      inProp: this.props.num <= this.props.postNumber
     };
     this.styleCheck = React.createRef();
     this.imgCheck = React.createRef();
@@ -145,7 +144,6 @@ class PostCard extends Component {
 
   checkStyles = () => {
     const { num } = this.props;
-    //const { userPost } = this.props;
     const post = this.props.posts[num - 1];
     let { style } = this.styleCheck.current;
     if (style.opacity == 0) {
@@ -158,7 +156,6 @@ class PostCard extends Component {
       .getComputedStyle(this.imgCheck.current)
       .getPropertyValue('background-image');
     if (!computed.startsWith('url("http://lorem') && post) {
-      console.log(computed);
       this.imgCheck.current.style.backgroundImage = `url(${post[0].image_url})`;
     }
   };
@@ -166,26 +163,14 @@ class PostCard extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     const { num } = this.props;
 
-    /*if (num === nextProps.userPost.length) {
-      return (
-        nextProps.userPost[num - 1].title.length != 0 ||
-        nextProps.postNumber == num
-      );
-    } else*/ if (
-      nextProps.postNumber === num
-    ) {
-      return true; // need num because all divs rendered first as invisible
+    if (nextProps.postNumber != num) {
+      return false; // need num because all divs rendered first as invisible
     }
-    return false;
-  }
-
-  getSnapshotBeforeUpdate(prevProps, prevState) {
-    return prevProps.height;
+    return true;
   }
 
   async componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log(this.props.num, ' updated. Props are ', this.props);
-    setTimeout(this.checkStyles, duration * 5);
+    setTimeout(this.checkStyles, duration * 1.5);
 
     await new Promise(resolve => setTimeout(resolve, 1));
     this.state.inProp ? null : this.setState({ inProp: true });
@@ -194,12 +179,7 @@ class PostCard extends Component {
   renderName() {
     const { num } = this.props;
     const post = this.props.posts[num - 1];
-    /*const { userPost } = this.props;
-    if (userPost.length >= num) {
-      if (this.props.userPost[num - 1].title.length != 0) {
-        return this.props.userPost[num - 1].title;
-      }
-    }*/
+
     return post ? post[0].username : 'Author';
   }
 
@@ -207,12 +187,6 @@ class PostCard extends Component {
     const { num } = this.props;
     const post = this.props.posts[num - 1];
 
-    /*const { userPost } = this.props;
-    if (userPost.length >= num) {
-      if (userPost[num - 1].body.length != 0) {
-        return userPost[num - 1].body;
-      }
-    }*/
     if (post) {
       return post[0].image_url;
     }
@@ -226,52 +200,50 @@ class PostCard extends Component {
   renderContent() {
     const { num } = this.props;
     const { postNumber } = this.props;
+    const color = randomColor();
+    const height = Math.round(Math.random() * 40 + 20);
 
     if (num <= this.props.postNumber) {
       return (
         <Transition in={this.state.inProp} timeout={duration}>
           {state => (
-            <Post
-              id="post"
-              ref={this.styleCheck}
-              height={this.props.height}
-              style={{
-                ...defaultStyle,
-                ...transitionStyles[state]
+            <Link
+              to={{
+                pathname: '/detail',
+                query: { postNumber, post: this.props.posts[0] }
               }}
+              style={{ textDecoration: 'none' }}
             >
-              <div className="overlay" />
-              <button onClick={e => this.save(e)} className="savebut">
-                Save
-                <div className="saveclick" />
-              </button>
-              <div className="sourcesite">
-                <Link
-                  to={{
-                    pathname: '/detail',
-                    query: { postNumber, post: this.props.posts }
-                  }}
-                  style={{ textDecoration: 'none' }}
-                >
-                  website.com
-                </Link>
-              </div>
-
-              <PostPic
-                ref={this.imgCheck}
+              <Post
+                id="post"
+                ref={this.styleCheck}
+                height={height}
                 style={{
-                  backgroundImage: `url(${this.renderImg()})`,
-                  backgroundColor: randomColor()
+                  ...defaultStyle,
+                  ...transitionStyles[state]
                 }}
-              />
-
-              <PostDetails>
-                <p style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
-                  {this.renderName()}
-                </p>
-                <p>...</p>
-              </PostDetails>
-            </Post>
+              >
+                <div className="overlay" />{' '}
+                <button onClick={e => this.save(e)} className="savebut">
+                  Save
+                  <div className="saveclick" />
+                </button>
+                <div className="sourcesite">website.com</div>
+                <PostPic
+                  ref={this.imgCheck}
+                  style={{
+                    backgroundImage: `url(${this.renderImg()})`,
+                    backgroundColor: color
+                  }}
+                />
+                <PostDetails>
+                  <p style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
+                    {this.renderName()}
+                  </p>
+                  <p>...</p>
+                </PostDetails>
+              </Post>
+            </Link>
           )}
         </Transition>
       );
