@@ -145,7 +145,7 @@ class BodyMain extends Component {
             <PostsButtons>Create Post</PostsButtons>
           </Link>
         </ButtonContainer>
-        {this.renderColumnsAndPosts(4, 64)}
+        {this.renderColumnsAndPosts(4, 128)}
       </Body2>
     );
   }

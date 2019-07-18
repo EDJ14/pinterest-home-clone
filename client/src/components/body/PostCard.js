@@ -164,7 +164,7 @@ class PostCard extends Component {
     const { num } = this.props;
 
     if (nextProps.postNumber != num) {
-      return false; // need num because all divs rendered first as invisible
+      return false; // need num because all divs rendered first as invisible. Tried using length of posts array but was slow
     }
     return true;
   }
@@ -188,6 +188,7 @@ class PostCard extends Component {
     const post = this.props.posts[num - 1];
 
     if (post) {
+      console.log(this.props.postNumber, post);
       return post[0].image_url;
     }
     return null;
