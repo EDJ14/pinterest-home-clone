@@ -1,3 +1,4 @@
-/client/node_modules
-node_modules
-config
+/server/client/node_modules
+/server/node_modules
+/server/config
+/worker/node_modules
