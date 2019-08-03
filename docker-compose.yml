@@ -1,0 +1,13 @@
+version: '3'
+services:
+  mysql:
+    image: 'mysql:latest'
+  redis:
+    image: 'redis:latest'
+  server:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./server
+    volumes:
+      - /app/node_modules
+      - ./server:/app
