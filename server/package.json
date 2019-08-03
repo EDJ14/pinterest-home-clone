@@ -4,7 +4,7 @@
   "description": "recreating pinterest's home page",
   "main": "index.js",
   "scripts": {
-    "client": "npm run start --prefix client",
+    "client": "npm run start --prefix ../client",
     "server": "nodemon index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
