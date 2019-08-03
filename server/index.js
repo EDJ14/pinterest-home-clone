@@ -22,11 +22,11 @@ app.use(passport.session());
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
+  host: keys.mysqlHost, //'localhost',
+  user: keys.mysqlUser, //'root',
   password: keys.sqlkey,
-  database: 'server6',
-  port: 3306
+  database: keys.mysqlDatabase, //'server6',
+  port: keys.mysqlPort // 3306
 });
 
 connection.connect(function(err) {
