@@ -1,25 +1,40 @@
 version: '3'
 services:
   mysql:
-    image: 'mysql:latest'
+    build:
+      dockerfile: dev.Dockerfile
+      context: ./mysql
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
     environment:
-      - MYSQL_ROOT_PASSWORD=password
-  redis:
-    image: 'redis:latest'
-  server:
+      - MYSQL_ROOT_PASSWORD=testpass
+    healthcheck:
+      test: 'exit 0'
+  nginx:
+    restart: always
+    build:
+      dockerfile: dev.Dockerfile
+      context: ./nginx
+    ports:
+      - '3050:80'
+  api:
     build:
       dockerfile: dev.Dockerfile
       context: ./server
+    depends_on:
+      - mysql
     volumes:
       - /app/node_modules
       - ./server:/app
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-      - MYSQLUSER=mysql
       - MYSQLHOST=mysql
-      - MYSQLDATABASE=mysql
-      - MYSQLPASSWORD=mysqlpassword
+      - MYSQLUSER=root
+      - MYSQLDATABASE=dbTEST9
+      - MYSQLPASSWORD=lamepassword
       - MYSQLPORT=3306
   client:
     build:

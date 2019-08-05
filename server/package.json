@@ -6,7 +6,8 @@
   "scripts": {
     "client": "npm run start --prefix ../client",
     "server": "nodemon index.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
     "mysql": "^2.17.1",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^2.0.0",
+    "pg": "^7.12.0",
     "redis": "^2.8.0"
   },
   "devDependencies": {

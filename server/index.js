@@ -24,7 +24,7 @@ const mysql = require('mysql');
 const connection = mysql.createConnection({
   host: keys.mysqlHost, //'localhost',
   user: keys.mysqlUser, //'root',
-  password: keys.sqlkey,
+  //password: keys.mysqlPassword,
   database: keys.mysqlDatabase, //'server6',
   port: keys.mysqlPort // 3306
 });
@@ -38,9 +38,14 @@ connection.connect(function(err) {
   console.log('connected as id ' + connection.threadId);
 });
 
-//connection.query('CREATE TABLE IF NOT EXISTS values (number INT');
+connection.query(`CREATE TABLE users (
+  id INTEGER AUTO_INCREMENT PRIMARY KEY,
+  google_id VARCHAR(50) UNIQUE,
+  username VARCHAR(255) UNIQUE,
+  created_at TIMESTAMP DEFAULT NOW()
+);`);
 
-// Redis Client Setup
+/* Redis Client Setup
 const redis = require('redis');
 const redisClient = redis.createClient({
   host: keys.redisHost,
@@ -48,9 +53,25 @@ const redisClient = redis.createClient({
   retry_strategy: () => 1000
 });
 const redisPublisher = redisClient.duplicate();
+*/
 
 require('./routes/postRoutes')(app, connection);
 require('./routes/authRoutes')(app);
+
+/* Postgres Client Setup
+const { Pool } = require('pg');
+const pgClient = new Pool({
+  user: keys.mysqlUser,
+  host: keys.mysqlHost,
+  database: keys.mysqlDatabase,
+  password: keys.mysqlPassword,
+  port: keys.mysqlPort
+});
+pgClient.on('error', () => console.log('Lost PG connection'));
+
+pgClient
+  .query('CREATE TABLE IF NOT EXISTS values (number INT)')
+  .catch(err => console.log(err));*/
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log('Awaiting orders'));
