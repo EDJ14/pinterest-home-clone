@@ -9,9 +9,7 @@ services:
     expose:
       - '3306'
     environment:
-      - MYSQL_ROOT_PASSWORD=testpass
-    healthcheck:
-      test: 'exit 0'
+      - MYSQL_ROOT_PASSWORD=testpassword
   nginx:
     restart: always
     build:
@@ -23,8 +21,6 @@ services:
     build:
       dockerfile: dev.Dockerfile
       context: ./server
-    depends_on:
-      - mysql
     volumes:
       - /app/node_modules
       - ./server:/app
@@ -33,9 +29,10 @@ services:
       - REDIS_PORT=6379
       - MYSQLHOST=mysql
       - MYSQLUSER=root
-      - MYSQLDATABASE=dbTEST9
-      - MYSQLPASSWORD=lamepassword
+      - MYSQLDATABASE=dbtest13
+      - MYSQLPASSWORD=testpassword
       - MYSQLPORT=3306
+      - WAIT_HOSTS=mysql:3306
   client:
     build:
       dockerfile: dev.Dockerfile
