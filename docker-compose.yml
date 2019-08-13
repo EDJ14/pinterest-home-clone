@@ -9,7 +9,10 @@ services:
     expose:
       - '3306'
     environment:
-      - MYSQL_ROOT_PASSWORD=testpassword
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=testdb
+      - MYSQL_USER=testuser
+      - MYSQL_PASSWORD=testpassword
   nginx:
     restart: always
     build:
@@ -28,8 +31,8 @@ services:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - MYSQLHOST=mysql
-      - MYSQLUSER=root
-      - MYSQLDATABASE=dbtest13
+      - MYSQLUSER=testuser
+      - MYSQLDATABASE=testdb
       - MYSQLPASSWORD=testpassword
       - MYSQLPORT=3306
       - WAIT_HOSTS=mysql:3306
