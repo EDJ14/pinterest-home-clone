@@ -9,7 +9,7 @@ script:
   - node ./testTest.js
 
 after_success:
-  - docker build -t eddiedj/pinterest-client ./clent
+  - docker build -t eddiedj/pinterest-client ./client
   - docker build -t eddiedj/pinterest-nginx ./nginx
   - docker build -t eddiedj/pinterest-server ./server
   - docker build -t eddiedj/pinterest-mysql ./mysql
