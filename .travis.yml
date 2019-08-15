@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t eddiedj/pinterest-test -f ./client/dev.Dockerfile ./client
+
+script:
+  - node ./testTest.js
+
+after_success:
+  - docker build -t eddiedj/multi-client ./clent
+  - docker build -t eddiedj/multi-nginx ./nginx
+  - docker build -t eddiedj/multi-server ./server
+  - docker build -t eddiedj/multi-mysql ./mysql
+  # Log into the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push eddiedj/multi-client
+  - docker push eddiedj/multi-nginx
+  - docker push eddiedj/multi-server
+  - docker push eddiedj/multi-mysql

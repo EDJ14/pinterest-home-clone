@@ -38,12 +38,7 @@ connection.connect(function(err) {
   console.log('connected as id ' + connection.threadId);
 });
 
-connection.query(`CREATE TABLE users (
-  id INTEGER AUTO_INCREMENT PRIMARY KEY,
-  google_id VARCHAR(50) UNIQUE,
-  username VARCHAR(255) UNIQUE,
-  created_at TIMESTAMP DEFAULT NOW()
-);`);
+require('./config/populateDB')(connection);
 
 /* Redis Client Setup
 const redis = require('redis');

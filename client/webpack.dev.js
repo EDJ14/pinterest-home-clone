@@ -14,6 +14,7 @@ module.exports = merge(common, {
     },*/
     historyApiFallback: true,
     contentBase: path.join(__dirname, 'public/'),
+    host: 'localhost',
     port: 3000,
     publicPath: 'http://localhost:3000/dist/',
     disableHostCheck: true
