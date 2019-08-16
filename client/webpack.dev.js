@@ -1,5 +1,5 @@
 const path = require('path');
-//const webpack = require('webpack');
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 const common = require('./webpack.common.js');
 
@@ -17,8 +17,8 @@ module.exports = merge(common, {
     host: 'localhost',
     port: 3000,
     publicPath: 'http://localhost:3000/dist/',
-    disableHostCheck: true
-    //hotOnly: true
-  }
-  //plugins: [new webpack.HotModuleReplacementPlugin()]
+    disableHostCheck: true,
+    hotOnly: true
+  },
+  plugins: [new webpack.HotModuleReplacementPlugin()]
 });

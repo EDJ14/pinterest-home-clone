@@ -43,3 +43,7 @@ services:
     volumes:
       - /app/node_modules
       - ./client:/app
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    ports:
+      - '3000:3000'

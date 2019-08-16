@@ -35,7 +35,7 @@ module.exports = (app, connection) => {
     });
   });
 
-  app.post('/api/posts', (req, res) => {
+  app.post('/posts', (req, res) => {
     const post = { user_id: 50, title: 'this is a test post' };
     connection.query('INSERT INTO posts SET ?', post, (err, results) => {
       if (err) {
@@ -50,5 +50,9 @@ module.exports = (app, connection) => {
         res.send(results2);
       });
     });
+  });
+
+  app.get('/deta*', (req, res) => {
+    res.redirect('/');
   });
 };

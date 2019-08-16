@@ -76,7 +76,7 @@ class BodyBanner extends Component {
       <BodyBan>
         <UserWelcome>
           Hi {this.props.auth ? this.props.auth.username : 'Loading'}!! Your
-          feed is made up of these topics
+          feed is made up of these topicss
         </UserWelcome>
         <CategoryBox>{posts}</CategoryBox>
       </BodyBan>
