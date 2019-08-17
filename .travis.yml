@@ -12,11 +12,9 @@ after_success:
   - docker build -t eddiedj/pinterest-client ./client
   - docker build -t eddiedj/pinterest-nginx ./nginx
   - docker build -t eddiedj/pinterest-server ./server
-  - docker build -t eddiedj/pinterest-mysql ./mysql
   # Log into the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
   - docker push eddiedj/pinterest-client
   - docker push eddiedj/pinterest-nginx
   - docker push eddiedj/pinterest-server
-  - docker push eddiedj/pinterest-mysql

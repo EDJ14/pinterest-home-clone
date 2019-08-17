@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Transition, CSSTransition } from 'react-transition-group';
 
+import SavedPostStatus from './SavedPostStatus';
 import magnifyCursor from '../../img/magnify.cur';
 
 const Post = styled.div`
@@ -38,13 +39,10 @@ const Post = styled.div`
     }
 
   &:hover > .savebut {
-    width: 7rem;
-    height: 4rem;
-    border: none;
+    
     top: 1rem;
     right: 1rem;
     position: absolute;
-    background-color: red;
     display: inline-block;
     visibility: visible;
     opacity: 1;
@@ -55,17 +53,6 @@ const Post = styled.div`
     color: white;
     font-weight: 300;
     z-index: 5;
-
-    &:focus .saveclick {
-      margin-left: 7.5rem;
-      width: 10rem;
-      height: 20rem;
-      background-color: white;
-      box-shadow: 0 0 0 4.5px rgb(0, 132, 255, 0.5);
-      outline: 0;      
-      position: absolute;
-      top: 0;
-    }
 
     &:hover {
       background-color: rgb(150, 9, 20);
@@ -194,10 +181,6 @@ class PostCard extends Component {
     return null;
   }
 
-  save = e => {
-    e.preventDefault();
-  };
-
   renderContent() {
     const { num } = this.props;
     const { postNumber } = this.props;
@@ -224,11 +207,10 @@ class PostCard extends Component {
                   ...transitionStyles[state]
                 }}
               >
-                <div className="overlay" />{' '}
-                <button onClick={e => this.save(e)} className="savebut">
-                  Save
-                  <div className="saveclick" />
-                </button>
+                <div className="overlay" />
+                <div className="savebut">
+                  <SavedPostStatus status={0} />
+                </div>
                 <div className="sourcesite">website.com</div>
                 <PostPic
                   ref={this.imgCheck}
