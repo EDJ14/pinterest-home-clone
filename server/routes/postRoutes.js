@@ -25,9 +25,9 @@ module.exports = (app, connection) => {
 
   app.get('/posts/:num/:offset', (req, res) => {
     console.log(req.params.num);
-    const q = `select username, image_url from photos right join 
-              (select username, photo_id, tag_id from posts left join users on posts.user_id = users.id) 
-              as userphotoid on photos.id = userphotoid.photo_id LIMIT ${
+    const q = `SELECT username, image_url FROM photos RIGHT JOIN 
+              (SELECT username, photo_id, tag_id FROM posts LEFT JOIN users ON posts.user_id = users.id) 
+              AS userphotoid ON photos.id = userphotoid.photo_id LIMIT ${
                 req.params.num
               } OFFSET ${req.params.offset}`;
     connection.query(q, (err, results) => {

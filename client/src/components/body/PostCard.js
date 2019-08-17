@@ -54,9 +54,6 @@ const Post = styled.div`
     font-weight: 300;
     z-index: 5;
 
-    &:hover {
-      background-color: rgb(150, 9, 20);
-    }
   }
 
     &:hover > .sourcesite {
@@ -159,7 +156,7 @@ class PostCard extends Component {
   async componentDidUpdate(prevProps, prevState, snapshot) {
     setTimeout(this.checkStyles, duration * 1.5);
 
-    await new Promise(resolve => setTimeout(resolve, 1));
+    await new Promise(resolve => setTimeout(resolve, 1)); // react renders stuff too fast i think
     this.state.inProp ? null : this.setState({ inProp: true });
   }
 

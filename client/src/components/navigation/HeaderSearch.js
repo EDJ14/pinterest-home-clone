@@ -62,7 +62,6 @@ class HeaderSearch extends Component {
               width: '3rem'
             }}
           >
-            {' '}
             <MdSearch />
           </IconContext.Provider>
         </SearchButton>
