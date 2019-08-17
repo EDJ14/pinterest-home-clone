@@ -52,7 +52,8 @@ module.exports = (app, connection) => {
     });
   });
 
-  app.get('/deta*', (req, res) => {
-    res.redirect('/');
+  app.post('/savepost', (req, res) => {
+    console.log(req.body);
+    console.log('saving POST');
   });
 };

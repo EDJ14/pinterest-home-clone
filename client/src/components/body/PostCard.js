@@ -190,7 +190,7 @@ class PostCard extends Component {
           {state => (
             <Link
               to={{
-                pathname: '/detail',
+                pathname: `/detail/${postNumber}`,
                 query: { postNumber, post: this.props.posts[0] }
               }}
               style={{ textDecoration: 'none' }}
@@ -206,7 +206,7 @@ class PostCard extends Component {
               >
                 <div className="overlay" />
                 <div className="savebut">
-                  <SavedPostStatus status={0} />
+                  <SavedPostStatus postNumber={this.props.postNumber} />
                 </div>
                 <div className="sourcesite">website.com</div>
                 <PostPic

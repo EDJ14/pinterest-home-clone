@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import axios from 'axios';
 
+import * as actions from '../../actions';
 import {
   MdThumbDown,
   MdThumbUp,
@@ -26,6 +27,10 @@ class SavedPostStatus extends Component {
     likes: 0
   };
 
+  handleClick = async (postID, userID) => {
+    await axios.post('/api/savepost', [this.props.postNumber, 3]);
+  };
+
   renderStar() {
     if (this.state.isLoading == 'LOAD') {
       return (
@@ -42,7 +47,7 @@ class SavedPostStatus extends Component {
           size: '4rem'
         }}
       >
-        <MdStarBorder />
+        <MdStarBorder onClick={() => this.handleClick()} />
       </IconContext.Provider>
     );
   }
@@ -52,9 +57,11 @@ class SavedPostStatus extends Component {
   }
 }
 
-/*export default connect(
+function mapStateToProps({ posts }) {
+  return { posts };
+}
+
+export default connect(
   mapStateToProps,
   actions
 )(SavedPostStatus);
-*/
-export default SavedPostStatus;
