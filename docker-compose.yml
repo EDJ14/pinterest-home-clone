@@ -36,6 +36,8 @@ services:
       - MYSQLPASSWORD=testpassword
       - MYSQLPORT=3306
       - WAIT_HOSTS=mysql:3306
+    #ports:
+    # - '5000:5000'
   client:
     build:
       dockerfile: dev.Dockerfile

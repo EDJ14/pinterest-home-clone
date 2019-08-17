@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 
 const keys = require('./config/keys');
-require('./services/passport');
 
 const app = express();
 
@@ -15,8 +14,6 @@ app.use(
     keys: [keys.cookieKey]
   })
 );
-app.use(passport.initialize());
-app.use(passport.session());
 
 // mySQL Client Setup
 const mysql = require('mysql');
@@ -39,6 +36,9 @@ connection.connect(function(err) {
 });
 
 require('./config/populateDB')(connection);
+require('./services/passport')(connection);
+app.use(passport.initialize());
+app.use(passport.session());
 
 /* Redis Client Setup
 const redis = require('redis');

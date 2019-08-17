@@ -22,7 +22,7 @@ module.exports = app => {
   });
 
   app.get('/current_user', (req, res) => {
-    console.log('curr user');
+    console.log('curr user is', req.user);
     res.send(req.user);
   });
 };
