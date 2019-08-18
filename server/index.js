@@ -15,7 +15,7 @@ app.use(
   })
 );
 
-/* mySQL Client Setup
+// mySQL Client Setup
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
@@ -36,7 +36,7 @@ connection.connect(function(err) {
 });
 
 require('./config/populateDB')(connection);
-require('./services/passport')(connection);*/
+require('./services/passport')(connection);
 app.use(passport.initialize());
 app.use(passport.session());
 
