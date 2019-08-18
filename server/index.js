@@ -15,7 +15,7 @@ app.use(
   })
 );
 
-// mySQL Client Setup
+/* mySQL Client Setup
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
@@ -36,7 +36,7 @@ connection.connect(function(err) {
 });
 
 require('./config/populateDB')(connection);
-require('./services/passport')(connection);
+require('./services/passport')(connection);*/
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -50,7 +50,7 @@ const redisClient = redis.createClient({
 const redisPublisher = redisClient.duplicate();
 */
 
-require('./routes/postRoutes')(app, connection);
+//require('./routes/postRoutes')(app, connection);
 require('./routes/authRoutes')(app);
 
 const PORT = process.env.PORT || 5000;
