@@ -5,7 +5,7 @@ module.exports = {
   googleClientSecret: 'DUXt2pi_hMOIcQ2EeXklFTUY',
   mysqlUser: process.env.RDS_USERNAME,
   mysqlHost: process.env.RDS_HOSTNAME,
-  //mysqlDatabase: process.env.MYSQLDATABASE,
+  mysqlDatabase: process.env.RDS_DB_NAME,
   mysqlPassword: process.env.RDS_PASSWORD,
   mysqlPort: process.env.RDS_PORT
 };
