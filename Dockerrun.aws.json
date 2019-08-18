@@ -18,6 +18,7 @@
     {
       "name": "nginx",
       "image": "eddiedj/pinterest-nginx",
+      "hostname": "nginx",
       "essential": true,
       "portMappings": [
         {

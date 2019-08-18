@@ -25,7 +25,7 @@ deploy:
   app: pinterest-docker
   env: PinterestDocker-env
   bucket_name: elasticbeanstalk-us-west-2-670225287603
-  bucket_path: pinterest-docker
+  bucket_path: docker-pinterest
   on:
     branch: master
   access_key_id:
