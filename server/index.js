@@ -15,7 +15,7 @@ app.use(
   })
 );
 
-// mySQL Client Setup
+/* mySQL Client Setup
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
@@ -36,7 +36,7 @@ connection.connect(function(err) {
 });
 
 require('./config/populateDB')(connection);
-require('./services/passport')(connection);
+require('./services/passport')(connection);*/
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -50,23 +50,8 @@ const redisClient = redis.createClient({
 const redisPublisher = redisClient.duplicate();
 */
 
-require('./routes/postRoutes')(app, connection);
+//require('./routes/postRoutes')(app, connection);
 require('./routes/authRoutes')(app);
-
-/* Postgres Client Setup
-const { Pool } = require('pg');
-const pgClient = new Pool({
-  user: keys.mysqlUser,
-  host: keys.mysqlHost,
-  database: keys.mysqlDatabase,
-  password: keys.mysqlPassword,
-  port: keys.mysqlPort
-});
-pgClient.on('error', () => console.log('Lost PG connection'));
-
-pgClient
-  .query('CREATE TABLE IF NOT EXISTS values (number INT)')
-  .catch(err => console.log(err));*/
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log('Awaiting orders'));
