@@ -3,9 +3,9 @@ module.exports = {
   googleClientID:
     '698149871795-b9shua1ueeapnnpible4kugpvfhvi9mb.apps.googleusercontent.com',
   googleClientSecret: 'DUXt2pi_hMOIcQ2EeXklFTUY',
-  mysqlUser: process.env.RDS_USERNAME,
-  mysqlHost: process.env.RDS_HOSTNAME,
-  mysqlDatabase: process.env.RDS_DB_NAME,
-  mysqlPassword: process.env.RDS_PASSWORD,
-  mysqlPort: process.env.RDS_PORT
+  mysqlUser: process.env.MYSQLUSER,
+  mysqlHost: process.env.MYSQLHOST,
+  mysqlDatabase: process.env.MYSQLDB,
+  mysqlPassword: process.env.MYSQLPASSWORD,
+  mysqlPort: process.env.MYSQLPORT
 };
