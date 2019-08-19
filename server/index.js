@@ -10,7 +10,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(
   cookieSession({
-    maxAge: 30 * 24 * 60 * 60 * 1000,   
+    maxAge: 30 * 24 * 60 * 60 * 1000,
     keys: [keys.cookieKey]
   })
 );
@@ -35,7 +35,7 @@ connection.connect(function(err) {
   console.log('connected as id ' + connection.threadId);
 });
 
-//require('./config/populateDB')(connection);
+require('./config/populateDB')(connection);
 require('./services/passport')(connection);
 app.use(passport.initialize());
 app.use(passport.session());
