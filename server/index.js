@@ -19,10 +19,10 @@ app.use(
 const mysql = require('mysql');
 
 const connection = mysql.createConnection({
-  host: keys.mysqlHost, //'mysql',
-  user: keys.mysqlUser, //'root',
+  host: keys.mysqlHost, //'mysql'
+  user: keys.mysqlUser, //'root'
   password: keys.mysqlPassword,
-  database: keys.mysqlDatabase, //'serverX',
+  database: keys.mysqlDatabase, //'serverX'
   port: keys.mysqlPort // 3306
 });
 

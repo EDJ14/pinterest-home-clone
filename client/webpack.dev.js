@@ -1,24 +1,50 @@
 const path = require('path');
 const webpack = require('webpack');
-const merge = require('webpack-merge');
-const common = require('./webpack.common.js');
 
-module.exports = merge(common, {
+module.exports = {
+  entry: ['babel-polyfill', './src/index.js'],
   mode: 'development',
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        options: { presets: ['@babel/env'] }
+      },
+      {
+        test: /\.(scss|css)$/,
+        exclude: /node_modules/,
+        use: ['style-loader', 'css-loader', 'sass-loader']
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: ['file-loader']
+      },
+      {
+        test: /\.(png|gif|cur|jpg)$/,
+        loader: 'url-loader',
+        query: { limit: 8192 }
+      }
+    ]
+  },
+  resolve: { extensions: ['*', '.js', '.jsx'] },
+  output: {
+    path: path.resolve(__dirname, 'public/'),
+    publicPath: '/public/',
+    filename: 'bundle.js'
+  },
   devServer: {
-    compress: true,
-    inline: true,
     /*proxy: {
       '/api': 'http://localhost:5000',
       '/auth': 'http://localhost:5000'
     },*/
     historyApiFallback: true,
     contentBase: path.join(__dirname, 'public/'),
-    host: 'localhost',
     port: 3000,
-    publicPath: 'http://localhost:3000/dist/',
+    publicPath: 'http://localhost:3000/public/',
     disableHostCheck: true,
     hotOnly: true
   },
   plugins: [new webpack.HotModuleReplacementPlugin()]
-});
+};
