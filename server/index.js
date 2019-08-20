@@ -40,17 +40,7 @@ require('./services/passport')(connection);
 app.use(passport.initialize());
 app.use(passport.session());
 
-/* Redis Client Setup
-const redis = require('redis');
-const redisClient = redis.createClient({
-  host: keys.redisHost,
-  port: keys.redisPort,
-  retry_strategy: () => 1000
-});
-const redisPublisher = redisClient.duplicate();
-*/
-
-//require('./routes/postRoutes')(app, connection);
+require('./routes/postRoutes')(app, connection);
 require('./routes/authRoutes')(app);
 
 const PORT = process.env.PORT || 5000;
