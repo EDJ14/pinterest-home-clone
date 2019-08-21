@@ -30,7 +30,7 @@ module.exports = {
   },
   resolve: { extensions: ['*', '.js', '.jsx'] },
   output: {
-    path: path.resolve(__dirname, 'public/'),
+    path: './public/',
     publicPath: '/public/',
     filename: 'bundle.js'
   },
@@ -40,7 +40,7 @@ module.exports = {
       '/auth': 'http://localhost:5000'
     },*/
     historyApiFallback: true,
-    contentBase: path.join(__dirname, 'public/'),
+    contentBase: './public',
     port: 3000,
     publicPath: 'http://localhost:3000/public/',
     disableHostCheck: true,
