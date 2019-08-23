@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import axios from 'axios';
 
-import * as actions from '../../actions';
+import * as actions from '../../../actions';
+
+import SavePostModal from './SavePostModal';
 import {
   MdThumbDown,
   MdThumbUp,
@@ -19,41 +21,41 @@ const SavedStatus = styled.div`
   border: none;
 `;
 
+const SaveButton = styled.div`
+  width: 10rem;
+  height: 5rem;
+  background-color: red;
+  border-radius: 15%;
+  font-size: 2rem;
+  justify-content: center;
+`;
+
 class SavedPostStatus extends Component {
   state = {
     isLoading: false,
     count: 0,
     color: 'white',
-    likes: 0
+    likes: 0,
+    modal: false
   };
 
-  handleClick = async (postID, userID) => {
-    await axios.post('/api/savepost', [this.props.postNumber, 3]);
+  handleClick = async e => {
+    e.preventDefault();
+    e.stopPropagation();
+    this.setState({ modal: true });
+    //await axios.post('/api/savepost', [this.props.postNumber, 3]);
   };
 
-  renderStar() {
-    if (this.state.isLoading == 'LOAD') {
-      return (
-        <div>
-          <div className="loader2">Loading...</div>
-        </div>
-      );
+  renderSaveButton() {
+    if (this.state.modal == true) {
+      return <SavePostModal />;
     }
 
-    return (
-      <IconContext.Provider
-        value={{
-          color: this.state.color,
-          size: '4rem'
-        }}
-      >
-        <MdStarBorder onClick={() => this.handleClick()} />
-      </IconContext.Provider>
-    );
+    return <SaveButton onClick={e => this.handleClick(e)}>Save</SaveButton>;
   }
 
   render() {
-    return this.renderStar();
+    return this.renderSaveButton();
   }
 }
 

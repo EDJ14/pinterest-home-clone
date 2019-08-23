@@ -30,20 +30,16 @@ module.exports = {
   },
   resolve: { extensions: ['*', '.js', '.jsx'] },
   output: {
-    path: './public/',
-    publicPath: '/public/',
+    path: path.resolve(__dirname, 'dist/'),
+    publicPath: '/dist/',
     filename: 'bundle.js'
   },
   devServer: {
-    /*proxy: {
-      '/api': 'http://localhost:5000',
-      '/auth': 'http://localhost:5000'
-    },*/
-    historyApiFallback: true,
-    contentBase: './public',
-    port: 3000,
-    publicPath: 'http://localhost:3000/public/',
     disableHostCheck: true,
+    historyApiFallback: true,
+    contentBase: path.join(__dirname, 'dist/'),
+    port: 3000,
+    publicPath: 'http://localhost:3000/dist/',
     hotOnly: true
   },
   plugins: [new webpack.HotModuleReplacementPlugin()]

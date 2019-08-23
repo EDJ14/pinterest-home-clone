@@ -37,6 +37,7 @@ module.exports = (app, connection) => {
 
   app.post('/posts', (req, res) => {
     const post = { user_id: 50, title: 'this is a test post' };
+    console.log(req.body);
     connection.query('INSERT INTO posts SET ?', post, (err, results) => {
       if (err) {
         console.log(err.sqlMessage);
@@ -56,55 +57,6 @@ module.exports = (app, connection) => {
     console.log(req.body);
     console.log('saving POST');
 
-    const faker = require('faker');
-
-    /*
-const uniquePics = [];
-let i = 0;
-while (i < 50) {
-  let pic = faker.image.image();
-  if (!uniquePics.includes(pic)) {
-    uniquePics.push(pic);
-    console.log('added pic # ', i);
-    i++;
-  } else {
-    continue;
-  }
-}
-*/
-
-    const userdata = [];
-    const photodata = [];
-    const postdata = [];
-    for (let i = 0; i < 50; i++) {
-      userdata.push([faker.internet.userName(), faker.date.past()]);
-      photodata.push([faker.image.image(), faker.date.past()]);
-      postdata.push([
-        faker.random.words() + faker.random.words(),
-        i + 1,
-        Math.floor(Math.random() * 9.9) + 1,
-        Math.floor(Math.random() * 49.9) + 1
-      ]);
-    }
-
-    const photoq = 'INSERT INTO photos (image_url, created_at) VALUES ?';
-    const userq = 'INSERT INTO users (username, created_at) VALUES ?';
-    const postq =
-      'INSERT INTO posts (title, photo_id, tag_id, user_id) VALUES ?';
-
-    connection.query(photoq, [photodata], function(err, result) {
-      console.log(err);
-      console.log(result);
-    });
-
-    connection.query(userq, [userdata], function(err, result) {
-      console.log(err);
-      console.log(result);
-    });
-
-    connection.query(postq, [postdata], function(err, result) {
-      console.log(err);
-      console.log(result);
-    });
+    res.sendStatus(200);
   });
 };
