@@ -6,13 +6,13 @@ import axios from 'axios';
 import * as actions from '../../../actions';
 
 import SavePostModal from './SavePostModal';
-import {
+/*mport {
   MdThumbDown,
   MdThumbUp,
   MdStarBorder,
   MdHourglassEmpty
 } from 'react-icons/md';
-import { IconContext } from 'react-icons';
+import { IconContext } from 'react-icons';*/
 
 const SavedStatus = styled.div`
   background-color: ${props => (props.status ? 'black' : 'blue')};
@@ -48,7 +48,7 @@ class SavedPostStatus extends Component {
 
   renderSaveButton() {
     if (this.state.modal == true) {
-      return <SavePostModal />;
+      return <SavePostModal setFalse={() => this.setState({ modal: false })} />;
     }
 
     return <SaveButton onClick={e => this.handleClick(e)}>Save</SaveButton>;
