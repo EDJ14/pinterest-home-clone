@@ -48,7 +48,13 @@ class SavedPostStatus extends Component {
 
   renderSaveButton() {
     if (this.state.modal == true) {
-      return <SavePostModal setFalse={() => this.setState({ modal: false })} />;
+      return (
+        <SavePostModal
+          title="Save Post"
+          content="Sure you want to save post"
+          setFalse={() => this.setState({ modal: false })}
+        />
+      );
     }
 
     return <SaveButton onClick={e => this.handleClick(e)}>Save</SaveButton>;

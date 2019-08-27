@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import history from '../../history';
 import styled from 'styled-components';
@@ -32,12 +32,20 @@ const handleClick = (e, setFalse) => {
   setFalse();
 };
 
+const renderContent = (loading, changeLoading, props) => {
+  if (loading) {
+    return <div className="lds-hourglass"></div>;
+  }
+  changeLoading(1);
+  setTimeout(() => changeLoading(0), 1500);
+  return <SavePopUpContent>{props.title}</SavePopUpContent>;
+};
+
 const SavePostModal = props => {
+  const [loading, changeLoading] = useState(0);
   return ReactDOM.createPortal(
     <SavePopUpContainer onClick={e => handleClick(e, props.setFalse)}>
-      <SavePopUp>
-        <SavePopUpContent>Save Post</SavePopUpContent>
-      </SavePopUp>
+      <SavePopUp>{renderContent(loading, changeLoading, props)}</SavePopUp>
     </SavePopUpContainer>,
     document.querySelector('#modal')
   );
