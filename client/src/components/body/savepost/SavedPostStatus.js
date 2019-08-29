@@ -50,7 +50,7 @@ class SavedPostStatus extends Component {
     if (this.state.modal == true) {
       return (
         <SavePostModal
-          title="Save Post"
+          inProp={true}
           content="Sure you want to save post"
           setFalse={() => this.setState({ modal: false })}
         />

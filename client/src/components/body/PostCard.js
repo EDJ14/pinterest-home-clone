@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Transition, CSSTransition } from 'react-transition-group';
+import { Transition } from 'react-transition-group';
 
 import SavedPostStatus from './savepost/SavedPostStatus';
 import magnifyCursor from '../../img/magnify.cur';

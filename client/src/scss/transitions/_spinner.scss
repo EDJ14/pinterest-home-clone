@@ -3,9 +3,10 @@
   position: relative;
   width: 64px;
   height: 64px;
+  top: 0.2rem;
 }
 .lds-hourglass:after {
-  content: " ";
+  content: ' ';
   display: block;
   border-radius: 50%;
   width: 0;
