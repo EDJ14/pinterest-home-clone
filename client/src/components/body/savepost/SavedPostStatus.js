@@ -27,7 +27,9 @@ const SaveButton = styled.div`
   background-color: red;
   border-radius: 15%;
   font-size: 2rem;
+  display: flex;
   justify-content: center;
+  align-items: center;
 `;
 
 class SavedPostStatus extends Component {
@@ -51,7 +53,7 @@ class SavedPostStatus extends Component {
       return (
         <SavePostModal
           inProp={true}
-          content="Sure you want to save post"
+          post={this.props.post}
           setFalse={() => this.setState({ modal: false })}
         />
       );

@@ -17,6 +17,12 @@ const PictureBox = styled.div`
   grid-column: 1 / 2;
   background-color: red;
   border-radius: 4%;
+  background-image: url(${props => props.img});
+`;
+
+const Title = styled.h1`
+  grid-row: 2 / 3;
+  grid-column: 2 / -1;
 `;
 
 const GrayCircle = styled.div`
@@ -27,7 +33,12 @@ const GrayCircle = styled.div`
 
 const SavePostContent = props => {
   const [loading, setLoading] = useState(0);
-  return [<HeaderBox>Choose board</HeaderBox>, <PictureBox></PictureBox>];
+  console.log(props);
+  return [
+    <HeaderBox>Choose board</HeaderBox>,
+    <PictureBox img={props.post[0].image_url} />,
+    <Title>TITLETITLE</Title>
+  ];
 };
 
 export default SavePostContent;

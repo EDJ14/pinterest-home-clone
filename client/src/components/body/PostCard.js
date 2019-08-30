@@ -206,9 +206,9 @@ class PostCard extends Component {
               >
                 <div className="overlay" />
                 <div className="savebut">
-                  <SavedPostStatus postNumber={this.props.postNumber} />
+                  <SavedPostStatus post={this.props.posts[num - 1]} />
                 </div>
-                <div className="sourcesite">websitessss.com</div>
+                <div className="sourcesite">websites.com</div>
                 <PostPic
                   ref={this.imgCheck}
                   style={{

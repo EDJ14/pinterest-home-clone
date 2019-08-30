@@ -32,6 +32,7 @@ const SavePopUpContent = styled.div`
   display: grid;
   grid-template-rows: 1fr 5fr 5fr;
   grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 2rem;
 `;
 
 const duration = 400;
@@ -71,7 +72,7 @@ const SavePostModal = props => {
                 ...transitionStyles[state]
               }}
             >
-              <SavePostContent props="props" />
+              <SavePostContent post={props.post} />
             </SavePopUpContent>
           </SavePopUp>
         </SavePopUpContainer>

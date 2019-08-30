@@ -6,6 +6,7 @@ import Loadable from 'react-loadable';
 import * as actions from '../../actions';
 
 //import PostCard from './PostCard';
+import ReturnToTop from './ReturnToTop';
 
 const Body2 = styled.div`
   grid-column: 2 / -2;
@@ -146,6 +147,7 @@ class BodyMain extends Component {
           </Link>
         </ButtonContainer>
         {this.renderColumnsAndPosts(4, 128)}
+        <ReturnToTop />
       </Body2>
     );
   }
