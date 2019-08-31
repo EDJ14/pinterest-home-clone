@@ -10,7 +10,7 @@ import ReturnToTop from './ReturnToTop';
 
 const Body2 = styled.div`
   grid-column: 2 / -2;
-  grid-row: 2 / -1;
+  grid-row: 3 / -1;
   height: 30rem;
 
   position: relative;
@@ -31,8 +31,9 @@ const Col = styled.div`
 `;
 
 const ButtonContainer = styled.div`
-  position: absolute;
-  top: -8rem;
+  grid-row: 2 / 3;
+  grid-column: 1 / -1;
+  padding: 0 20rem;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -132,24 +133,24 @@ class BodyMain extends Component {
   };
 
   render() {
-    return (
+    return [
       <Body2 id="body">
-        <ButtonContainer>
-          <PostsButtons onClick={this.handleClick}>New Post</PostsButtons>
-          <PostsButtons
-            style={{ marginRight: '10rem' }}
-            onClick={this.deletePosts}
-          >
-            Clear Posts
-          </PostsButtons>
-          <Link to="/new">
-            <PostsButtons>Create Post</PostsButtons>
-          </Link>
-        </ButtonContainer>
         {this.renderColumnsAndPosts(4, 128)}
         <ReturnToTop />
-      </Body2>
-    );
+      </Body2>,
+      <ButtonContainer>
+        <PostsButtons onClick={this.handleClick}>New Post</PostsButtons>
+        <PostsButtons
+          style={{ marginRight: '10rem' }}
+          onClick={this.deletePosts}
+        >
+          Clear Posts
+        </PostsButtons>
+        <Link to="/new">
+          <PostsButtons>Create Post</PostsButtons>
+        </Link>
+      </ButtonContainer>
+    ];
   }
 }
 
