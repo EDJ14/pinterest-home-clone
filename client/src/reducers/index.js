@@ -4,6 +4,7 @@ import postsReducer from './postsReducer';
 import incPostReducer from './incPostReducer';
 import { reducer as reduxForm } from 'redux-form';
 //import userPostReducer from './userPostReducer';
+import tempReducer from './tempReducer';
 
 export default combineReducers({
   auth: authReducer,

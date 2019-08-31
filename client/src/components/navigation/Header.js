@@ -117,7 +117,7 @@ class Header extends Component {
     } else if (this.props.auth == false) {
       return <HeaderUserButton text="Login" />;
     } else if (this.props.auth.username == null) {
-      let user = `user ${Math.ceil(Math.random()) * 100}`;
+      let user = 'user 100';
       return <HeaderUserButton text={user} />;
     }
     const { username } = this.props.auth;
@@ -150,7 +150,7 @@ class Header extends Component {
         <ButtonsCont>
           <HeaderUserButton bold text="Home" />
           <HeaderUserButton text="Following" />
-          <a href="/auth/google">{this.renderAuth()}</a>
+          <a href="/api/tempLogin">{this.renderAuth()}</a>
           <IconContext.Provider value={{ color: 'gray', size: '3rem' }}>
             <div style={{ padding: '0 1.5rem' }}>
               <TiMessageTyping />

@@ -75,8 +75,10 @@ class BodyBanner extends Component {
     return (
       <BodyBan>
         <UserWelcome>
-          Hi {this.props.auth ? this.props.auth.username : 'Loading'}!! Your
-          feed is made up of these topics
+          {this.props.auth
+            ? `Hi ${this.props.auth.username}!! Your
+      feed is made up of these topics`
+            : 'Login NOW NOW NOW'}
         </UserWelcome>
         <CategoryBox>{posts}</CategoryBox>
       </BodyBan>
