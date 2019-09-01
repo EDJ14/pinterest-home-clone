@@ -27,9 +27,7 @@ module.exports = (app, connection) => {
     console.log(req.params.num);
     const q = `SELECT username, image_url FROM photos RIGHT JOIN 
               (SELECT username, photo_id, tag_id FROM posts LEFT JOIN users ON posts.user_id = users.id) 
-              AS userphotoid ON photos.id = userphotoid.photo_id LIMIT ${
-                req.params.num
-              } OFFSET ${req.params.offset}`;
+              AS userphotoid ON photos.id = userphotoid.photo_id LIMIT ${req.params.num} OFFSET ${req.params.offset}`;
     connection.query(q, (err, results) => {
       res.send(results);
     });
@@ -54,6 +52,7 @@ module.exports = (app, connection) => {
   });
 
   app.post('/savepost', (req, res) => {
+    const q = 'INSERT INTO liked_posts FROM ' + req.params.num;
     console.log(req.body);
     console.log('saving POST');
 

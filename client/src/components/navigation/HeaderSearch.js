@@ -3,9 +3,11 @@ import styled from 'styled-components';
 import { MdSearch } from 'react-icons/md';
 import { IconContext } from 'react-icons';
 
+import SearchFocus from './SearchFocus';
+
 const Search = styled.input`
   type: text;
-  width: 74rem;
+  width: 70rem;
   padding-left: 4.5rem;
   font-size: 1.75rem;
 
@@ -39,11 +41,31 @@ const SearchButton = styled.button`
   transform: scale(1.25);
 `;
 
+const DropDown = styled.div`
+  top: 4rem;
+`;
+
 class HeaderSearch extends Component {
-  state = { input: '' };
+  state = { input: '', showDropDown: false };
 
   handleChange = e => {
     this.setState({ input: e.target.value });
+  };
+
+  onFocus = () => {
+    this.setState({ showDropDown: true });
+  };
+
+  renderDropDown = () => {
+    if (this.state.showDropDown) {
+      return (
+        <DropDown>
+          <SearchFocus
+            closeModal={() => this.setState({ showDropDown: false })}
+          />
+        </DropDown>
+      );
+    }
   };
 
   render() {
@@ -53,6 +75,7 @@ class HeaderSearch extends Component {
           onChange={e => this.handleChange(e)}
           value={this.state.input}
           placeholder="Search"
+          onFocus={this.onFocus}
         />
         <SearchButton>
           <IconContext.Provider
@@ -65,6 +88,7 @@ class HeaderSearch extends Component {
             <MdSearch />
           </IconContext.Provider>
         </SearchButton>
+        {this.renderDropDown()}
       </div>
     );
   }

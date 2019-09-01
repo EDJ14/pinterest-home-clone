@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
-const HeaderBox = styled.div`
+const HeaderBox = styled.button`
   grid-row: 1;
   grid-column: 1 / -1;
   display: flex;
@@ -10,6 +11,10 @@ const HeaderBox = styled.div`
   font-size: 3rem;
   font-weight: bold;
   margin-bottom: 4rem;
+  border: none;
+  background-color: inherit;
+  cursor: pointer;
+  font: inherit;
 `;
 
 const PictureBox = styled.div`
@@ -31,11 +36,15 @@ const GrayCircle = styled.div`
   border-radius: 50%;
 `;
 
+const confirmSave = async () => {
+  const res = await axios.post('/api/savepost', { test: 'test' });
+};
+
 const SavePostContent = props => {
   const [loading, setLoading] = useState(0);
   console.log(props);
   return [
-    <HeaderBox>Choose board</HeaderBox>,
+    <HeaderBox onClick={confirmSave}>Confirm Save</HeaderBox>,
     <PictureBox img={props.post[0].image_url} />,
     <Title>TITLETITLE</Title>
   ];
