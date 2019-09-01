@@ -13,18 +13,17 @@ import formFields from './formFields';
 
 export const Container = styled.div`
   grid-row: 2 / 3;
-  grid-column: 2 / -2;
+  grid-column: 1 / -1;
 `;
 
 export const FormContainer = styled.div`
-  padding: 2rem;
+  padding: 0 2rem;
   margin: 0 auto;
   display: flex;
-  width: min-content;
-  align-items: center;
+  width: 100%;
+  align-items: start;
   flex-direction: column;
   background-color: rgba(3, 3, 3, 0.2);
-  border-radius: 10%;
 `;
 
 class PostForm extends Component {

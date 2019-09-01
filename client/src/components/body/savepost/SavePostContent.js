@@ -14,12 +14,11 @@ const HeaderBox = styled.button`
   border: none;
   background-color: inherit;
   cursor: pointer;
-  font: inherit;
 `;
 
 const PictureBox = styled.div`
-  grid-row: 2 / 3;
-  grid-column: 1 / 2;
+  grid-row: 2 / -1;
+  grid-column: 1 / 3;
   background-color: red;
   border-radius: 4%;
   background-image: url(${props => props.img});
@@ -27,7 +26,7 @@ const PictureBox = styled.div`
 
 const Title = styled.h1`
   grid-row: 2 / 3;
-  grid-column: 2 / -1;
+  grid-column: 3 / -1;
 `;
 
 const GrayCircle = styled.div`

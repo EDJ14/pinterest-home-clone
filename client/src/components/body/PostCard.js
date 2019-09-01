@@ -172,7 +172,6 @@ class PostCard extends Component {
     const post = this.props.posts[num - 1];
 
     if (post) {
-      console.log(this.props.postNumber, post);
       return post[0].image_url;
     }
     return null;
