@@ -12,7 +12,7 @@ const DropDownGray = styled.div`
   position: fixed;
   height: 92.5%;
   width: 100%;
-  bottom: 0;
+  top: 6.5rem;
   left: 0;
 `;
 
@@ -26,46 +26,72 @@ const DropDownContainer = styled.div`
     width: 20rem;
   }
 
-  height: 75rem;
+  height: 80%;
   background-color: white;
   position: absolute;
   left: 7rem;
   top: -1rem;
-  padding: 2rem;
 
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 3fr 3fr;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 3rem;
 `;
 
-const DropDownItems = styled.div`
+const DropDownItem = styled.div`
   background-color: ${props => props.color};
 `;
 
-const renderStuff = () => {
-  return [
-    'green',
-    'blue',
-    'red',
-    'black',
-    'brown',
-    'green',
-    'blue',
-    'red',
-    'black',
-    'brown',
-    'red',
-    'blue'
-  ].map(color => <DropDownItems color={color} />);
-};
+const IdeasForYou = styled.div`
+  grid-row: 2 / 3;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 0.5rem;
+  padding: 1rem;
+`;
+const Trending = styled.div`
+  grid-row: 3 / 4;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 0.5rem;
+  padding: 1rem;
+`;
+
+const Placeholder = styled.div`
+  background-color: red;
+  background-border-radius: 3%;
+`;
 
 const SearchFocus = props => {
   return ReactDOM.createPortal(
     <DropDown>
       <DropDownGray onClick={props.closeModal}>
         <DropDownContainer onClick={e => e.stopPropagation()}>
-          {renderStuff()}
+          <IdeasForYou>
+            <Placeholder />
+            <Placeholder />
+            <Placeholder />
+            <Placeholder />
+            <Placeholder />
+            <Placeholder />
+            <Placeholder />
+            <Placeholder />
+          </IdeasForYou>
+          <div>TRENDING IDEERS</div>
+          <Trending>
+            <Placeholder />
+            <Placeholder />
+            <Placeholder />
+            <Placeholder />
+            <Placeholder />
+            <Placeholder />
+            <Placeholder />
+            <Placeholder />
+          </Trending>
         </DropDownContainer>
       </DropDownGray>
     </DropDown>,

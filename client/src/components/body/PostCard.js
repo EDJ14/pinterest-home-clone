@@ -147,7 +147,7 @@ class PostCard extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     const { num } = this.props;
 
-    if (nextProps.postNumber != num) {
+    if (nextProps.postNumber != num && nextProps.postNumber != 0) {
       return false; // need num because all divs rendered first as invisible. Tried using length of posts array but was slow
     }
     return true;
