@@ -31,17 +31,42 @@ const DropDownContainer = styled.div`
   position: absolute;
   left: 7rem;
   top: -1rem;
+  padding: 2rem;
+
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 3rem;
+`;
+
+const DropDownItems = styled.div`
+  background-color: ${props => props.color};
 `;
 
 const renderStuff = () => {
-  ['green', 'blue', 'red', 'black', 'brown'].map(color => <div>{color}</div>);
+  return [
+    'green',
+    'blue',
+    'red',
+    'black',
+    'brown',
+    'green',
+    'blue',
+    'red',
+    'black',
+    'brown',
+    'red',
+    'blue'
+  ].map(color => <DropDownItems color={color} />);
 };
 
 const SearchFocus = props => {
   return ReactDOM.createPortal(
     <DropDown>
       <DropDownGray onClick={props.closeModal}>
-        <DropDownContainer>{renderStuff()}</DropDownContainer>
+        <DropDownContainer onClick={e => e.stopPropagation()}>
+          {renderStuff()}
+        </DropDownContainer>
       </DropDownGray>
     </DropDown>,
     document.querySelector('#modal')
