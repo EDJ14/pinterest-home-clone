@@ -21,9 +21,10 @@ export const FormContainer = styled.div`
   margin: 0 auto;
   display: flex;
   width: 100%;
-  align-items: start;
+  align-items: center;
   flex-direction: column;
   background-color: rgba(3, 3, 3, 0.2);
+  overflow: hidden;
 `;
 
 class PostForm extends Component {
