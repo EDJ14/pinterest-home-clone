@@ -22,7 +22,7 @@ module.exports = {
         use: ['file-loader']
       },
       {
-        test: /\.(png|gif|cur|jpg)$/,
+        test: /\.(png|gif|cur)$/,
         loader: 'url-loader',
         query: { limit: 8192 }
       }

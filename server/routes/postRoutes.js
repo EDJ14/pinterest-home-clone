@@ -40,7 +40,6 @@ module.exports = (app, connection) => {
       if (err) {
         console.log(err.sqlMessage);
       }
-      console.log(results);
       retrievePostq =
         'SELECT title, user_id, photo_id, tag_id FROM posts WHERE id=' +
         results.insertId;

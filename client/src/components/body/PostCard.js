@@ -139,9 +139,9 @@ class PostCard extends Component {
     const computed = window
       .getComputedStyle(this.imgCheck.current)
       .getPropertyValue('background-image');
-    if (!computed.startsWith('url("http://lorem') && post) {
+    /*if (!computed.startsWith('url("http://lorem') && post) {
       this.imgCheck.current.style.backgroundImage = `url(${post[0].image_url})`;
-    }
+    }*/
   };
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -212,7 +212,8 @@ class PostCard extends Component {
                   ref={this.imgCheck}
                   style={{
                     backgroundImage: `url(${this.renderImg()})`,
-                    backgroundColor: color
+                    backgroundSize: 'cover'
+                    //backgroundColor: color
                   }}
                 />
                 <PostDetails>

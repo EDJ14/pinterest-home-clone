@@ -21,7 +21,7 @@ while (i < 50) {
   const postdata = [];
   for (let i = 0; i < 50; i++) {
     userdata.push([faker.internet.userName(), faker.date.past()]);
-    photodata.push([faker.image.image(), faker.date.past()]);
+    photodata.push([`../../img/stockPhotos/${i}.jpg`, faker.date.past()]);
     postdata.push([
       faker.random.words() + faker.random.words(),
       i + 1,
