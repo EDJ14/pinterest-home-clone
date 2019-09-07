@@ -21,7 +21,12 @@ while (i < 50) {
   const postdata = [];
   for (let i = 0; i < 50; i++) {
     userdata.push([faker.internet.userName(), faker.date.past()]);
-    photodata.push([`../../img/stockPhotos/${i}.jpg`, faker.date.past()]);
+    photodata.push([
+      `https://picsum.photos/id/${i}/${Math.ceil(
+        10 * Math.random()
+      )}00/${Math.ceil(10 * Math.random())}00`,
+      faker.date.past()
+    ]);
     postdata.push([
       faker.random.words() + faker.random.words(),
       i + 1,
@@ -43,10 +48,16 @@ while (i < 50) {
     }
   }
 */
+  const photoqclear = 'DELETE FROM photos';
   const photoq = 'INSERT INTO photos (image_url, created_at) VALUES ?';
   const userq = 'INSERT INTO users (username, created_at) VALUES ?';
   const phototagq = 'INSERT INTO photo_tags (photo_id, tag_id) VALUES ?';
   const postq = 'INSERT INTO posts (title, photo_id, tag_id, user_id) VALUES ?';
+
+  connection.query(photoqclear, function(err, result) {
+    console.log(err);
+    console.log(result);
+  });
 
   connection.query(photoq, [photodata], function(err, result) {
     console.log(err);
