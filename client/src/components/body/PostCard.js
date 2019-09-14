@@ -139,9 +139,9 @@ class PostCard extends Component {
     const computed = window
       .getComputedStyle(this.imgCheck.current)
       .getPropertyValue('background-image');
-    /*if (!computed.startsWith('url("http://lorem') && post) {
+    if (!computed.startsWith('url("http://') && post) {
       this.imgCheck.current.style.backgroundImage = `url(${post[0].image_url})`;
-    }*/
+    }
   };
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -207,7 +207,7 @@ class PostCard extends Component {
                 <div className="savebut">
                   <SavedPostStatus post={this.props.posts[num - 1]} />
                 </div>
-                <div className="sourcesite">websitesssss.com</div>
+                <div className="sourcesite">websites.com</div>
                 <PostPic
                   ref={this.imgCheck}
                   style={{
