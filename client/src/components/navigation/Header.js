@@ -150,9 +150,7 @@ class Header extends Component {
         <ButtonsCont>
           <HeaderUserButton bold text="Home" />
           <HeaderUserButton text="Following" />
-          <a href="http://192.168.99.101.xip.io:3050/auth/google">
-            {this.renderAuth()}
-          </a>
+          <a href="/auth/google">{this.renderAuth()}</a>
           <IconContext.Provider value={{ color: 'gray', size: '3rem' }}>
             <div style={{ padding: '0 1.5rem' }}>
               <TiMessageTyping />
