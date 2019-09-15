@@ -144,7 +144,8 @@ class PostCard extends Component {
     const computed = window
       .getComputedStyle(this.imgCheck.current)
       .getPropertyValue('background-image');
-    if (!computed.startsWith('url("https://') && post) {
+    console.log(computed);
+    if (computed.startsWith('url("http://') && post) {
       this.imgCheck.current.style.backgroundImage = `url(${post[0].image_url})`;
     }
   };
@@ -159,7 +160,10 @@ class PostCard extends Component {
   }
 
   async componentDidUpdate(prevProps, prevState, snapshot) {
-    setTimeout(this.checkStyles, duration * 1.5);
+    console.log('Props', this.props);
+    this.props.postNumber != 0
+      ? setTimeout(this.checkStyles, duration * 1.5)
+      : null;
 
     await new Promise(resolve => setTimeout(resolve, 1)); // react renders stuff too fast i think
     this.state.inProp ? null : this.setState({ inProp: true });
@@ -195,7 +199,7 @@ class PostCard extends Component {
             <Link
               to={{
                 pathname: `/detail/${postNumber}`,
-                query: { postNumber, post: this.props.posts[0] }
+                query: { postNumber, post: this.props.posts[num - 1] }
               }}
               style={{ textDecoration: 'none' }}
             >
@@ -217,8 +221,8 @@ class PostCard extends Component {
                   ref={this.imgCheck}
                   style={{
                     backgroundImage: `url(${this.renderImg()})`,
-                    backgroundSize: 'cover'
-                    //backgroundColor: color
+                    backgroundSize: 'cover',
+                    backgroundColor: color
                   }}
                 />
                 <PostDetails>

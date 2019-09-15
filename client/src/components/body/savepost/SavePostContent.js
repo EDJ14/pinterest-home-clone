@@ -22,6 +22,7 @@ const PictureBox = styled.div`
   background-color: red;
   border-radius: 4%;
   background-image: url(${props => props.img});
+  background-size: cover;
 `;
 
 const Title = styled.h1`

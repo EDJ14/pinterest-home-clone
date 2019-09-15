@@ -40,6 +40,7 @@ const PostContents = styled.div`
   height: 90%;
   border-radius: inherit;
   background-image: url(${props => props.image_url});
+  backround-size: cover;
   background-color: ${randomColor()};
   display: relative;
   transition: filter 0.2s;
