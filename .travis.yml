@@ -9,13 +9,13 @@ script:
   - node ./testTest.js
 
 after_success:
-  - docker build -t eddiedj/pinterest-client ./client
+  - docker build -t eddiedj/pinterest-clueant ./client
   - docker build -t eddiedj/pinterest-nginx ./nginx
   - docker build -t eddiedj/pinterest-server ./server
   # Log into the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push eddiedj/pinterest-client
+  - docker push eddiedj/pinterest-clueannt
   - docker push eddiedj/pinterest-nginx
   - docker push eddiedj/pinterest-server
 

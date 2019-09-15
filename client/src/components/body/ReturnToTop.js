@@ -36,7 +36,6 @@ class ReturnToTop extends React.Component {
       document.documentElement.scrollHeight -
       document.documentElement.clientHeight;
     const scrolled = scrollPx / winHeightPx;
-    console.log(scrollPx);
     if (scrollPx >= 200) {
       this.setState({ display: true });
     }

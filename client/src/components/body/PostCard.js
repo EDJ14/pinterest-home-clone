@@ -124,6 +124,7 @@ class PostCard extends Component {
     };
     this.styleCheck = React.createRef();
     this.imgCheck = React.createRef();
+    this.authorCheck = React.createRef();
   }
 
   checkStyles = () => {
@@ -136,10 +137,14 @@ class PostCard extends Component {
     if (style.transform != 'translateY(0)') {
       style.transform = 'translateY(0)';
     }
+    const author = this.authorCheck.current;
+    if (author.textContent == 'Author') {
+      author.textContent = post[0].username;
+    }
     const computed = window
       .getComputedStyle(this.imgCheck.current)
       .getPropertyValue('background-image');
-    if (!computed.startsWith('url("http://') && post) {
+    if (!computed.startsWith('url("https://') && post) {
       this.imgCheck.current.style.backgroundImage = `url(${post[0].image_url})`;
     }
   };
@@ -217,7 +222,10 @@ class PostCard extends Component {
                   }}
                 />
                 <PostDetails>
-                  <p style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
+                  <p
+                    ref={this.authorCheck}
+                    style={{ fontWeight: 'bold', fontSize: '1.2rem' }}
+                  >
                     {this.renderName()}
                   </p>
                   <p>...</p>
