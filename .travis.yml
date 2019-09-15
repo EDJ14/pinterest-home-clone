@@ -9,7 +9,7 @@ script:
   - node ./testTest.js
 
 after_success:
-  - docker build --no-cache -t eddiedj/pinterest-client ./client
+  - docker build -t eddiedj/pinterest-client ./client
   - docker build -t eddiedj/pinterest-nginx ./nginx
   - docker build -t eddiedj/pinterest-server ./server
   # Log into the docker CLI
