@@ -2,4 +2,3 @@
 /server/node_modules
 /docker-compose.yml
 /client/webpack.dev.js
-/client/src/img/stockPhotos
