@@ -2,11 +2,12 @@
   "AWSEBDockerrunVersion": 2,
   "containerDefinitions": [
     {
-      "name": "clientt",
-      "image": "eddiedj/pinterest-clientt",
+      "name": "client",
+      "image": "eddiedj/pinterest-client",
       "hostname": "client",
       "essential": false,
-      "memory": 256
+      "memory": 256,
+      "Update": "true"
     },
     {
       "name": "server",
@@ -26,7 +27,7 @@
           "containerPort": 80
         }
       ],
-      "links": ["clientt", "server"],
+      "links": ["client", "server"],
       "memory": 256
     }
   ]
