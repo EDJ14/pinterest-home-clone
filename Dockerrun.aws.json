@@ -6,8 +6,7 @@
       "image": "eddiedj/pinterest-client",
       "hostname": "client",
       "essential": false,
-      "memory": 256,
-      "Update": "true"
+      "memory": 256
     },
     {
       "name": "server",
