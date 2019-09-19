@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from 'axios'
 import Loadable from 'react-loadable';
 import * as actions from '../../actions';
 
@@ -92,6 +93,8 @@ class BodyMain extends Component {
   };
 
   handleClick = () => {
+    axios.get('/api/database');
+
     this.props.incrementPosts();
 
     this.props.fetchPosts(this.props.postNumber);

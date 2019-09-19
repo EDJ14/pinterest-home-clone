@@ -1,3 +1,5 @@
+const DB = require('../config/populateDB');
+
 module.exports = (app, connection) => {
   app.get('/newpost/:username', (req, res) => {
     const person = { username: req.params.username };
@@ -56,5 +58,10 @@ module.exports = (app, connection) => {
     console.log('saving POST');
 
     res.sendStatus(200);
+  });
+
+  app.get('/database', (req, res) => {
+    DB(connection);
+    res.send(200);
   });
 };
