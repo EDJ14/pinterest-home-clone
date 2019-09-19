@@ -92,9 +92,9 @@ class BodyMain extends Component {
     }
   };
 
-  handleClick = () => {
-    axios.get('/api/database');
-
+  handleClick = async () => {
+    const res = await axios.get('/api/database');
+    console.log(res);
     this.props.incrementPosts();
 
     this.props.fetchPosts(this.props.postNumber);
