@@ -3,7 +3,7 @@
   "containerDefinitions": [
     {
       "name": "client",
-      "image": "eddiedj/pinterest-client",
+      "image": "eddiedj/pinterest-client:v6",
       "hostname": "client",
       "essential": false,
       "memory": 256
