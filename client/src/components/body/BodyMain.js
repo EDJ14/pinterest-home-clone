@@ -150,7 +150,7 @@ class BodyMain extends Component {
           Clear Posts
         </PostsButtons>
         <Link to="/new">
-          <PostsButtons>Creat Post</PostsButtons>
+          <PostsButtons>Create Post</PostsButtons>
         </Link>
       </ButtonContainer>
     ];
