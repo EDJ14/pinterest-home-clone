@@ -28,7 +28,7 @@ deploy:
   env: PinterestV7-env
   bucket_name: elasticbeanstalk-us-west-2-670225287603
   bucket_path: docker-pinterest7
-  label: uno
+  label: dos
   on:
     branch: master
   access_key_id:
