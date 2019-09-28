@@ -143,6 +143,7 @@ class BodyMain extends Component {
       </Body2>,
       <ButtonContainer>
         <PostsButtons onClick={this.handleClick}>New Post</PostsButtons>
+        <a href="/api/database">DATABASE</a>
         <PostsButtons
           style={{ marginRight: '10rem' }}
           onClick={this.deletePosts}

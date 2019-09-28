@@ -62,6 +62,6 @@ module.exports = (app, connection) => {
 
   app.get('/database', (req, res) => {
     //DB(connection);
-    res.sendStatus(200);
+    res.send('db');
   });
 };
