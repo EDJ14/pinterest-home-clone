@@ -93,8 +93,8 @@ class BodyMain extends Component {
   };
 
   handleClick = async () => {
-    const res = await axios.get('/api/database');
-    console.log(res);
+    //const res = await axios.get('/api/database');
+    //console.log(res);
     this.props.incrementPosts();
 
     this.props.fetchPosts(this.props.postNumber);
@@ -150,7 +150,7 @@ class BodyMain extends Component {
           Clear Posts
         </PostsButtons>
         <Link to="/new">
-          <PostsButtons>Createe Post</PostsButtons>
+          <PostsButtons>Createee Post</PostsButtons>
         </Link>
       </ButtonContainer>
     ];
