@@ -24,11 +24,11 @@ after_success:
 deploy:
   provider: elasticbeanstalk
   region: us-west-2
-  app: pinterest-v7
-  env: PinterestV7-env
+  app: pinterest-v8
+  env: PinterestV8-env
   bucket_name: elasticbeanstalk-us-west-2-670225287603
-  bucket_path: docker-pinterest7
-  label: dos
+  bucket_path: docker-pinterest8
+  label: uno
   on:
     branch: master
   access_key_id:
