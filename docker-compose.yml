@@ -21,7 +21,6 @@ services:
     ports:
       - '3050:80'
   api:
-    # 'DUXt2pi_hMOIcQ2EeXklFTUY',
     build:
       dockerfile: dev.Dockerfile
       context: ./server
