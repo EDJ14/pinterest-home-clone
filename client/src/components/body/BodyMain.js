@@ -130,7 +130,7 @@ class BodyMain extends Component {
   }
 
   deletePosts = () => {
-    alert('???YOU SURE BOUT DAT??');
+    alert('Clear All Posts?');
 
     this.props.deletePosts();
   };
