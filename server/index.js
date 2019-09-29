@@ -18,7 +18,7 @@ app.use(
 // mySQL Client Setup
 const mysql = require('mysql');
 
-/*const connection = mysql.createConnection({
+const connection = mysql.createConnection({
   host: keys.mysqlHost, //'mysql'
   user: keys.mysqlUser, //'root'
   password: keys.mysqlPassword,
@@ -33,14 +33,14 @@ connection.connect(function(err) {
   }
 
   console.log('connected as id ' + connection.threadId);
-});*/
+});
 
 //require('./config/populateDB')(connection);
 //require('./services/passport')(connection);
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./routes/postRoutes')(app); //, connection);
+require('./routes/postRoutes')(app, connection);
 require('./routes/authRoutes')(app);
 
 const PORT = process.env.PORT || 5000;
