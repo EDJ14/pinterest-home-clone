@@ -11,7 +11,9 @@ module.exports = (app, connection) => {
     const q = 'SELECT tag_name FROM tags LIMIT 5';
 
     connection.query(q, (err, results) => {
-      if (err) throw err;
+      if (err) {
+        console.log(err.sqlMessage);
+      }
       res.send(results);
     });
   });
@@ -19,7 +21,9 @@ module.exports = (app, connection) => {
   app.get('/images/:num', (req, res) => {
     const q = 'SELECT image_url FROM photos WHERE id=' + req.params.num;
     connection.query(q, (err, results) => {
-      if (err) throw err;
+      if (err) {
+        console.log(err.sqlMessage);
+      }
 
       res.send(results);
     });
