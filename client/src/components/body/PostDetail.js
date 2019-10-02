@@ -114,7 +114,7 @@ export const PostDetail = props => {
           <IconContext.Provider value={{ color: 'black', size: '4.5rem' }}>
             <MdKeyboardArrowLeft />
           </IconContext.Provider>
-          <BackButton>Homer</BackButton>
+          <BackButton>Home</BackButton>
         </BackButtonContainer>
       </Link>
       <PostContainer>
