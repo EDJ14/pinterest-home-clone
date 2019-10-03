@@ -43,5 +43,11 @@ app.use(passport.session());
 require('./routes/postRoutes')(app, connection);
 require('./routes/authRoutes')(app);
 
+console.log('port', process.env.MYSQLPORT);
+console.log('HOST', process.env.MYSQLHOST);
+console.log('DATABASE', process.env.MYSQLDATABASE);
+console.log('PASSWORD', process.env.MYSQLPASSWORD);
+console.log('USER', process.env.MYSQLUSER);
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log('Awaiting orders'));
