@@ -26,7 +26,7 @@ module.exports = connection => {
         clientID: keys.googleClientID,
         clientSecret: keys.googleClientSecret,
         callbackURL:
-          'http://192.168.99.101.nip.io:3050/api/auth/google/callback',
+          'http://192.168.99.101.nip.io:3050/api/auth/google/callback', // http://pinterestv8-env.mnfpmmpm5f.us-west-2.elasticbeanstalk.com/api/auth/google/callback
         proxy: true
       },
       async (accessToken, refreshToken, profile, done) => {
