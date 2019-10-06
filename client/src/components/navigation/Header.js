@@ -121,6 +121,7 @@ class Header extends Component {
       return <HeaderUserButton text={user} />;
     }
     const { username } = this.props.auth;
+    console.log(username);
     return (
       <HeaderUserButton
         text={username.length > 6 ? username.slice(0, 6) + '...' : username}
