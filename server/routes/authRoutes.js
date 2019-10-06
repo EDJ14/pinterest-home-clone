@@ -8,12 +8,6 @@ module.exports = app => {
     })
   );
 
-  app.get('/tempLogin', (req, res) => {
-    req.user = 4;
-    console.log('LOGGING ', req.user);
-    res.redirect('/');
-  });
-
   app.get(
     '/auth/google/callback',
     passport.authenticate('google'),

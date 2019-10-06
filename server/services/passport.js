@@ -11,9 +11,9 @@ module.exports = connection => {
     const q = 'SELECT * FROM users WHERE id=' + id;
     connection.query(q, (err, results) => {
       const user = {
-        id: results.length ? results[0].id : null,
-        google_id: results.length ? results[0].google_id : null,
-        username: results.length ? results[0].username : null //115660807052933830156
+        id: results ? results[0].id : null,
+        google_id: results ? results[0].google_id : null,
+        username: results ? results[0].username : null //115660807052933830156
       };
 
       done(null, user);
