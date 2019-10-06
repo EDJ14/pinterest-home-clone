@@ -5,7 +5,8 @@ import {
   FETCH_POSTS,
   INCREMENT_POSTS,
   USER_POST,
-  DELETE_POSTS
+  DELETE_POSTS,
+  INC_DELETE
 } from './types';
 
 export const fetchUser = () => async dispatch => {

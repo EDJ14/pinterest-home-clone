@@ -13,15 +13,11 @@ const Post = styled.div`
   background-color: white;
   border-radius: 10px;
   margin: 1rem 0.333rem;
-
   position: relative;
-
   display: grid;
   grid-template-rows: 92.5% 7.5%;
   grid-template-columns: 1fr 1fr;
-
   cursor: url(${magnifyCursor}), auto;
-
   &:hover > .overlay {
     width: 100%;
     height: 100%;
@@ -32,12 +28,10 @@ const Post = styled.div`
     transform: scale(1.035);
     transition: all 0.2s ease-out;
   }
-
   .savebut, .sourcesite {
     display: none;
     visibility: hidden;
     }
-
   &:hover > .savebut {
     
     top: 1rem;
@@ -53,9 +47,7 @@ const Post = styled.div`
     color: white;
     font-weight: 300;
     z-index: 5;
-
   }
-
     &:hover > .sourcesite {
       width: 7rem;
       height: 4rem;

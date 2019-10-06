@@ -25,7 +25,8 @@ module.exports = connection => {
       {
         clientID: keys.googleClientID,
         clientSecret: keys.googleClientSecret,
-        callbackURL: '/auth/google/callback',
+        callbackURL:
+          'http://192.168.99.101.nip.io:3050/api/auth/google/callback',
         proxy: true
       },
       async (accessToken, refreshToken, profile, done) => {

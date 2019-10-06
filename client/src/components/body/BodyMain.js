@@ -13,13 +13,10 @@ const Body2 = styled.div`
   grid-column: 2 / -2;
   grid-row: 3 / -1;
   height: 30rem;
-
   position: relative;
-
   display: grid;
   grid-gap: 1.3rem;
   grid-template-columns: repeat(4, 1fr);
-
   @media (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -49,11 +46,9 @@ const PostsButtons = styled.button`
   cursor: pointer;
   font-size: 2rem;
   transition: all 0.2s;
-
   &:hover {
     transform: translateY(-3px);
   }
-
   &:active,
   &:focus {
     box-shadow: 0 0 0 4.5px rgb(0, 132, 255, 0.5);
