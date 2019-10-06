@@ -35,17 +35,7 @@ connection.connect(function(err) {
   console.log('connected as id ' + connection.threadId);
 });
 
-const cp = require('child_process');
-
-cp.exec(
-  'mysql -u testuser -p testpassword < ./config/initDB.sql',
-  (error, stdout, stderr) => {
-    if (error) throw error;
-    console.log(`stdout: ${stdout}`);
-    console.log(`stderr: ${stderr}`);
-  }
-);
-
+require('./config/init_db')(connection);
 require('./config/populateDB')(connection);
 require('./services/passport')(connection);
 app.use(passport.initialize());
