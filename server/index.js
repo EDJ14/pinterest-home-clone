@@ -36,12 +36,12 @@ connection.connect(function(err) {
 });
 
 //require('./config/init_db')(connection);
-if (
+/*if (
   JSON.stringify(keys.startTime) ==
   JSON.stringify([new Date().getMinutes(), new Date().getSeconds()])
-) {
-  require('./config/populateDB')(connection);
-}
+) {*/
+require('./config/populateDB')(connection);
+//}
 require('./services/passport')(connection);
 app.use(passport.initialize());
 app.use(passport.session());

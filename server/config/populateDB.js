@@ -89,6 +89,17 @@ while (i < 50) {
     console.log(result);
   });*/
 
+  const count = connection.query('SELECT COUNT(*) FROM posts ', function(
+    err,
+    result
+  ) {
+    console.log('ERROR', err);
+    console.log('RESULT', result);
+    return result;
+  });
+
+  console.log('COUNT', count);
+
   connection.query(photoq, [photodata], function(err, result) {
     console.log(err);
     console.log(result);
