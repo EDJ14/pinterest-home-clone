@@ -23,8 +23,8 @@ while (i < 50) {
     userdata.push([faker.internet.userName(), faker.date.past()]);
     photodata.push([
       `https://picsum.photos/id/${i}/${Math.ceil(
-        10 * Math.random()
-      )}00/${Math.ceil(10 * Math.random())}00`,
+        30 * Math.random()
+      )}00/${Math.ceil(60 * Math.random())}00`,
       faker.date.past()
     ]);
     postdata.push([
@@ -49,15 +49,45 @@ while (i < 50) {
   }
 */
   const photoqclear = 'DELETE FROM photos';
+  const userqclear = 'DELETE FROM users';
+  const postqclear = 'DELETE FROM posts';
+
   const photoq = 'INSERT INTO photos (image_url, created_at) VALUES ?';
   const userq = 'INSERT INTO users (username, created_at) VALUES ?';
   const phototagq = 'INSERT INTO photo_tags (photo_id, tag_id) VALUES ?';
   const postq = 'INSERT INTO posts (title, photo_id, tag_id, user_id) VALUES ?';
 
+  const clearDB = `SELECT Concat('TRUNCATE TABLE ',table_schema,'.',TABLE_NAME, ';') 
+  FROM INFORMATION_SCHEMA.TABLES where  table_schema in ('pinterest');`;
+
+  /*connection.query('SET FOREIGN_KEY_CHECKS=0;', function(err, result) {
+    console.log(err);
+    console.log(result);
+  });
+
+  connection.query(clearDB, function(err, result) {
+    console.log(err);
+    console.log(result);
+  });
+
+  connection.query('SET FOREIGN_KEY_CHECKS=1;', function(err, result) {
+    console.log(err);
+    console.log(result);
+  });
+  connection.query(postqclear, function(err, result) {
+    console.log(err);
+    console.log(result);
+  });
+
   connection.query(photoqclear, function(err, result) {
     console.log(err);
     console.log(result);
   });
+
+  connection.query(userqclear, function(err, result) {
+    console.log(err);
+    console.log(result);
+  });*/
 
   connection.query(photoq, [photodata], function(err, result) {
     console.log(err);

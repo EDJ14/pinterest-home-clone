@@ -20,9 +20,9 @@ const mysql = require('mysql');
 
 const connection = mysql.createConnection({
   host: keys.mysqlHost, //'mysql'
-  user: keys.mysqlUser, //'root'
+  user: keys.mysqlUser,
   password: keys.mysqlPassword,
-  database: keys.mysqlDatabase, //'serverX'
+  database: keys.mysqlDatabase, // pinterest
   port: keys.mysqlPort // 3306
 });
 
@@ -35,8 +35,13 @@ connection.connect(function(err) {
   console.log('connected as id ' + connection.threadId);
 });
 
-require('./config/init_db')(connection);
-require('./config/populateDB')(connection);
+//require('./config/init_db')(connection);
+if (
+  JSON.stringify(keys.startTime) ==
+  JSON.stringify([new Date().getMinutes(), new Date().getSeconds()])
+) {
+  require('./config/populateDB')(connection);
+}
 require('./services/passport')(connection);
 app.use(passport.initialize());
 app.use(passport.session());

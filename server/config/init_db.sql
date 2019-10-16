@@ -1,6 +1,10 @@
 ALTER USER 'testuser' IDENTIFIED WITH mysql_native_password BY 'testpassword';
 flush privileges;
 
+SELECT concat('DROP TABLE IF EXISTS `', table_name, '`;')
+FROM information_schema.tables
+WHERE table_schema = 'pinterest';
+
 CREATE TABLE users (
     id INTEGER AUTO_INCREMENT PRIMARY KEY,
     google_id VARCHAR(50) UNIQUE,

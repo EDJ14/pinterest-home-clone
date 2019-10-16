@@ -26,13 +26,16 @@ module.exports = connection => {
         clientID: keys.googleClientID,
         clientSecret: keys.googleClientSecret,
         callbackURL:
-          'http://pinterestv8-env.mnfpmmpm5f.us-west-2.elasticbeanstalk.com/api/auth/google/callback', // http://192.168.99.101.nip.io:3050/api/auth/google/callback
+          /*'http://pinterestv8-env.mnfpmmpm5f.us-west-2.elasticbeanstalk.com/api/auth/google/callback'*/
+
+          'http://192.168.99.101.nip.io:3050/auth/google/callback',
         proxy: true
       },
       async (accessToken, refreshToken, profile, done) => {
         const q = 'SELECT * FROM users WHERE google_id=' + profile.id;
         connection.query(q, (err, results) => {
-          if (results.length) {
+          if (results.length > 0) {
+            console.log('> 0');
             // check if any results, ie any users in database
             const existingUser = {
               id: results[0].id,
@@ -40,6 +43,7 @@ module.exports = connection => {
             };
             return done(null, existingUser);
           }
+          console.log('new user');
           newUserQ = `INSERT INTO users (google_id) VALUES (${profile.id})`; // if no users, insert with new id
           connection.query(newUserQ, (err, results2) => {
             const getNewUserQ =
