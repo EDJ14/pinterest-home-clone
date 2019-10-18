@@ -60,67 +60,35 @@ while (i < 50) {
   const clearDB = `SELECT Concat('TRUNCATE TABLE ',table_schema,'.',TABLE_NAME, ';') 
   FROM INFORMATION_SCHEMA.TABLES where  table_schema in ('pinterest');`;
 
-  /*connection.query('SET FOREIGN_KEY_CHECKS=0;', function(err, result) {
-    console.log(err);
-    console.log(result);
+  new Promise((resolve, reject) => {
+    connection.query('SELECT COUNT(*) FROM posts ', function(err, result) {
+      console.log('ERROR', err);
+      console.log('RESULT', result);
+      resolve(result);
+    });
+  }).then(result => {
+    const count = result[0]['COUNT(*)'];
+    console.log(count);
+
+    if (count < 100) {
+      connection.query(photoq, [photodata], function(err, result) {
+        console.log(err);
+        console.log(result);
+      });
+
+      connection.query(userq, [userdata], function(err, result) {
+        console.log(err);
+        console.log(result);
+      });
+
+      connection.query(postq, [postdata], function(err, result) {
+        console.log(err);
+        console.log(result);
+      });
+
+      // select username, image_url from photos right join
+      // (select username, photo_id from posts left join users on posts.user_id = users.id) as userphotoid
+      // on photos.id = userphotoid.photo_id;
+    }
   });
-
-  connection.query(clearDB, function(err, result) {
-    console.log(err);
-    console.log(result);
-  });
-
-  connection.query('SET FOREIGN_KEY_CHECKS=1;', function(err, result) {
-    console.log(err);
-    console.log(result);
-  });
-  connection.query(postqclear, function(err, result) {
-    console.log(err);
-    console.log(result);
-  });
-
-  connection.query(photoqclear, function(err, result) {
-    console.log(err);
-    console.log(result);
-  });
-
-  connection.query(userqclear, function(err, result) {
-    console.log(err);
-    console.log(result);
-  });*/
-
-  const count = connection.query('SELECT COUNT(*) FROM posts ', function(
-    err,
-    result
-  ) {
-    console.log('ERROR', err);
-    console.log('RESULT', result);
-    return result;
-  });
-
-  console.log('COUNT', count);
-
-  connection.query(photoq, [photodata], function(err, result) {
-    console.log(err);
-    console.log(result);
-  });
-
-  connection.query(userq, [userdata], function(err, result) {
-    console.log(err);
-    console.log(result);
-  });
-
-  /*connection.query(phototagq, [datatags], function(err, result) {
-    console.log(err);
-    console.log(result);
-  });*/
-
-  connection.query(postq, [postdata], function(err, result) {
-    console.log(err);
-    console.log(result);
-  });
-
-  // select username, image_url from photos right join
-  // (select username, photo_id from posts left join users on posts.user_id = users.id) as userphotoid
-  // on photos.id = userphotoid.photo_id;
 };
