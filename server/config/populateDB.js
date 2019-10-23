@@ -57,9 +57,6 @@ while (i < 50) {
   const phototagq = 'INSERT INTO photo_tags (photo_id, tag_id) VALUES ?';
   const postq = 'INSERT INTO posts (title, photo_id, tag_id, user_id) VALUES ?';
 
-  const clearDB = `SELECT Concat('TRUNCATE TABLE ',table_schema,'.',TABLE_NAME, ';') 
-  FROM INFORMATION_SCHEMA.TABLES where  table_schema in ('pinterest');`;
-
   new Promise((resolve, reject) => {
     connection.query('SELECT COUNT(*) FROM posts ', function(err, result) {
       console.log('ERROR', err);
@@ -67,6 +64,7 @@ while (i < 50) {
       resolve(result);
     });
   }).then(result => {
+    connection.query();
     const count = result[0]['COUNT(*)'];
     console.log(count);
 
