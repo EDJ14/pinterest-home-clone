@@ -48,7 +48,7 @@ while (i < 50) {
     }
   }
 */
-  const photoqclear = 'DELETE FROM photos';
+  const photoqclear = 'DELETE FROM photos'; // comment
   const userqclear = 'DELETE FROM users';
   const postqclear = 'DELETE FROM posts';
 
