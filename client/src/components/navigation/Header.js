@@ -112,9 +112,10 @@ const LogoCont = styled.div`
 
 class Header extends Component {
   renderAuth = () => {
+    console.log(this.props);
     if (this.props.auth == null) {
       return <HeaderUserButton text="Loading" />;
-    } else if (this.props.auth == false) {
+    } else if (this.props.auth.username == undefined) {
       return <HeaderUserButton text="Login" />;
     } else if (this.props.auth.username == null) {
       let user = 'No Username';

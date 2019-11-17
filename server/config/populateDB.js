@@ -20,7 +20,7 @@ module.exports = connection => {
     ]);
   }
 
-  const photoqclear = 'DELETE FROM photos'; // comment
+  const photoqclear = 'DELETE FROM photos';
   const userqclear = 'DELETE FROM users';
   const postqclear = 'DELETE FROM posts';
 
