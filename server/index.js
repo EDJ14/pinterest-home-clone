@@ -35,7 +35,7 @@ connection.connect(function(err) {
   console.log('connected as id ' + connection.threadId);
 });
 
-//require('./config/populateDB')(connection);
+require('./config/populateDB')(connection);
 require('./services/passport')(connection);
 app.use(passport.initialize());
 app.use(passport.session());

@@ -1,21 +1,6 @@
 module.exports = connection => {
   const faker = require('faker');
 
-  /*
-const uniquePics = [];
-let i = 0;
-while (i < 50) {
-  let pic = faker.image.image();
-  if (!uniquePics.includes(pic)) {
-    uniquePics.push(pic);
-    console.log('added pic # ', i);
-    i++;
-  } else {
-    continue;
-  }
-}
-*/
-
   const userdata = [];
   const photodata = [];
   const postdata = [];
@@ -35,19 +20,6 @@ while (i < 50) {
     ]);
   }
 
-  /*const datatags = [];
-  while (datatags.length < 50) {
-    let num1 = Math.floor(Math.random() * 49.9) + 1;
-    let num2 = Math.floor(Math.random() * 9.9) + 1;
-    let pair = [num1, num2];
-
-    if (!subArr(datatags, pair)) {
-      datatags.push(pair);
-    } else {
-      continue;
-    }
-  }
-*/
   const photoqclear = 'DELETE FROM photos'; // comment
   const userqclear = 'DELETE FROM users';
   const postqclear = 'DELETE FROM posts';
@@ -64,9 +36,8 @@ while (i < 50) {
       resolve(result);
     });
   }).then(result => {
-    connection.query();
     const count = result[0]['COUNT(*)'];
-    console.log(count);
+    console.log('count', count);
 
     if (count < 100) {
       connection.query(photoq, [photodata], function(err, result) {

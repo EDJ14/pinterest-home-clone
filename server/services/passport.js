@@ -4,10 +4,12 @@ const keys = require('../config/keys');
 
 module.exports = connection => {
   passport.serializeUser((user, done) => {
+    console.log('serialize');
     done(null, user.id);
   });
 
   passport.deserializeUser((id, done) => {
+    console.log('deserialize');
     const q = 'SELECT * FROM users WHERE id=' + id;
     connection.query(q, (err, results) => {
       const user = {
@@ -28,7 +30,7 @@ module.exports = connection => {
         callbackURL:
           /*'http://pinterestv8-env.mnfpmmpm5f.us-west-2.elasticbeanstalk.com/api/auth/google/callback'*/
 
-          'http://192.168.99.101.nip.io:3050/auth/google/callback',
+          'http://192.168.99.101.nip.io:3050/api/auth/google/callback',
         proxy: true
       },
       async (accessToken, refreshToken, profile, done) => {
@@ -43,8 +45,9 @@ module.exports = connection => {
             };
             return done(null, existingUser);
           }
-          console.log('new user');
-          newUserQ = `INSERT INTO users (google_id) VALUES (${profile.id})`; // if no users, insert with new id
+          console.log('new user', profile);
+          newUserQ = `INSERT INTO users (google_id, username) VALUES (${(profile.id,
+          profile.displayName)})`; // if no users, insert with new id
           connection.query(newUserQ, (err, results2) => {
             const getNewUserQ =
               'SELECT * FROM users WHERE id=' + results2.insertId; // after inserting, get that user
