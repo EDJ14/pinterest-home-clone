@@ -117,11 +117,11 @@ class Header extends Component {
     } else if (this.props.auth == false) {
       return <HeaderUserButton text="Login" />;
     } else if (this.props.auth.username == null) {
-      let user = 'user 100';
+      let user = 'No Username';
       return <HeaderUserButton text={user} />;
     }
     const { username } = this.props.auth;
-    console.log(username);
+
     return (
       <HeaderUserButton
         text={username.length > 6 ? username.slice(0, 6) + '...' : username}
