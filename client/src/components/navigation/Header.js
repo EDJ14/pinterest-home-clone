@@ -117,7 +117,7 @@ class Header extends Component {
       return <HeaderUserButton text="Loading" />;
     } else if (this.props.auth.username == undefined) {
       return <HeaderUserButton text="Login" />;
-    } else if (this.props.auth.username == null) {
+    } else if (this.props.auth == null) {
       let user = 'No Username';
       return <HeaderUserButton text={user} />;
     }
