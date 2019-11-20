@@ -6,6 +6,7 @@ module.exports = connection => {
   passport.serializeUser((user, done) => {
     console.log('serialize');
     done(null, user.id);
+    return;
   });
 
   passport.deserializeUser((id, done) => {
@@ -20,6 +21,7 @@ module.exports = connection => {
           username: results[0].username
         };
         done(null, user);
+        return;
       }
       const user = { id: null, google_id: null, username: null };
       done(null, user);

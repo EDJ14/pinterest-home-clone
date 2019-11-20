@@ -72,7 +72,7 @@ const SavePostModal = props => {
                 ...transitionStyles[state]
               }}
             >
-              <SavePostContent post={props.post} />
+              <SavePostContent post={props.post} num={props.postNum} />
             </SavePopUpContent>
           </SavePopUp>
         </SavePopUpContainer>

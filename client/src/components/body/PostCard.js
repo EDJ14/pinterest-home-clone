@@ -171,9 +171,7 @@ class PostCard extends Component {
   renderImg() {
     const { num } = this.props;
     const post = this.props.posts[num - 1];
-    console.log('props', this.props);
     if (post) {
-      console.log(post);
       return post[0].image_url;
     }
     return null;
@@ -207,7 +205,10 @@ class PostCard extends Component {
               >
                 <div className="overlay" />
                 <div className="savebut">
-                  <SavedPostStatus post={this.props.posts[num - 1]} />
+                  <SavedPostStatus
+                    post={this.props.posts[num - 1]}
+                    postNum={num}
+                  />
                 </div>
                 <div className="sourcesite">websites.com</div>
                 <PostPic

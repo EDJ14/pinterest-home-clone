@@ -54,6 +54,7 @@ class SavedPostStatus extends Component {
         <SavePostModal
           inProp={true}
           post={this.props.post}
+          postNum={this.props.postNum}
           setFalse={() => this.setState({ modal: false })}
         />
       );
@@ -71,7 +72,4 @@ function mapStateToProps({ posts }) {
   return { posts };
 }
 
-export default connect(
-  mapStateToProps,
-  actions
-)(SavedPostStatus);
+export default connect(mapStateToProps, actions)(SavedPostStatus);

@@ -36,15 +36,19 @@ const GrayCircle = styled.div`
   border-radius: 50%;
 `;
 
-const confirmSave = async () => {
-  const res = await axios.post('/api/savepost', { test: 'test' });
+const confirmSave = async (post, num) => {
+  console.log(post, num);
+  const res = await axios.post('/api/savepost', { post, num });
 };
 
 const SavePostContent = props => {
   const [loading, setLoading] = useState(0);
-  console.log(props);
+  const { post } = props;
+  const { num } = props;
   return [
-    <HeaderBox onClick={confirmSave}>Confirm Save</HeaderBox>,
+    <HeaderBox onClick={props => confirmSave(post, num)}>
+      Confirm Save
+    </HeaderBox>,
     <PictureBox img={props.post[0].image_url} />,
     <Title>TITLETITLE</Title>
   ];
