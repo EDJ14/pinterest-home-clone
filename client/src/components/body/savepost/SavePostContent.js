@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import axios from 'axios';
 
@@ -37,7 +38,7 @@ const GrayCircle = styled.div`
 `;
 
 const confirmSave = async (post, num) => {
-  console.log(post, num);
+  console.log(post, num, props);
   const res = await axios.post('/api/savepost', { post, num });
 };
 
@@ -46,7 +47,7 @@ const SavePostContent = props => {
   const { post } = props;
   const { num } = props;
   return [
-    <HeaderBox onClick={props => confirmSave(post, num)}>
+    <HeaderBox onClick={props => confirmSave(post, num, props.auth)}>
       Confirm Save
     </HeaderBox>,
     <PictureBox img={props.post[0].image_url} />,
@@ -54,4 +55,8 @@ const SavePostContent = props => {
   ];
 };
 
-export default SavePostContent;
+function mapStateToProps(state) {
+  return { auth: state.auth };
+}
+
+export default connect(mapStateToProps)(SavePostContent);
