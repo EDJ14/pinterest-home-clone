@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import axios from 'axios';
@@ -37,18 +37,19 @@ const GrayCircle = styled.div`
   border-radius: 50%;
 `;
 
-const confirmSave = async (post, num) => {
-  console.log(post, num, props);
-  const res = await axios.post('/api/savepost', { post, num });
+const confirmSave = async (post, num, user) => {
+  console.log(post, num, user);
+  const res = await axios.post('/api/savepost', { post, num, user });
 };
 
 const SavePostContent = props => {
-  const [loading, setLoading] = useState(0);
   const { post } = props;
   const { num } = props;
+  const { auth } = props;
+  console.log('props', props);
   return [
-    <HeaderBox onClick={props => confirmSave(post, num, props.auth)}>
-      Confirm Save
+    <HeaderBox onClick={() => confirmSave(post, num, auth)}>
+      {props.auth == undefined ? 'Sign In to Save' : 'Confirm Save'}
     </HeaderBox>,
     <PictureBox img={props.post[0].image_url} />,
     <Title>TITLETITLE</Title>

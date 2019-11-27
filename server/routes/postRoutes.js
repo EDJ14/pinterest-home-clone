@@ -57,9 +57,24 @@ module.exports = (app, connection) => {
   });
 
   app.post('/savepost', (req, res) => {
-    const q = 'INSERT INTO liked_posts FROM ' + req.params.num;
+    const getUserIdq = `SELECT id FROM users WHERE username='${req.body.user.username}';`;
     console.log(req.body);
-    console.log('saving POST');
+
+    connection.query(getUserIdq, (err, results) => {
+      if (err) {
+        console.log('ERROR', err.sqlMessage);
+      }
+
+      console.log('RESUlts', results[0]);
+
+      const q = `INSERT INTO liked_posts (user_id, post_id) VALUES (${results[0].id}, ${req.body.num});`;
+      connection.query(q, (err, results) => {
+        if (err) {
+          console.log('ERror', err);
+        }
+        console.log('REsuLTS', results);
+      });
+    });
 
     res.sendStatus(200);
   });
