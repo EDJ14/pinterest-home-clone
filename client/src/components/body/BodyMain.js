@@ -157,7 +157,4 @@ function mapStateToProps({ postNumber }) {
   return { postNumber };
 }
 
-export default connect(
-  mapStateToProps,
-  actions
-)(BodyMain);
+export default connect(mapStateToProps, actions)(BodyMain);
