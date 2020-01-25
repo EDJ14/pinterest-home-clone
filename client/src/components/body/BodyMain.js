@@ -146,7 +146,7 @@ class BodyMain extends Component {
           Clear Posts
         </PostsButtons>
         <Link to="/new">
-          <PostsButtons>Create Post</PostsButtons>
+          <PostsButtons>Create Postee</PostsButtons>
         </Link>
       </ButtonContainer>
     ];
@@ -157,7 +157,4 @@ function mapStateToProps({ postNumber }) {
   return { postNumber };
 }
 
-export default connect(
-  mapStateToProps,
-  actions
-)(BodyMain);
+export default connect(mapStateToProps, actions)(BodyMain);
